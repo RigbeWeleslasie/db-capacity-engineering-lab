@@ -94,14 +94,25 @@ app.get('/api/patients/recent', async (_req, res) => {
 
 // ---------------------------------------------------------------------------
 // Patient lookup by last name
+//
+// OPS-2201: indexing last_name (see data-seed/seed.sh) fixes the DB-side cost
+// (full table scan -> index lookup) but does NOT fix shift-change latency on
+// its own -- a common surname still matches ~10,000 rows, and shipping every
+// match as a ~3.6MB JSON payload pins the single Node event loop (measured
+// 170%+ CPU) serializing/writing the response, long after MySQL has the rows.
+// Capping the result set bounds both the rows MySQL has to touch (LIMIT lets
+// the index lookup stop early) and the bytes the app has to serialize.
 // ---------------------------------------------------------------------------
+const MAX_SEARCH_RESULTS = 50;
+
 app.get('/api/patients/search', async (req, res) => {
   const lastName = req.query.lastName || '';
+  const limit = Math.min(Number(req.query.limit) || MAX_SEARCH_RESULTS, MAX_SEARCH_RESULTS);
   try {
     const pool = getPool();
     const [rows] = await pool.query(
-      'SELECT * FROM patients WHERE last_name = ?',
-      [lastName]
+      'SELECT * FROM patients WHERE last_name = ? ORDER BY id DESC LIMIT ?',
+      [lastName, limit]
     );
     res.json({ count: rows.length, lastName, data: rows });
   } catch (err) {
@@ -112,36 +123,59 @@ app.get('/api/patients/search', async (req, res) => {
 
 // ---------------------------------------------------------------------------
 // Admit a patient to a hospital (decrement available beds).
-// We update the bed count, then notify the regional bed registry that the
-// count changed before finalizing, so the two systems stay consistent.
+//
+// OPS-2203: this used to call notifyBedRegistry() (a simulated 500ms network
+// round trip) *before* COMMIT, inside the same transaction as the UPDATE.
+// The UPDATE takes an exclusive row lock (X, REC_NOT_GAP on the PRIMARY
+// index -- see evidence/OPS-2203-locks.txt) that MySQL can't release until
+// COMMIT/ROLLBACK, so every admit to the same hospital held that lock for
+// ~500ms instead of the <1ms the UPDATE itself needs. Concurrent admits to
+// the same row serialize on that lock (InnoDB enforces it to give
+// transactions repeatable, isolated writes -- this is 2PL row locking, not a
+// bug in InnoDB), so max throughput for one hospital was bounded by
+// 1 / (lock hold time) =~ 1 / 0.5s = 2 admits/sec no matter how many callers
+// piled on. With innodb-lock-wait-timeout=5 (docker-compose.yml) and 500
+// concurrent callers well beyond that ceiling, most waiters exceeded 5s and
+// failed with ER_LOCK_WAIT_TIMEOUT ("Lock wait timeout exceeded; try
+// restarting transaction") -- confirmed count: 507 in
+// evidence/OPS-2203-repro-output.txt. Measured successful throughput was
+// ~1.97 admits/sec (118 succeeded / 60s), matching the 2/s prediction.
+//
+// Fix: shrink the critical section to just the UPDATE, and notify the
+// registry outside it so the row lock is held for the write alone.
+// Trade-off: the registry notification is no longer pre-commit-atomic with
+// the bed decrement -- if notifyBedRegistry() fails or the process dies
+// right after, the registry can miss an update. A production fix would make
+// that notification durable (outbox table + async retry) rather than
+// best-effort; here we log so on-call can see it.
+//
+// A single UPDATE is already atomic in MySQL under autocommit, so we also
+// drop the explicit BEGIN/COMMIT: `pool.query` needs one round trip instead
+// of three (BEGIN, UPDATE, COMMIT), shaving the remaining lock-hold time
+// further. Measured: this single change raised same-row throughput from
+// ~221.6/s to ~264.5/s, 0 errors either way (evidence/OPS-2203-fixed2-
+// output.txt) -- p95 latency is still ~2s because 500 concurrent writers to
+// ONE row cannot beat 1/W_lock no matter how small W_lock gets; this is the
+// fundamental ceiling of single-row 2PL, not a leftover bug.
 // ---------------------------------------------------------------------------
 app.post('/api/hospitals/:id/admit', async (req, res) => {
   const hospitalId = Number(req.params.id);
   const pool = getPool();
-  let conn;
   try {
-    conn = await pool.getConnection();
-    await conn.beginTransaction();
-
-    await conn.query(
+    await pool.query(
       'UPDATE hospitals SET available_beds = available_beds - 1 WHERE id = ?',
       [hospitalId]
     );
-
-    // Notify the external regional bed registry of the new count before we
-    // commit (simulated here with a network round-trip latency).
-    await notifyBedRegistry(hospitalId);
-
-    await conn.commit();
     res.json({ status: 'admitted', hospitalId });
+
+    // Best-effort, outside the critical section: the row lock is already released.
+    notifyBedRegistry(hospitalId).catch((err) => {
+      // eslint-disable-next-line no-console
+      console.error(`bed registry notify failed for hospital ${hospitalId}:`, err.message);
+    });
   } catch (err) {
-    if (conn) {
-      try { await conn.rollback(); } catch (_) { /* ignore */ }
-    }
     dbErrorsTotal.inc({ route: '/api/hospitals/:id/admit', code: err.code || 'UNKNOWN' });
     res.status(500).json({ error: err.code || 'ERROR', message: err.message });
-  } finally {
-    if (conn) conn.release();
   }
 });
 
@@ -152,15 +186,108 @@ function notifyBedRegistry(_hospitalId) {
 
 // ---------------------------------------------------------------------------
 // Full patient export for the analytics/ETL team.
+//
+// OPS-2204: `pool.query('SELECT * FROM patients')` buffers every row of the
+// result set into JS objects, then res.json() builds one giant string from
+// all of them and hands it to the socket in one shot. Measured: a SINGLE
+// export call pushed capacity-api's RSS to ~155MB (dmesg cgroup OOM-kill log
+// in evidence/OPS-2204-dmesg-oom.txt: "anon-rss:155908kB") against the
+// 160MB container limit, and killed the process -- confirmed by
+// RestartCount incrementing and a fresh "listening on :3000" line in
+// container logs. The table itself is only ~31MB on disk (100,000 rows,
+// information_schema.TABLES DATA_LENGTH+INDEX_LENGTH), so the buffered
+// request/response path multiplies that ~5x in live heap (parsed row
+// objects + the full JSON string + Node's unstreamed HTTP write buffer, all
+// resident at once) -- O(N) memory that scales with table size and stacks
+// per concurrent caller, not O(1).
+//
+// Fix (attempt 1): stream rows from MySQL straight to the HTTP response as
+// they arrive instead of buffering the whole result set. That alone stopped
+// the OOM-kill (RestartCount stayed 0 across a full reproduce-OPS-2204.js
+// run -- evidence/OPS-2204-fixed-output.txt) but under the ticket's 50
+// concurrent callers memory still sat at 158.5MiB/160MiB (99%, see
+// conversation evidence) and p95 latency exploded to ~2m7s with 57% client
+// timeouts: one res.write() call per row means 100,000 syscalls per export,
+// and 50 concurrent streams doing that saturates the single event loop --
+// we'd traded an OOM crash for a throughput collapse.
+//
+// Fix (attempt 2, kept): batch EXPORT_BATCH_SIZE rows into one res.write()
+// call (cuts syscalls ~200x) AND cap MAX_CONCURRENT_EXPORTS in-process, so
+// peak memory is bounded by (concurrent exports x batch size) instead of
+// scaling with either table size or caller count. A real nightly ETL job
+// needs one export, not fifty in parallel; a burst past the cap gets a fast
+// 503 + Retry-After instead of silently competing for the same limited
+// memory/event-loop budget as everyone else. See evidence/OPS-2204-fixed2-*
+// for the re-run with both changes in place.
 // ---------------------------------------------------------------------------
+const EXPORT_BATCH_SIZE = 200;
+const MAX_CONCURRENT_EXPORTS = 4;
+let activeExports = 0;
+
 app.get('/api/patients/export', async (_req, res) => {
+  if (activeExports >= MAX_CONCURRENT_EXPORTS) {
+    res.set('Retry-After', '5');
+    return res.status(503).json({
+      error: 'EXPORT_BUSY',
+      message: `Too many concurrent exports in flight (limit ${MAX_CONCURRENT_EXPORTS}); retry shortly.`,
+    });
+  }
+  activeExports += 1;
+
+  const pool = getPool();
+  let conn;
   try {
-    const pool = getPool();
-    const [rows] = await pool.query('SELECT * FROM patients');
-    res.json({ count: rows.length, data: rows });
+    conn = await pool.getConnection();
+    // mysql2/promise wraps the callback-style connection; that raw
+    // connection is what exposes .query(sql).stream().
+    const queryStream = conn.connection
+      .query('SELECT * FROM patients')
+      .stream({ highWaterMark: 500 });
+
+    res.setHeader('Content-Type', 'application/json');
+    res.write('{"data":[');
+
+    let count = 0;
+    let wroteAny = false;
+    let batch = [];
+
+    const flushBatch = () => {
+      if (batch.length === 0) return true;
+      const ok = res.write((wroteAny ? ',' : '') + batch.join(','));
+      wroteAny = true;
+      batch = [];
+      return ok;
+    };
+
+    await new Promise((resolve, reject) => {
+      queryStream.on('data', (row) => {
+        batch.push(JSON.stringify(row));
+        count += 1;
+        if (batch.length >= EXPORT_BATCH_SIZE && !flushBatch()) {
+          queryStream.pause();
+          res.once('drain', () => queryStream.resume());
+        }
+      });
+      queryStream.on('end', () => {
+        flushBatch();
+        resolve();
+      });
+      queryStream.on('error', reject);
+    });
+
+    res.end(`],"count":${count}}`);
   } catch (err) {
     dbErrorsTotal.inc({ route: '/api/patients/export', code: err.code || 'UNKNOWN' });
-    res.status(500).json({ error: err.code || 'ERROR', message: err.message });
+    if (!res.headersSent) {
+      res.status(500).json({ error: err.code || 'ERROR', message: err.message });
+    } else {
+      // Already streaming a 200 -- can't change status now; just end the
+      // response so the client doesn't hang on a truncated body forever.
+      res.end();
+    }
+  } finally {
+    if (conn) conn.release();
+    activeExports -= 1;
   }
 });
 

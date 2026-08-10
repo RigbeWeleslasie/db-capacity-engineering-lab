@@ -1,0 +1,12 @@
+=== docker stats mid-load (AFTER index fix) ===
+CONTAINER ID   NAME           CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O        PIDS
+db1d8cf137e9   mysql-db       38.60%    569.1MiB / 14.46GiB   3.84%     6.28MB / 9.26GB   72.7MB / 967MB   40
+525f976a2ca0   capacity-api   171.13%   67.59MiB / 160MiB     42.24%    2.67GB / 3.48GB   4.85MB / 0B      11
+
+=== SHOW PROCESSLIST mid-load ===
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Id	User	Host	db	Command	Time	State	Info
+5	event_scheduler	localhost	NULL	Daemon	555	Waiting on empty queue	NULL
+128	root	172.18.0.4:41626	capacity_lab	Sleep	0		NULL
+129	root	172.18.0.4:41632	capacity_lab	Sleep	0		NULL
+143	root	localhost	NULL	Query	0	init	SHOW PROCESSLIST

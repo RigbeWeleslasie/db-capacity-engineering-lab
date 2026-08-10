@@ -1,0 +1,35 @@
+
+    http_req_failed
+    ✓ 'rate<0.05' rate=0.68%
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......: 41149  1175.305861/s
+    checks_succeeded...: 99.31% 40868 out of 41149
+    checks_failed......: 0.68%  281 out of 41149
+
+    ✗ status is 200
+      ↳  99% — ✓ 40868 / ✗ 281
+
+    HTTP
+    http_req_duration..............: avg=1.04s    min=1.8ms  med=353.82ms max=31.99s p(90)=606.29ms p(95)=701.69ms p(99)=25.72s
+      { expected_response:true }...: avg=948.93ms min=1.8ms  med=351.47ms max=31.99s p(90)=601.26ms p(95)=674.79ms p(99)=25.75s
+    http_req_failed................: 0.68%  281 out of 41149
+    http_reqs......................: 41149  1175.305861/s
+
+    EXECUTION
+    iteration_duration.............: avg=1.04s    min=1.87ms med=353.88ms max=31.99s p(90)=606.37ms p(95)=701.77ms p(99)=25.72s
+    iterations.....................: 41149  1175.305861/s
+    vus............................: 494    min=320          max=2000
+    vus_max........................: 2000   min=2000         max=2000
+
+    NETWORK
+    data_received..................: 751 MB 22 MB/s
+    data_sent......................: 3.7 MB 106 kB/s
+
+
+
+
+running (35.0s), 0000/2000 VUs, 41149 complete and 494 interrupted iterations
+registration_surge ✓ [ 100% ] 0493/2000 VUs  30s

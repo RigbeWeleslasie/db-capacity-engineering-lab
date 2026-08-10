@@ -1,0 +1,489 @@
+
+         /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+
+     execution: local
+        script: load-tests/reproduce-OPS-2202.js
+        output: -
+
+     scenarios: (100.00%) 1 scenario, 2000 max VUs, 35s max duration (incl. graceful stop):
+              * registration_surge: Up to 2000 looping VUs for 30s over 2 stages (gracefulRampDown: 30s, gracefulStop: 5s)
+
+
+running (00.7s), 0289/2000 VUs, 580 complete and 0 interrupted iterations
+registration_surge   [   2% ] 0289/2000 VUs  00.7s/30.0s
+
+running (01.7s), 0689/2000 VUs, 1560 complete and 0 interrupted iterations
+registration_surge   [   6% ] 0689/2000 VUs  01.7s/30.0s
+
+running (02.7s), 1089/2000 VUs, 2736 complete and 0 interrupted iterations
+registration_surge   [   9% ] 1089/2000 VUs  02.7s/30.0s
+
+running (03.7s), 1488/2000 VUs, 3931 complete and 0 interrupted iterations
+registration_surge   [  12% ] 1488/2000 VUs  03.7s/30.0s
+
+running (04.7s), 1888/2000 VUs, 5590 complete and 0 interrupted iterations
+registration_surge   [  16% ] 1888/2000 VUs  04.7s/30.0s
+
+running (05.7s), 2000/2000 VUs, 7814 complete and 0 interrupted iterations
+registration_surge   [  19% ] 2000/2000 VUs  05.7s/30.0s
+
+running (06.7s), 2000/2000 VUs, 10456 complete and 0 interrupted iterations
+registration_surge   [  22% ] 2000/2000 VUs  06.7s/30.0s
+
+running (07.7s), 2000/2000 VUs, 13285 complete and 0 interrupted iterations
+registration_surge   [  26% ] 2000/2000 VUs  07.7s/30.0s
+
+running (08.7s), 2000/2000 VUs, 16237 complete and 0 interrupted iterations
+registration_surge   [  29% ] 2000/2000 VUs  08.7s/30.0s
+
+running (09.7s), 2000/2000 VUs, 19218 complete and 0 interrupted iterations
+registration_surge   [  32% ] 2000/2000 VUs  09.7s/30.0s
+
+running (10.7s), 2000/2000 VUs, 22183 complete and 0 interrupted iterations
+registration_surge   [  36% ] 2000/2000 VUs  10.7s/30.0s
+
+running (11.7s), 2000/2000 VUs, 25239 complete and 0 interrupted iterations
+registration_surge   [  39% ] 2000/2000 VUs  11.7s/30.0s
+
+running (12.7s), 2000/2000 VUs, 27863 complete and 0 interrupted iterations
+registration_surge   [  42% ] 2000/2000 VUs  12.7s/30.0s
+
+running (13.7s), 2000/2000 VUs, 30995 complete and 0 interrupted iterations
+registration_surge   [  46% ] 2000/2000 VUs  13.7s/30.0s
+
+running (14.7s), 2000/2000 VUs, 34217 complete and 0 interrupted iterations
+registration_surge   [  49% ] 2000/2000 VUs  14.7s/30.0s
+
+running (15.7s), 2000/2000 VUs, 37386 complete and 0 interrupted iterations
+registration_surge   [  52% ] 2000/2000 VUs  15.7s/30.0s
+time="2026-08-10T00:03:23+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:23+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:23+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:23+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:23+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+
+running (16.7s), 2000/2000 VUs, 40630 complete and 0 interrupted iterations
+registration_surge   [  56% ] 2000/2000 VUs  16.7s/30.0s
+time="2026-08-10T00:03:23+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:23+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:23+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:23+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:23+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:23+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:23+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:23+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:23+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:23+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+
+running (17.7s), 2000/2000 VUs, 43830 complete and 0 interrupted iterations
+registration_surge   [  59% ] 2000/2000 VUs  17.7s/30.0s
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+
+running (18.7s), 2000/2000 VUs, 47073 complete and 0 interrupted iterations
+registration_surge   [  62% ] 2000/2000 VUs  18.7s/30.0s
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:25+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+
+running (19.7s), 2000/2000 VUs, 50541 complete and 0 interrupted iterations
+registration_surge   [  66% ] 2000/2000 VUs  19.7s/30.0s
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:26+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+
+running (20.7s), 2000/2000 VUs, 53809 complete and 0 interrupted iterations
+registration_surge   [  69% ] 2000/2000 VUs  20.7s/30.0s
+time="2026-08-10T00:03:27+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:27+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:27+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:28+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:28+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:28+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:28+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:28+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:28+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:28+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+
+running (21.7s), 2000/2000 VUs, 57103 complete and 0 interrupted iterations
+registration_surge   [  72% ] 2000/2000 VUs  21.7s/30.0s
+time="2026-08-10T00:03:29+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:29+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:29+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:29+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:29+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:29+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:29+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:29+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:29+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:29+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:29+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:29+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:29+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+
+running (22.7s), 2000/2000 VUs, 60390 complete and 0 interrupted iterations
+registration_surge   [  76% ] 2000/2000 VUs  22.7s/30.0s
+
+running (23.7s), 2000/2000 VUs, 63664 complete and 0 interrupted iterations
+registration_surge   [  79% ] 2000/2000 VUs  23.7s/30.0s
+
+running (24.7s), 2000/2000 VUs, 66916 complete and 0 interrupted iterations
+registration_surge   [  82% ] 2000/2000 VUs  24.7s/30.0s
+
+running (25.7s), 2000/2000 VUs, 70322 complete and 0 interrupted iterations
+registration_surge   [  86% ] 2000/2000 VUs  25.7s/30.0s
+
+running (26.7s), 2000/2000 VUs, 73676 complete and 0 interrupted iterations
+registration_surge   [  89% ] 2000/2000 VUs  26.7s/30.0s
+
+running (27.7s), 2000/2000 VUs, 77042 complete and 0 interrupted iterations
+registration_surge   [  92% ] 2000/2000 VUs  27.7s/30.0s
+
+running (28.7s), 2000/2000 VUs, 80336 complete and 0 interrupted iterations
+registration_surge   [  96% ] 2000/2000 VUs  28.7s/30.0s
+
+running (29.7s), 2000/2000 VUs, 83726 complete and 0 interrupted iterations
+registration_surge   [  99% ] 2000/2000 VUs  29.7s/30.0s
+
+running (30.7s), 0862/2000 VUs, 85746 complete and 0 interrupted iterations
+registration_surge ↓ [ 100% ] 2000/2000 VUs  30s
+
+running (31.7s), 0722/2000 VUs, 85886 complete and 0 interrupted iterations
+registration_surge ↓ [ 100% ] 2000/2000 VUs  30s
+
+running (32.7s), 0697/2000 VUs, 85911 complete and 0 interrupted iterations
+registration_surge ↓ [ 100% ] 2000/2000 VUs  30s
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+time="2026-08-10T00:03:40+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/recent\": EOF"
+
+running (33.7s), 0590/2000 VUs, 86018 complete and 0 interrupted iterations
+registration_surge ↓ [ 100% ] 2000/2000 VUs  30s
+
+running (34.7s), 0514/2000 VUs, 86094 complete and 0 interrupted iterations
+registration_surge ↓ [ 100% ] 2000/2000 VUs  30s
+
+
+  █ THRESHOLDS 
+
+    http_req_failed
+    ✗ 'rate<0.05' rate=84.88%
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......: 86094  2459.080841/s
+    checks_succeeded...: 15.11% 13017 out of 86094
+    checks_failed......: 84.88% 73077 out of 86094
+
+    ✗ status is 200
+      ↳  15% — ✓ 13017 / ✗ 73077
+
+    HTTP
+    http_req_duration..............: avg=504.19ms min=10.72ms med=92.52ms max=32.62s p(90)=324.94ms p(95)=996.22ms p(99)=16.66s
+      { expected_response:true }...: avg=2.02s    min=10.72ms med=537.4ms max=32.62s p(90)=1.33s    p(95)=11.91s   p(99)=28.63s
+    http_req_failed................: 84.88% 73077 out of 86094
+    http_reqs......................: 86094  2459.080841/s
+
+    EXECUTION
+    iteration_duration.............: avg=504.26ms min=10.82ms med=92.58ms max=32.62s p(90)=325ms    p(95)=996.28ms p(99)=16.66s
+    iterations.....................: 86094  2459.080841/s
+    vus............................: 514    min=288            max=2000
+    vus_max........................: 2000   min=2000           max=2000
+
+    NETWORK
+    data_received..................: 261 MB 7.5 MB/s
+    data_sent......................: 7.7 MB 220 kB/s
+
+
+
+
+running (35.0s), 0000/2000 VUs, 86094 complete and 514 interrupted iterations
+registration_surge ✓ [ 100% ] 0513/2000 VUs  30s
+time="2026-08-10T00:03:42+03:00" level=error msg="thresholds on metrics 'http_req_failed' have been crossed"

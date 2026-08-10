@@ -1,0 +1,16 @@
+=== docker stats mid-surge (2000 VUs hitting /recent) ===
+CONTAINER ID   NAME           CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O        PIDS
+db1d8cf137e9   mysql-db       27.42%    501.2MiB / 14.46GiB   3.39%     33.4MB / 12.8GB   72.9MB / 967MB   40
+44e1b6f4525e   capacity-api   155.38%   90.58MiB / 160MiB     56.61%    1.9GB / 2.43GB    4.91MB / 0B      11
+
+=== SHOW PROCESSLIST (is DB actually busy?) ===
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Id	User	Host	db	Command	Time	State	Info
+5	event_scheduler	localhost	NULL	Daemon	801	Waiting on empty queue	NULL
+161	root	172.18.0.4:59870	capacity_lab	Sleep	0		NULL
+163	root	172.18.0.4:33826	capacity_lab	Sleep	0		NULL
+195	root	localhost	NULL	Query	0	init	SHOW PROCESSLIST
+Variable_name	Value
+Threads_connected	3
+Variable_name	Value
+Threads_running	2

@@ -1,0 +1,375 @@
+
+         /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+
+     execution: local
+        script: load-tests/reproduce-OPS-2204.js
+        output: -
+
+     scenarios: (100.00%) 1 scenario, 50 max VUs, 2m30s max duration (incl. graceful stop):
+              * nightly_export: 50 looping VUs for 2m0s (gracefulStop: 30s)
+
+
+running (0m01.0s), 50/50 VUs, 0 complete and 0 interrupted iterations
+nightly_export   [   1% ] 50 VUs  0m01.0s/2m0s
+
+running (0m02.0s), 50/50 VUs, 0 complete and 0 interrupted iterations
+nightly_export   [   2% ] 50 VUs  0m02.0s/2m0s
+
+running (0m03.0s), 50/50 VUs, 0 complete and 0 interrupted iterations
+nightly_export   [   2% ] 50 VUs  0m03.0s/2m0s
+
+running (0m04.0s), 50/50 VUs, 1 complete and 0 interrupted iterations
+nightly_export   [   3% ] 50 VUs  0m04.0s/2m0s
+
+running (0m05.0s), 50/50 VUs, 1 complete and 0 interrupted iterations
+nightly_export   [   4% ] 50 VUs  0m05.0s/2m0s
+
+running (0m06.0s), 50/50 VUs, 1 complete and 0 interrupted iterations
+nightly_export   [   5% ] 50 VUs  0m06.0s/2m0s
+
+running (0m07.0s), 50/50 VUs, 2 complete and 0 interrupted iterations
+nightly_export   [   6% ] 50 VUs  0m07.0s/2m0s
+
+running (0m08.0s), 50/50 VUs, 3 complete and 0 interrupted iterations
+nightly_export   [   7% ] 50 VUs  0m08.0s/2m0s
+
+running (0m09.0s), 50/50 VUs, 5 complete and 0 interrupted iterations
+nightly_export   [   7% ] 50 VUs  0m09.0s/2m0s
+
+running (0m10.0s), 50/50 VUs, 7 complete and 0 interrupted iterations
+nightly_export   [   8% ] 50 VUs  0m10.0s/2m0s
+
+running (0m11.0s), 50/50 VUs, 8 complete and 0 interrupted iterations
+nightly_export   [   9% ] 50 VUs  0m11.0s/2m0s
+
+running (0m12.0s), 50/50 VUs, 8 complete and 0 interrupted iterations
+nightly_export   [  10% ] 50 VUs  0m12.0s/2m0s
+
+running (0m13.0s), 50/50 VUs, 9 complete and 0 interrupted iterations
+nightly_export   [  11% ] 50 VUs  0m13.0s/2m0s
+
+running (0m14.0s), 50/50 VUs, 10 complete and 0 interrupted iterations
+nightly_export   [  12% ] 50 VUs  0m14.0s/2m0s
+
+running (0m15.0s), 50/50 VUs, 12 complete and 0 interrupted iterations
+nightly_export   [  13% ] 50 VUs  0m15.0s/2m0s
+
+running (0m16.0s), 50/50 VUs, 12 complete and 0 interrupted iterations
+nightly_export   [  13% ] 50 VUs  0m16.0s/2m0s
+
+running (0m17.0s), 50/50 VUs, 13 complete and 0 interrupted iterations
+nightly_export   [  14% ] 50 VUs  0m17.0s/2m0s
+
+running (0m18.0s), 50/50 VUs, 16 complete and 0 interrupted iterations
+nightly_export   [  15% ] 50 VUs  0m18.0s/2m0s
+
+running (0m19.0s), 50/50 VUs, 16 complete and 0 interrupted iterations
+nightly_export   [  16% ] 50 VUs  0m19.0s/2m0s
+
+running (0m20.0s), 50/50 VUs, 17 complete and 0 interrupted iterations
+nightly_export   [  17% ] 50 VUs  0m20.0s/2m0s
+
+running (0m21.0s), 50/50 VUs, 18 complete and 0 interrupted iterations
+nightly_export   [  17% ] 50 VUs  0m21.0s/2m0s
+
+running (0m22.0s), 50/50 VUs, 19 complete and 0 interrupted iterations
+nightly_export   [  18% ] 50 VUs  0m22.0s/2m0s
+
+running (0m23.0s), 50/50 VUs, 20 complete and 0 interrupted iterations
+nightly_export   [  19% ] 50 VUs  0m23.0s/2m0s
+
+running (0m24.0s), 50/50 VUs, 23 complete and 0 interrupted iterations
+nightly_export   [  20% ] 50 VUs  0m24.0s/2m0s
+
+running (0m25.0s), 50/50 VUs, 25 complete and 0 interrupted iterations
+nightly_export   [  21% ] 50 VUs  0m25.0s/2m0s
+
+running (0m26.0s), 50/50 VUs, 28 complete and 0 interrupted iterations
+nightly_export   [  22% ] 50 VUs  0m26.0s/2m0s
+
+running (0m27.0s), 50/50 VUs, 28 complete and 0 interrupted iterations
+nightly_export   [  23% ] 50 VUs  0m27.0s/2m0s
+
+running (0m28.0s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  23% ] 50 VUs  0m28.0s/2m0s
+
+running (0m29.0s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  24% ] 50 VUs  0m29.0s/2m0s
+
+running (0m30.0s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  25% ] 50 VUs  0m30.1s/2m0s
+
+running (0m31.0s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  26% ] 50 VUs  0m31.1s/2m0s
+
+running (0m32.0s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  27% ] 50 VUs  0m32.0s/2m0s
+
+running (0m33.0s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  28% ] 50 VUs  0m33.1s/2m0s
+
+running (0m34.1s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  29% ] 50 VUs  0m34.3s/2m0s
+
+running (0m35.3s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  30% ] 50 VUs  0m35.7s/2m0s
+
+running (0m36.2s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  30% ] 50 VUs  0m36.3s/2m0s
+
+running (0m37.0s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  31% ] 50 VUs  0m37.2s/2m0s
+
+running (0m38.7s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  32% ] 50 VUs  0m38.9s/2m0s
+
+running (0m42.8s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  36% ] 50 VUs  0m43.6s/2m0s
+
+running (0m46.6s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  40% ] 50 VUs  0m47.4s/2m0s
+
+running (0m50.4s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  42% ] 50 VUs  0m50.9s/2m0s
+
+running (0m52.3s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  44% ] 50 VUs  0m52.5s/2m0s
+
+running (0m54.2s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  46% ] 50 VUs  0m54.6s/2m0s
+
+running (0m56.5s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  47% ] 50 VUs  0m56.9s/2m0s
+
+running (0m58.0s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  48% ] 50 VUs  0m58.1s/2m0s
+
+running (0m59.5s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  50% ] 50 VUs  0m59.8s/2m0s
+
+running (1m02.7s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  53% ] 50 VUs  1m03.6s/2m0s
+
+running (1m06.7s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  56% ] 50 VUs  1m07.4s/2m0s
+
+running (1m11.7s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  60% ] 50 VUs  1m12.4s/2m0s
+
+running (1m14.2s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  62% ] 50 VUs  1m14.5s/2m0s
+
+running (1m18.3s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  66% ] 50 VUs  1m18.7s/2m0s
+
+running (1m22.6s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  70% ] 50 VUs  1m23.5s/2m0s
+
+running (1m24.2s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  70% ] 50 VUs  1m24.3s/2m0s
+
+running (1m25.4s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  71% ] 50 VUs  1m25.5s/2m0s
+
+running (1m28.8s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  74% ] 50 VUs  1m29.3s/2m0s
+
+running (1m30.7s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  76% ] 50 VUs  1m31.0s/2m0s
+
+running (1m32.4s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  78% ] 50 VUs  1m33.1s/2m0s
+
+running (1m34.3s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  79% ] 50 VUs  1m34.6s/2m0s
+
+running (1m36.2s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  80% ] 50 VUs  1m36.6s/2m0s
+
+running (1m37.9s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  82% ] 50 VUs  1m38.1s/2m0s
+
+running (1m39.1s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  83% ] 50 VUs  1m39.4s/2m0s
+
+running (1m40.1s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  83% ] 50 VUs  1m40.2s/2m0s
+
+running (1m41.1s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  85% ] 50 VUs  1m41.5s/2m0s
+
+running (1m42.2s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  85% ] 50 VUs  1m42.4s/2m0s
+
+running (1m43.3s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  86% ] 50 VUs  1m43.5s/2m0s
+
+running (1m45.1s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  88% ] 50 VUs  1m45.8s/2m0s
+
+running (1m46.5s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  89% ] 50 VUs  1m46.7s/2m0s
+
+running (1m48.4s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  90% ] 50 VUs  1m48.5s/2m0s
+
+running (1m49.6s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  92% ] 50 VUs  1m50.0s/2m0s
+
+running (1m51.2s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  93% ] 50 VUs  1m51.5s/2m0s
+
+running (1m52.0s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  93% ] 50 VUs  1m52.1s/2m0s
+
+running (1m54.1s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  95% ] 50 VUs  1m54.6s/2m0s
+
+running (1m56.3s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  97% ] 50 VUs  1m56.5s/2m0s
+
+running (1m58.9s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export   [  99% ] 50 VUs  1m59.2s/2m0s
+
+running (2m07.6s), 50/50 VUs, 29 complete and 0 interrupted iterations
+nightly_export ↓ [ 100% ] 50 VUs  2m0s
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/export\": request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/export\": request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/export\": request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/export\": request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/export\": request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/export\": request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/export\": request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/export\": request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/export\": request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/export\": request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/export\": request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/export\": request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/export\": request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="request timeout"
+time="2026-08-10T17:57:22+03:00" level=warning msg="Request Failed" error="request timeout"
+
+running (2m08.0s), 23/50 VUs, 56 complete and 0 interrupted iterations
+nightly_export ↓ [ 100% ] 50 VUs  2m0s
+
+running (2m09.0s), 23/50 VUs, 56 complete and 0 interrupted iterations
+nightly_export ↓ [ 100% ] 50 VUs  2m0s
+time="2026-08-10T17:57:24+03:00" level=warning msg="Request Failed" error="request timeout"
+
+running (2m10.0s), 22/50 VUs, 57 complete and 0 interrupted iterations
+nightly_export ↓ [ 100% ] 50 VUs  2m0s
+time="2026-08-10T17:57:25+03:00" level=warning msg="Request Failed" error="request timeout"
+
+running (2m11.0s), 21/50 VUs, 58 complete and 0 interrupted iterations
+nightly_export ↓ [ 100% ] 50 VUs  2m0s
+
+running (2m12.0s), 20/50 VUs, 59 complete and 0 interrupted iterations
+nightly_export ↓ [ 100% ] 50 VUs  2m0s
+time="2026-08-10T17:57:27+03:00" level=warning msg="Request Failed" error="request timeout"
+
+running (2m13.0s), 18/50 VUs, 61 complete and 0 interrupted iterations
+nightly_export ↓ [ 100% ] 50 VUs  2m0s
+
+running (2m14.0s), 15/50 VUs, 64 complete and 0 interrupted iterations
+nightly_export ↓ [ 100% ] 50 VUs  2m0s
+time="2026-08-10T17:57:29+03:00" level=warning msg="Request Failed" error="request timeout"
+time="2026-08-10T17:57:30+03:00" level=warning msg="Request Failed" error="request timeout"
+
+running (2m15.0s), 13/50 VUs, 66 complete and 0 interrupted iterations
+nightly_export ↓ [ 100% ] 50 VUs  2m0s
+
+running (2m16.0s), 13/50 VUs, 66 complete and 0 interrupted iterations
+nightly_export ↓ [ 100% ] 50 VUs  2m0s
+time="2026-08-10T17:57:31+03:00" level=warning msg="Request Failed" error="request timeout"
+
+running (2m17.0s), 12/50 VUs, 67 complete and 0 interrupted iterations
+nightly_export ↓ [ 100% ] 50 VUs  2m0s
+time="2026-08-10T17:57:33+03:00" level=warning msg="Request Failed" error="request timeout"
+time="2026-08-10T17:57:33+03:00" level=warning msg="Request Failed" error="request timeout"
+time="2026-08-10T17:57:33+03:00" level=warning msg="Request Failed" error="request timeout"
+
+running (2m18.0s), 09/50 VUs, 70 complete and 0 interrupted iterations
+nightly_export ↓ [ 100% ] 50 VUs  2m0s
+
+running (2m19.0s), 09/50 VUs, 70 complete and 0 interrupted iterations
+nightly_export ↓ [ 100% ] 50 VUs  2m0s
+time="2026-08-10T17:57:34+03:00" level=warning msg="Request Failed" error="request timeout"
+
+running (2m20.0s), 08/50 VUs, 71 complete and 0 interrupted iterations
+nightly_export ↓ [ 100% ] 50 VUs  2m0s
+time="2026-08-10T17:57:35+03:00" level=warning msg="Request Failed" error="request timeout"
+
+running (2m21.0s), 07/50 VUs, 72 complete and 0 interrupted iterations
+nightly_export ↓ [ 100% ] 50 VUs  2m0s
+time="2026-08-10T17:57:36+03:00" level=warning msg="Request Failed" error="request timeout"
+
+running (2m22.0s), 06/50 VUs, 73 complete and 0 interrupted iterations
+nightly_export ↓ [ 100% ] 50 VUs  2m0s
+time="2026-08-10T17:57:37+03:00" level=warning msg="Request Failed" error="request timeout"
+
+running (2m23.0s), 05/50 VUs, 74 complete and 0 interrupted iterations
+nightly_export ↓ [ 100% ] 50 VUs  2m0s
+time="2026-08-10T17:57:38+03:00" level=warning msg="Request Failed" error="request timeout"
+time="2026-08-10T17:57:39+03:00" level=warning msg="Request Failed" error="request timeout"
+time="2026-08-10T17:57:39+03:00" level=warning msg="Request Failed" error="request timeout"
+
+running (2m24.0s), 02/50 VUs, 77 complete and 0 interrupted iterations
+nightly_export ↓ [ 100% ] 50 VUs  2m0s
+time="2026-08-10T17:57:39+03:00" level=warning msg="Request Failed" error="request timeout"
+time="2026-08-10T17:57:39+03:00" level=warning msg="Request Failed" error="request timeout"
+
+
+  █ THRESHOLDS 
+
+    http_req_failed
+    ✗ 'rate<0.05' rate=56.96%
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......: 79     0.546399/s
+    checks_succeeded...: 43.03% 34 out of 79
+    checks_failed......: 56.96% 45 out of 79
+
+    ✗ status is 200
+      ↳  43% — ✓ 34 / ✗ 45
+
+    HTTP
+    http_req_duration..............: avg=1m23s  min=3.7s med=2m0s   max=2m7s  p(90)=2m7s  p(95)=2m7s  p(99)=2m7s 
+      { expected_response:true }...: avg=29.38s min=3.7s med=17.51s max=1m58s p(90)=1m47s p(95)=1m47s p(99)=1m54s
+    http_req_failed................: 56.96% 45 out of 79
+    http_reqs......................: 79     0.546399/s
+
+    EXECUTION
+    iteration_duration.............: avg=1m23s  min=3.7s med=2m0s   max=2m7s  p(90)=2m7s  p(95)=2m7s  p(99)=2m7s 
+    iterations.....................: 79     0.546399/s
+    vus............................: 2      min=2        max=50
+    vus_max........................: 50     min=50       max=50
+
+    NETWORK
+    data_received..................: 1.8 GB 13 MB/s
+    data_sent......................: 7.1 kB 49 B/s
+
+
+
+
+running (2m24.6s), 00/50 VUs, 79 complete and 0 interrupted iterations
+nightly_export ✓ [ 100% ] 50 VUs  2m0s
+time="2026-08-10T17:57:40+03:00" level=error msg="thresholds on metrics 'http_req_failed' have been crossed"

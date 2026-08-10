@@ -1,0 +1,11 @@
+=== /api/patients/recent WHILE search burst running (AFTER both fixes) ===
+200
+  -> recent call took 0.17 s
+200
+  -> recent call took 0.17 s
+200
+  -> recent call took 0.17 s
+200
+  -> recent call took 0.17 s
+200
+  -> recent call took 0.17 s

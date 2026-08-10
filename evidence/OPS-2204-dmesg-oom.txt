@@ -1,0 +1,6 @@
+=== kernel OOM-killer log (dmesg) confirming cgroup OOM kill of node process ===
+[ 9594.250544] Memory cgroup out of memory: Killed process 53961 (node) total-vm:1472472kB, anon-rss:155908kB, file-rss:42752kB, shmem-rss:0kB, UID:0 pgtables:5012kB oom_score_adj:0
+[ 9618.110637] Memory cgroup out of memory: Killed process 54633 (node) total-vm:1283928kB, anon-rss:157896kB, file-rss:42368kB, shmem-rss:0kB, UID:0 pgtables:4240kB oom_score_adj:0
+
+=== docker inspect RestartCount progression ===
+RestartCount=2

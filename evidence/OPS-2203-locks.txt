@@ -1,0 +1,99 @@
+=== sys.innodb_lock_waits (mid-load, 200 VUs hammering hospital id=1) ===
+Total concurrent lock-wait rows observed: 47 (see evidence/OPS-2203-locks-full.txt for all)
+
+--- First 2 waiter/blocker pairs (representative) ---
+mysql: [Warning] Using a password on the command line interface can be insecure.
+*************************** 1. row ***************************
+                wait_started: 2026-08-09 21:12:13
+                    wait_age: 00:00:05
+               wait_age_secs: 5
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 2993
+         waiting_trx_started: 2026-08-09 21:12:13
+             waiting_trx_age: 00:00:05
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 338
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422013296:4970:10:4:2:130667400845968
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 2961
+                blocking_pid: 328
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422005216:7288:10:4:2:130667400786128
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:13
+            blocking_trx_age: 00:00:05
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 328
+sql_kill_blocking_connection: KILL 328
+*************************** 2. row ***************************
+                wait_started: 2026-08-09 21:12:13
+                    wait_age: 00:00:05
+               wait_age_secs: 5
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 2993
+         waiting_trx_started: 2026-08-09 21:12:13
+             waiting_trx_age: 00:00:05
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 338
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422013296:4970:10:4:2:130667400845968
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 2960
+                blocking_pid: 330
+              blocking_query: NULL
+            blocking_lock_id: 130670422006832:8074:10:4:2:130667400798096
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:13
+            blocking_trx_age: 00:00:05
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 1
+     sql_kill_blocking_query: KILL QUERY 330
+
+--- Lock counts ---
+total_locks
+100
+ENGINE_TRANSACTION_ID	OBJECT_NAME	INDEX_NAME	LOCK_TYPE	LOCK_MODE	LOCK_STATUS	LOCK_DATA
+2961	hospitals	NULL	TABLE	IX	GRANTED	NULL
+
+--- SHOW ENGINE INNODB STATUS / TRANSACTIONS excerpt ---
+=== SHOW ENGINE INNODB STATUS (TRANSACTIONS excerpt) ===
+TRANSACTIONS
+------------
+LIST OF TRANSACTIONS FOR EACH SESSION:
+---TRANSACTION 412145398745768, not started
+0 lock struct(s), heap size 1128, 0 row lock(s)
+---TRANSACTION 412145398704560, not started
+0 lock struct(s), heap size 1128, 0 row lock(s)
+---TRANSACTION 412145398703752, not started
+0 lock struct(s), heap size 1128, 0 row lock(s)
+---TRANSACTION 3060, ACTIVE 1 sec starting index read
+mysql tables in use 1, locked 1
+LOCK WAIT 2 lock struct(s), heap size 1128, 1 row lock(s)
+MySQL thread id 348, OS thread handle 130669180020288, query id 319503 172.18.0.4 root updating
+UPDATE hospitals SET available_beds = available_beds - 1 WHERE id = 1
+------- TRX HAS BEEN WAITING 1 SEC FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 10 page no 4 n bits 72 index PRIMARY of table `capacity_lab`.`hospitals` trx id 3060 lock_mode X locks rec but not gap waiting
+Record lock, heap no 2 PHYSICAL RECORD: n_fields 5; compact format; info bits 0
+ 0: len 4; hex 80000001; asc     ;;
+ 1: len 6; hex 000000000b91; asc       ;;
+ 2: len 7; hex 02000002200151; asc       Q;;
+ 3: len 16; hex 47656e6572616c20486f73706974616c; asc General Hospital;;
+ 4: len 4; hex 800f4194; asc   A ;;
+
+------------------

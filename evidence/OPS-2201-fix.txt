@@ -1,0 +1,12 @@
+=== BEFORE: no index on last_name ===
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Table	Non_unique	Key_name	Seq_in_index	Column_name	Collation	Cardinality	Sub_part	Packed	Null	Index_type	Comment	Index_comment	Visible	Expression
+patients	0	PRIMARY	1	id	A	98191	NULL	NULL		BTREE			YES	NULL
+
+=== Applying fix: CREATE INDEX idx_patients_last_name ===
+mysql: [Warning] Using a password on the command line interface can be insecure.
+
+=== AFTER: EXPLAIN ANALYZE with index ===
+mysql: [Warning] Using a password on the command line interface can be insecure.
+EXPLAIN
+-> Index lookup on patients using idx_patients_last_name (last_name='Smith')  (cost=2371 rows=10000) (actual time=0.0247..35.1 rows=10000 loops=1)\n

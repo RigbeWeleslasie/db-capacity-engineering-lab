@@ -1,0 +1,10 @@
+=== capacity-api /metrics breakdown for /api/patients/export after fix (batched writes + concurrency cap) ===
+200 (real exports completed): 236
+503 (EXPORT_BUSY, graceful reject, all <5ms): 36678
+0 crashes, 0 connection resets, 0 timeouts.
+
+=== RestartCount across the full 2-minute, 50-VU reproduction ===
+Before: 0   After: 0
+
+=== dmesg: no new OOM kill entries after the fix ===
+[30033.994810] Out of memory: Killed process 26589 (chrome) total-vm:1464134376kB, anon-rss:884760kB, file-rss:0kB, shmem-rss:5120kB, UID:1000 pgtables:7028kB oom_score_adj:300

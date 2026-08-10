@@ -1,0 +1,414 @@
+
+         /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+
+     execution: local
+        script: load-tests/reproduce-OPS-2204.js
+        output: -
+
+     scenarios: (100.00%) 1 scenario, 50 max VUs, 2m30s max duration (incl. graceful stop):
+              * nightly_export: 50 looping VUs for 2m0s (gracefulStop: 30s)
+
+
+running (0m01.0s), 50/50 VUs, 46 complete and 0 interrupted iterations
+nightly_export   [   1% ] 50 VUs  0m01.0s/2m0s
+
+running (0m02.0s), 50/50 VUs, 148 complete and 0 interrupted iterations
+nightly_export   [   2% ] 50 VUs  0m02.0s/2m0s
+
+running (0m03.0s), 50/50 VUs, 277 complete and 0 interrupted iterations
+nightly_export   [   2% ] 50 VUs  0m03.0s/2m0s
+
+running (0m04.0s), 50/50 VUs, 466 complete and 0 interrupted iterations
+nightly_export   [   3% ] 50 VUs  0m04.0s/2m0s
+
+running (0m05.0s), 50/50 VUs, 701 complete and 0 interrupted iterations
+nightly_export   [   4% ] 50 VUs  0m05.0s/2m0s
+
+running (0m06.0s), 50/50 VUs, 951 complete and 0 interrupted iterations
+nightly_export   [   5% ] 50 VUs  0m06.0s/2m0s
+
+running (0m07.0s), 50/50 VUs, 1246 complete and 0 interrupted iterations
+nightly_export   [   6% ] 50 VUs  0m07.0s/2m0s
+
+running (0m08.0s), 50/50 VUs, 1562 complete and 0 interrupted iterations
+nightly_export   [   7% ] 50 VUs  0m08.0s/2m0s
+
+running (0m09.0s), 50/50 VUs, 1901 complete and 0 interrupted iterations
+nightly_export   [   7% ] 50 VUs  0m09.0s/2m0s
+
+running (0m10.0s), 50/50 VUs, 2205 complete and 0 interrupted iterations
+nightly_export   [   8% ] 50 VUs  0m10.0s/2m0s
+
+running (0m11.0s), 50/50 VUs, 2543 complete and 0 interrupted iterations
+nightly_export   [   9% ] 50 VUs  0m11.0s/2m0s
+
+running (0m12.0s), 50/50 VUs, 2819 complete and 0 interrupted iterations
+nightly_export   [  10% ] 50 VUs  0m12.0s/2m0s
+
+running (0m13.0s), 50/50 VUs, 3139 complete and 0 interrupted iterations
+nightly_export   [  11% ] 50 VUs  0m13.0s/2m0s
+
+running (0m14.0s), 50/50 VUs, 3450 complete and 0 interrupted iterations
+nightly_export   [  12% ] 50 VUs  0m14.0s/2m0s
+
+running (0m15.0s), 50/50 VUs, 3781 complete and 0 interrupted iterations
+nightly_export   [  12% ] 50 VUs  0m15.0s/2m0s
+
+running (0m16.0s), 50/50 VUs, 4103 complete and 0 interrupted iterations
+nightly_export   [  13% ] 50 VUs  0m16.0s/2m0s
+
+running (0m17.0s), 50/50 VUs, 4424 complete and 0 interrupted iterations
+nightly_export   [  14% ] 50 VUs  0m17.0s/2m0s
+
+running (0m18.0s), 50/50 VUs, 4728 complete and 0 interrupted iterations
+nightly_export   [  15% ] 50 VUs  0m18.0s/2m0s
+
+running (0m19.0s), 50/50 VUs, 5083 complete and 0 interrupted iterations
+nightly_export   [  16% ] 50 VUs  0m19.0s/2m0s
+
+running (0m20.0s), 50/50 VUs, 5382 complete and 0 interrupted iterations
+nightly_export   [  17% ] 50 VUs  0m20.0s/2m0s
+
+running (0m21.0s), 50/50 VUs, 5696 complete and 0 interrupted iterations
+nightly_export   [  17% ] 50 VUs  0m21.0s/2m0s
+
+running (0m22.0s), 50/50 VUs, 6008 complete and 0 interrupted iterations
+nightly_export   [  18% ] 50 VUs  0m22.0s/2m0s
+
+running (0m23.0s), 50/50 VUs, 6328 complete and 0 interrupted iterations
+nightly_export   [  19% ] 50 VUs  0m23.0s/2m0s
+
+running (0m24.0s), 50/50 VUs, 6620 complete and 0 interrupted iterations
+nightly_export   [  20% ] 50 VUs  0m24.0s/2m0s
+
+running (0m25.0s), 50/50 VUs, 6970 complete and 0 interrupted iterations
+nightly_export   [  21% ] 50 VUs  0m25.0s/2m0s
+
+running (0m26.0s), 50/50 VUs, 7255 complete and 0 interrupted iterations
+nightly_export   [  22% ] 50 VUs  0m26.0s/2m0s
+
+running (0m27.0s), 50/50 VUs, 7610 complete and 0 interrupted iterations
+nightly_export   [  22% ] 50 VUs  0m27.0s/2m0s
+
+running (0m28.0s), 50/50 VUs, 7897 complete and 0 interrupted iterations
+nightly_export   [  23% ] 50 VUs  0m28.0s/2m0s
+
+running (0m29.0s), 50/50 VUs, 8232 complete and 0 interrupted iterations
+nightly_export   [  24% ] 50 VUs  0m29.0s/2m0s
+
+running (0m30.0s), 50/50 VUs, 8534 complete and 0 interrupted iterations
+nightly_export   [  25% ] 50 VUs  0m30.0s/2m0s
+
+running (0m31.0s), 50/50 VUs, 8843 complete and 0 interrupted iterations
+nightly_export   [  26% ] 50 VUs  0m31.0s/2m0s
+
+running (0m32.0s), 50/50 VUs, 9178 complete and 0 interrupted iterations
+nightly_export   [  27% ] 50 VUs  0m32.0s/2m0s
+
+running (0m33.0s), 50/50 VUs, 9493 complete and 0 interrupted iterations
+nightly_export   [  27% ] 50 VUs  0m33.0s/2m0s
+
+running (0m34.0s), 50/50 VUs, 9804 complete and 0 interrupted iterations
+nightly_export   [  28% ] 50 VUs  0m34.0s/2m0s
+
+running (0m35.0s), 50/50 VUs, 10112 complete and 0 interrupted iterations
+nightly_export   [  29% ] 50 VUs  0m35.0s/2m0s
+
+running (0m36.0s), 50/50 VUs, 10425 complete and 0 interrupted iterations
+nightly_export   [  30% ] 50 VUs  0m36.0s/2m0s
+
+running (0m37.0s), 50/50 VUs, 10735 complete and 0 interrupted iterations
+nightly_export   [  31% ] 50 VUs  0m37.0s/2m0s
+
+running (0m38.0s), 50/50 VUs, 11048 complete and 0 interrupted iterations
+nightly_export   [  32% ] 50 VUs  0m38.0s/2m0s
+
+running (0m39.0s), 50/50 VUs, 11362 complete and 0 interrupted iterations
+nightly_export   [  32% ] 50 VUs  0m39.0s/2m0s
+
+running (0m40.0s), 50/50 VUs, 11683 complete and 0 interrupted iterations
+nightly_export   [  33% ] 50 VUs  0m40.0s/2m0s
+
+running (0m41.0s), 50/50 VUs, 11994 complete and 0 interrupted iterations
+nightly_export   [  34% ] 50 VUs  0m41.0s/2m0s
+
+running (0m42.0s), 50/50 VUs, 12301 complete and 0 interrupted iterations
+nightly_export   [  35% ] 50 VUs  0m42.0s/2m0s
+
+running (0m43.0s), 50/50 VUs, 12623 complete and 0 interrupted iterations
+nightly_export   [  36% ] 50 VUs  0m43.0s/2m0s
+
+running (0m44.0s), 50/50 VUs, 12934 complete and 0 interrupted iterations
+nightly_export   [  37% ] 50 VUs  0m44.0s/2m0s
+
+running (0m45.0s), 50/50 VUs, 13256 complete and 0 interrupted iterations
+nightly_export   [  37% ] 50 VUs  0m45.0s/2m0s
+
+running (0m46.0s), 50/50 VUs, 13566 complete and 0 interrupted iterations
+nightly_export   [  38% ] 50 VUs  0m46.0s/2m0s
+
+running (0m47.0s), 50/50 VUs, 13869 complete and 0 interrupted iterations
+nightly_export   [  39% ] 50 VUs  0m47.0s/2m0s
+
+running (0m48.0s), 50/50 VUs, 14190 complete and 0 interrupted iterations
+nightly_export   [  40% ] 50 VUs  0m48.0s/2m0s
+
+running (0m49.0s), 50/50 VUs, 14511 complete and 0 interrupted iterations
+nightly_export   [  41% ] 50 VUs  0m49.0s/2m0s
+
+running (0m50.0s), 50/50 VUs, 14826 complete and 0 interrupted iterations
+nightly_export   [  42% ] 50 VUs  0m50.0s/2m0s
+
+running (0m51.0s), 50/50 VUs, 15142 complete and 0 interrupted iterations
+nightly_export   [  42% ] 50 VUs  0m51.0s/2m0s
+
+running (0m52.0s), 50/50 VUs, 15443 complete and 0 interrupted iterations
+nightly_export   [  43% ] 50 VUs  0m52.0s/2m0s
+
+running (0m53.0s), 50/50 VUs, 15763 complete and 0 interrupted iterations
+nightly_export   [  44% ] 50 VUs  0m53.0s/2m0s
+
+running (0m54.0s), 50/50 VUs, 16070 complete and 0 interrupted iterations
+nightly_export   [  45% ] 50 VUs  0m54.0s/2m0s
+
+running (0m55.0s), 50/50 VUs, 16391 complete and 0 interrupted iterations
+nightly_export   [  46% ] 50 VUs  0m55.0s/2m0s
+
+running (0m56.0s), 50/50 VUs, 16709 complete and 0 interrupted iterations
+nightly_export   [  47% ] 50 VUs  0m56.0s/2m0s
+
+running (0m57.0s), 50/50 VUs, 17031 complete and 0 interrupted iterations
+nightly_export   [  47% ] 50 VUs  0m57.0s/2m0s
+
+running (0m58.0s), 50/50 VUs, 17366 complete and 0 interrupted iterations
+nightly_export   [  48% ] 50 VUs  0m58.0s/2m0s
+
+running (0m59.0s), 50/50 VUs, 17676 complete and 0 interrupted iterations
+nightly_export   [  49% ] 50 VUs  0m59.0s/2m0s
+
+running (1m00.0s), 50/50 VUs, 17991 complete and 0 interrupted iterations
+nightly_export   [  50% ] 50 VUs  1m00.0s/2m0s
+
+running (1m01.0s), 50/50 VUs, 18280 complete and 0 interrupted iterations
+nightly_export   [  51% ] 50 VUs  1m01.0s/2m0s
+
+running (1m02.0s), 50/50 VUs, 18600 complete and 0 interrupted iterations
+nightly_export   [  52% ] 50 VUs  1m02.0s/2m0s
+
+running (1m03.0s), 50/50 VUs, 18949 complete and 0 interrupted iterations
+nightly_export   [  52% ] 50 VUs  1m03.0s/2m0s
+
+running (1m04.0s), 50/50 VUs, 19241 complete and 0 interrupted iterations
+nightly_export   [  53% ] 50 VUs  1m04.0s/2m0s
+
+running (1m05.0s), 50/50 VUs, 19554 complete and 0 interrupted iterations
+nightly_export   [  54% ] 50 VUs  1m05.0s/2m0s
+
+running (1m06.0s), 50/50 VUs, 19874 complete and 0 interrupted iterations
+nightly_export   [  55% ] 50 VUs  1m06.0s/2m0s
+
+running (1m07.0s), 50/50 VUs, 20184 complete and 0 interrupted iterations
+nightly_export   [  56% ] 50 VUs  1m07.0s/2m0s
+
+running (1m08.0s), 50/50 VUs, 20511 complete and 0 interrupted iterations
+nightly_export   [  57% ] 50 VUs  1m08.0s/2m0s
+
+running (1m09.0s), 50/50 VUs, 20833 complete and 0 interrupted iterations
+nightly_export   [  57% ] 50 VUs  1m09.0s/2m0s
+
+running (1m10.0s), 50/50 VUs, 21147 complete and 0 interrupted iterations
+nightly_export   [  58% ] 50 VUs  1m10.0s/2m0s
+
+running (1m11.0s), 50/50 VUs, 21435 complete and 0 interrupted iterations
+nightly_export   [  59% ] 50 VUs  1m11.0s/2m0s
+
+running (1m12.0s), 50/50 VUs, 21741 complete and 0 interrupted iterations
+nightly_export   [  60% ] 50 VUs  1m12.0s/2m0s
+
+running (1m13.0s), 50/50 VUs, 22061 complete and 0 interrupted iterations
+nightly_export   [  61% ] 50 VUs  1m13.0s/2m0s
+
+running (1m14.0s), 50/50 VUs, 22388 complete and 0 interrupted iterations
+nightly_export   [  62% ] 50 VUs  1m14.0s/2m0s
+
+running (1m15.0s), 50/50 VUs, 22695 complete and 0 interrupted iterations
+nightly_export   [  62% ] 50 VUs  1m15.0s/2m0s
+
+running (1m16.0s), 50/50 VUs, 22995 complete and 0 interrupted iterations
+nightly_export   [  63% ] 50 VUs  1m16.0s/2m0s
+
+running (1m17.0s), 50/50 VUs, 23314 complete and 0 interrupted iterations
+nightly_export   [  64% ] 50 VUs  1m17.0s/2m0s
+
+running (1m18.0s), 50/50 VUs, 23636 complete and 0 interrupted iterations
+nightly_export   [  65% ] 50 VUs  1m18.0s/2m0s
+
+running (1m19.0s), 50/50 VUs, 23944 complete and 0 interrupted iterations
+nightly_export   [  66% ] 50 VUs  1m19.0s/2m0s
+
+running (1m20.0s), 50/50 VUs, 24264 complete and 0 interrupted iterations
+nightly_export   [  67% ] 50 VUs  1m20.0s/2m0s
+
+running (1m21.0s), 50/50 VUs, 24585 complete and 0 interrupted iterations
+nightly_export   [  67% ] 50 VUs  1m21.0s/2m0s
+
+running (1m22.0s), 50/50 VUs, 24896 complete and 0 interrupted iterations
+nightly_export   [  68% ] 50 VUs  1m22.0s/2m0s
+
+running (1m23.0s), 50/50 VUs, 25200 complete and 0 interrupted iterations
+nightly_export   [  69% ] 50 VUs  1m23.0s/2m0s
+
+running (1m24.0s), 50/50 VUs, 25547 complete and 0 interrupted iterations
+nightly_export   [  70% ] 50 VUs  1m24.0s/2m0s
+
+running (1m25.0s), 50/50 VUs, 25860 complete and 0 interrupted iterations
+nightly_export   [  71% ] 50 VUs  1m25.0s/2m0s
+
+running (1m26.0s), 50/50 VUs, 26165 complete and 0 interrupted iterations
+nightly_export   [  72% ] 50 VUs  1m26.0s/2m0s
+
+running (1m27.0s), 50/50 VUs, 26486 complete and 0 interrupted iterations
+nightly_export   [  72% ] 50 VUs  1m27.0s/2m0s
+
+running (1m28.0s), 50/50 VUs, 26808 complete and 0 interrupted iterations
+nightly_export   [  73% ] 50 VUs  1m28.0s/2m0s
+
+running (1m29.0s), 50/50 VUs, 27149 complete and 0 interrupted iterations
+nightly_export   [  74% ] 50 VUs  1m29.0s/2m0s
+
+running (1m30.0s), 50/50 VUs, 27451 complete and 0 interrupted iterations
+nightly_export   [  75% ] 50 VUs  1m30.0s/2m0s
+
+running (1m31.0s), 50/50 VUs, 27755 complete and 0 interrupted iterations
+nightly_export   [  76% ] 50 VUs  1m31.0s/2m0s
+
+running (1m32.0s), 50/50 VUs, 28066 complete and 0 interrupted iterations
+nightly_export   [  77% ] 50 VUs  1m32.0s/2m0s
+
+running (1m33.0s), 50/50 VUs, 28387 complete and 0 interrupted iterations
+nightly_export   [  77% ] 50 VUs  1m33.0s/2m0s
+
+running (1m34.0s), 50/50 VUs, 28678 complete and 0 interrupted iterations
+nightly_export   [  78% ] 50 VUs  1m34.0s/2m0s
+
+running (1m35.0s), 50/50 VUs, 28997 complete and 0 interrupted iterations
+nightly_export   [  79% ] 50 VUs  1m35.0s/2m0s
+
+running (1m36.0s), 50/50 VUs, 29304 complete and 0 interrupted iterations
+nightly_export   [  80% ] 50 VUs  1m36.0s/2m0s
+
+running (1m37.0s), 50/50 VUs, 29626 complete and 0 interrupted iterations
+nightly_export   [  81% ] 50 VUs  1m37.0s/2m0s
+
+running (1m38.0s), 50/50 VUs, 29929 complete and 0 interrupted iterations
+nightly_export   [  82% ] 50 VUs  1m38.0s/2m0s
+
+running (1m39.0s), 50/50 VUs, 30254 complete and 0 interrupted iterations
+nightly_export   [  82% ] 50 VUs  1m39.0s/2m0s
+
+running (1m40.0s), 50/50 VUs, 30554 complete and 0 interrupted iterations
+nightly_export   [  83% ] 50 VUs  1m40.0s/2m0s
+
+running (1m41.0s), 50/50 VUs, 30874 complete and 0 interrupted iterations
+nightly_export   [  84% ] 50 VUs  1m41.0s/2m0s
+
+running (1m42.0s), 50/50 VUs, 31186 complete and 0 interrupted iterations
+nightly_export   [  85% ] 50 VUs  1m42.0s/2m0s
+
+running (1m43.0s), 50/50 VUs, 31508 complete and 0 interrupted iterations
+nightly_export   [  86% ] 50 VUs  1m43.0s/2m0s
+
+running (1m44.0s), 50/50 VUs, 31789 complete and 0 interrupted iterations
+nightly_export   [  87% ] 50 VUs  1m44.0s/2m0s
+
+running (1m45.0s), 50/50 VUs, 32109 complete and 0 interrupted iterations
+nightly_export   [  87% ] 50 VUs  1m45.0s/2m0s
+
+running (1m46.0s), 50/50 VUs, 32426 complete and 0 interrupted iterations
+nightly_export   [  88% ] 50 VUs  1m46.0s/2m0s
+
+running (1m47.0s), 50/50 VUs, 32737 complete and 0 interrupted iterations
+nightly_export   [  89% ] 50 VUs  1m47.0s/2m0s
+
+running (1m48.0s), 50/50 VUs, 33070 complete and 0 interrupted iterations
+nightly_export   [  90% ] 50 VUs  1m48.0s/2m0s
+
+running (1m49.0s), 50/50 VUs, 33393 complete and 0 interrupted iterations
+nightly_export   [  91% ] 50 VUs  1m49.0s/2m0s
+
+running (1m50.0s), 50/50 VUs, 33713 complete and 0 interrupted iterations
+nightly_export   [  92% ] 50 VUs  1m50.0s/2m0s
+
+running (1m51.0s), 50/50 VUs, 34013 complete and 0 interrupted iterations
+nightly_export   [  92% ] 50 VUs  1m51.0s/2m0s
+
+running (1m52.0s), 50/50 VUs, 34310 complete and 0 interrupted iterations
+nightly_export   [  93% ] 50 VUs  1m52.0s/2m0s
+
+running (1m53.0s), 50/50 VUs, 34631 complete and 0 interrupted iterations
+nightly_export   [  94% ] 50 VUs  1m53.0s/2m0s
+
+running (1m54.0s), 50/50 VUs, 34949 complete and 0 interrupted iterations
+nightly_export   [  95% ] 50 VUs  1m54.0s/2m0s
+
+running (1m55.0s), 50/50 VUs, 35271 complete and 0 interrupted iterations
+nightly_export   [  96% ] 50 VUs  1m55.0s/2m0s
+
+running (1m56.0s), 50/50 VUs, 35593 complete and 0 interrupted iterations
+nightly_export   [  97% ] 50 VUs  1m56.0s/2m0s
+
+running (1m57.0s), 50/50 VUs, 35885 complete and 0 interrupted iterations
+nightly_export   [  97% ] 50 VUs  1m57.0s/2m0s
+
+running (1m58.0s), 50/50 VUs, 36205 complete and 0 interrupted iterations
+nightly_export   [  98% ] 50 VUs  1m58.0s/2m0s
+
+running (1m59.0s), 50/50 VUs, 36525 complete and 0 interrupted iterations
+nightly_export   [  99% ] 50 VUs  1m59.0s/2m0s
+
+running (2m00.0s), 50/50 VUs, 36863 complete and 0 interrupted iterations
+nightly_export   [ 100% ] 50 VUs  2m00.0s/2m0s
+
+
+  █ THRESHOLDS 
+
+    http_req_failed
+    ✗ 'rate<0.05' rate=99.36%
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......: 36913  305.406798/s
+    checks_succeeded...: 0.63%  235 out of 36913
+    checks_failed......: 99.36% 36678 out of 36913
+
+    ✗ status is 200
+      ↳  0% — ✓ 235 / ✗ 36678
+
+    HTTP
+    http_req_duration..............: avg=162.65ms min=3.64ms med=152.83ms max=6.36s p(90)=159.01ms p(95)=161.17ms p(99)=266.82ms
+      { expected_response:true }...: avg=2.17s    min=1.56s  med=2.17s    max=2.49s p(90)=2.24s    p(95)=2.33s    p(99)=2.43s   
+    http_req_failed................: 99.36% 36678 out of 36913
+    http_reqs......................: 36913  305.406798/s
+
+    EXECUTION
+    iteration_duration.............: avg=162.72ms min=3.77ms med=152.89ms max=6.36s p(90)=159.08ms p(95)=161.23ms p(99)=266.88ms
+    iterations.....................: 36913  305.406798/s
+    vus............................: 50     min=50             max=50
+    vus_max........................: 50     min=50             max=50
+
+    NETWORK
+    data_received..................: 8.5 GB 70 MB/s
+    data_sent......................: 3.3 MB 27 kB/s
+
+
+
+
+running (2m00.9s), 00/50 VUs, 36913 complete and 0 interrupted iterations
+nightly_export ✓ [ 100% ] 50 VUs  2m0s
+time="2026-08-10T18:01:40+03:00" level=error msg="thresholds on metrics 'http_req_failed' have been crossed"

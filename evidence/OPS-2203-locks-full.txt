@@ -1,0 +1,1501 @@
+=== sys.innodb_lock_waits (mid-load) ===
+mysql: [Warning] Using a password on the command line interface can be insecure.
+*************************** 1. row ***************************
+                wait_started: 2026-08-09 21:12:13
+                    wait_age: 00:00:05
+               wait_age_secs: 5
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 2993
+         waiting_trx_started: 2026-08-09 21:12:13
+             waiting_trx_age: 00:00:05
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 338
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422013296:4970:10:4:2:130667400845968
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 2961
+                blocking_pid: 328
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422005216:7288:10:4:2:130667400786128
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:13
+            blocking_trx_age: 00:00:05
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 328
+sql_kill_blocking_connection: KILL 328
+*************************** 2. row ***************************
+                wait_started: 2026-08-09 21:12:13
+                    wait_age: 00:00:05
+               wait_age_secs: 5
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 2993
+         waiting_trx_started: 2026-08-09 21:12:13
+             waiting_trx_age: 00:00:05
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 338
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422013296:4970:10:4:2:130667400845968
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 2960
+                blocking_pid: 330
+              blocking_query: NULL
+            blocking_lock_id: 130670422006832:8074:10:4:2:130667400798096
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:13
+            blocking_trx_age: 00:00:05
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 1
+     sql_kill_blocking_query: KILL QUERY 330
+sql_kill_blocking_connection: KILL 330
+*************************** 3. row ***************************
+                wait_started: 2026-08-09 21:12:14
+                    wait_age: 00:00:04
+               wait_age_secs: 4
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3002
+         waiting_trx_started: 2026-08-09 21:12:14
+             waiting_trx_age: 00:00:04
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 318
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670421997136:9724:10:4:2:130670353518256
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 2961
+                blocking_pid: 328
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422005216:7288:10:4:2:130667400786128
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:13
+            blocking_trx_age: 00:00:05
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 328
+sql_kill_blocking_connection: KILL 328
+*************************** 4. row ***************************
+                wait_started: 2026-08-09 21:12:14
+                    wait_age: 00:00:04
+               wait_age_secs: 4
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3004
+         waiting_trx_started: 2026-08-09 21:12:14
+             waiting_trx_age: 00:00:04
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 324
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422001984:8418:10:4:2:130670353554512
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 2961
+                blocking_pid: 328
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422005216:7288:10:4:2:130667400786128
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:13
+            blocking_trx_age: 00:00:05
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 328
+sql_kill_blocking_connection: KILL 328
+*************************** 5. row ***************************
+                wait_started: 2026-08-09 21:12:14
+                    wait_age: 00:00:04
+               wait_age_secs: 4
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3004
+         waiting_trx_started: 2026-08-09 21:12:14
+             waiting_trx_age: 00:00:04
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 324
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422001984:8418:10:4:2:130670353554512
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3002
+                blocking_pid: 318
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670421997136:9724:10:4:2:130670353518256
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:14
+            blocking_trx_age: 00:00:04
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 318
+sql_kill_blocking_connection: KILL 318
+*************************** 6. row ***************************
+                wait_started: 2026-08-09 21:12:15
+                    wait_age: 00:00:03
+               wait_age_secs: 3
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3008
+         waiting_trx_started: 2026-08-09 21:12:15
+             waiting_trx_age: 00:00:03
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 351
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422023800:4928:10:4:2:130667400925120
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3002
+                blocking_pid: 318
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670421997136:9724:10:4:2:130670353518256
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:14
+            blocking_trx_age: 00:00:04
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 318
+sql_kill_blocking_connection: KILL 318
+*************************** 7. row ***************************
+                wait_started: 2026-08-09 21:12:15
+                    wait_age: 00:00:03
+               wait_age_secs: 3
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3008
+         waiting_trx_started: 2026-08-09 21:12:15
+             waiting_trx_age: 00:00:03
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 351
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422023800:4928:10:4:2:130667400925120
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3006
+                blocking_pid: 354
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422026224:4798:10:4:2:130667400943072
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:15
+            blocking_trx_age: 00:00:03
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 354
+sql_kill_blocking_connection: KILL 354
+*************************** 8. row ***************************
+                wait_started: 2026-08-09 21:12:15
+                    wait_age: 00:00:03
+               wait_age_secs: 3
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3008
+         waiting_trx_started: 2026-08-09 21:12:15
+             waiting_trx_age: 00:00:03
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 351
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422023800:4928:10:4:2:130667400925120
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3004
+                blocking_pid: 324
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422001984:8418:10:4:2:130670353554512
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:14
+            blocking_trx_age: 00:00:04
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 324
+sql_kill_blocking_connection: KILL 324
+*************************** 9. row ***************************
+                wait_started: 2026-08-09 21:12:15
+                    wait_age: 00:00:03
+               wait_age_secs: 3
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3008
+         waiting_trx_started: 2026-08-09 21:12:15
+             waiting_trx_age: 00:00:03
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 351
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422023800:4928:10:4:2:130667400925120
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 2961
+                blocking_pid: 328
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422005216:7288:10:4:2:130667400786128
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:13
+            blocking_trx_age: 00:00:05
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 328
+sql_kill_blocking_connection: KILL 328
+*************************** 10. row ***************************
+                wait_started: 2026-08-09 21:12:15
+                    wait_age: 00:00:03
+               wait_age_secs: 3
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3006
+         waiting_trx_started: 2026-08-09 21:12:15
+             waiting_trx_age: 00:00:03
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 354
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422026224:4798:10:4:2:130667400943072
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3004
+                blocking_pid: 324
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422001984:8418:10:4:2:130670353554512
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:14
+            blocking_trx_age: 00:00:04
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 324
+sql_kill_blocking_connection: KILL 324
+*************************** 11. row ***************************
+                wait_started: 2026-08-09 21:12:15
+                    wait_age: 00:00:03
+               wait_age_secs: 3
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3006
+         waiting_trx_started: 2026-08-09 21:12:15
+             waiting_trx_age: 00:00:03
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 354
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422026224:4798:10:4:2:130667400943072
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3002
+                blocking_pid: 318
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670421997136:9724:10:4:2:130670353518256
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:14
+            blocking_trx_age: 00:00:04
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 318
+sql_kill_blocking_connection: KILL 318
+*************************** 12. row ***************************
+                wait_started: 2026-08-09 21:12:15
+                    wait_age: 00:00:03
+               wait_age_secs: 3
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3006
+         waiting_trx_started: 2026-08-09 21:12:15
+             waiting_trx_age: 00:00:03
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 354
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422026224:4798:10:4:2:130667400943072
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 2961
+                blocking_pid: 328
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422005216:7288:10:4:2:130667400786128
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:13
+            blocking_trx_age: 00:00:05
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 328
+sql_kill_blocking_connection: KILL 328
+*************************** 13. row ***************************
+                wait_started: 2026-08-09 21:12:16
+                    wait_age: 00:00:02
+               wait_age_secs: 2
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3010
+         waiting_trx_started: 2026-08-09 21:12:16
+             waiting_trx_age: 00:00:02
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 358
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422029456:5212:10:4:2:130667400967008
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3006
+                blocking_pid: 354
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422026224:4798:10:4:2:130667400943072
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:15
+            blocking_trx_age: 00:00:03
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 354
+sql_kill_blocking_connection: KILL 354
+*************************** 14. row ***************************
+                wait_started: 2026-08-09 21:12:16
+                    wait_age: 00:00:02
+               wait_age_secs: 2
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3012
+         waiting_trx_started: 2026-08-09 21:12:16
+             waiting_trx_age: 00:00:02
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 346
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422019760:4928:10:4:2:130667400895200
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3010
+                blocking_pid: 358
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422029456:5212:10:4:2:130667400967008
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:16
+            blocking_trx_age: 00:00:02
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 358
+sql_kill_blocking_connection: KILL 358
+*************************** 15. row ***************************
+                wait_started: 2026-08-09 21:12:16
+                    wait_age: 00:00:02
+               wait_age_secs: 2
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3012
+         waiting_trx_started: 2026-08-09 21:12:16
+             waiting_trx_age: 00:00:02
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 346
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422019760:4928:10:4:2:130667400895200
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3008
+                blocking_pid: 351
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422023800:4928:10:4:2:130667400925120
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:15
+            blocking_trx_age: 00:00:03
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 351
+sql_kill_blocking_connection: KILL 351
+*************************** 16. row ***************************
+                wait_started: 2026-08-09 21:12:16
+                    wait_age: 00:00:02
+               wait_age_secs: 2
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3012
+         waiting_trx_started: 2026-08-09 21:12:16
+             waiting_trx_age: 00:00:02
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 346
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422019760:4928:10:4:2:130667400895200
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3006
+                blocking_pid: 354
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422026224:4798:10:4:2:130667400943072
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:15
+            blocking_trx_age: 00:00:03
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 354
+sql_kill_blocking_connection: KILL 354
+*************************** 17. row ***************************
+                wait_started: 2026-08-09 21:12:16
+                    wait_age: 00:00:02
+               wait_age_secs: 2
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3012
+         waiting_trx_started: 2026-08-09 21:12:16
+             waiting_trx_age: 00:00:02
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 346
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422019760:4928:10:4:2:130667400895200
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3004
+                blocking_pid: 324
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422001984:8418:10:4:2:130670353554512
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:14
+            blocking_trx_age: 00:00:04
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 324
+sql_kill_blocking_connection: KILL 324
+*************************** 18. row ***************************
+                wait_started: 2026-08-09 21:12:16
+                    wait_age: 00:00:02
+               wait_age_secs: 2
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3012
+         waiting_trx_started: 2026-08-09 21:12:16
+             waiting_trx_age: 00:00:02
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 346
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422019760:4928:10:4:2:130667400895200
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3002
+                blocking_pid: 318
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670421997136:9724:10:4:2:130670353518256
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:14
+            blocking_trx_age: 00:00:04
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 318
+sql_kill_blocking_connection: KILL 318
+*************************** 19. row ***************************
+                wait_started: 2026-08-09 21:12:16
+                    wait_age: 00:00:02
+               wait_age_secs: 2
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3012
+         waiting_trx_started: 2026-08-09 21:12:16
+             waiting_trx_age: 00:00:02
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 346
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422019760:4928:10:4:2:130667400895200
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 2961
+                blocking_pid: 328
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422005216:7288:10:4:2:130667400786128
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:13
+            blocking_trx_age: 00:00:05
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 328
+sql_kill_blocking_connection: KILL 328
+*************************** 20. row ***************************
+                wait_started: 2026-08-09 21:12:16
+                    wait_age: 00:00:02
+               wait_age_secs: 2
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3010
+         waiting_trx_started: 2026-08-09 21:12:16
+             waiting_trx_age: 00:00:02
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 358
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422029456:5212:10:4:2:130667400967008
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3008
+                blocking_pid: 351
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422023800:4928:10:4:2:130667400925120
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:15
+            blocking_trx_age: 00:00:03
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 351
+sql_kill_blocking_connection: KILL 351
+*************************** 21. row ***************************
+                wait_started: 2026-08-09 21:12:16
+                    wait_age: 00:00:02
+               wait_age_secs: 2
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3010
+         waiting_trx_started: 2026-08-09 21:12:16
+             waiting_trx_age: 00:00:02
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 358
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422029456:5212:10:4:2:130667400967008
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3004
+                blocking_pid: 324
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422001984:8418:10:4:2:130670353554512
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:14
+            blocking_trx_age: 00:00:04
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 324
+sql_kill_blocking_connection: KILL 324
+*************************** 22. row ***************************
+                wait_started: 2026-08-09 21:12:16
+                    wait_age: 00:00:02
+               wait_age_secs: 2
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3010
+         waiting_trx_started: 2026-08-09 21:12:16
+             waiting_trx_age: 00:00:02
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 358
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422029456:5212:10:4:2:130667400967008
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3002
+                blocking_pid: 318
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670421997136:9724:10:4:2:130670353518256
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:14
+            blocking_trx_age: 00:00:04
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 318
+sql_kill_blocking_connection: KILL 318
+*************************** 23. row ***************************
+                wait_started: 2026-08-09 21:12:16
+                    wait_age: 00:00:02
+               wait_age_secs: 2
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3010
+         waiting_trx_started: 2026-08-09 21:12:16
+             waiting_trx_age: 00:00:02
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 358
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422029456:5212:10:4:2:130667400967008
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 2961
+                blocking_pid: 328
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422005216:7288:10:4:2:130667400786128
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:13
+            blocking_trx_age: 00:00:05
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 328
+sql_kill_blocking_connection: KILL 328
+*************************** 24. row ***************************
+                wait_started: 2026-08-09 21:12:17
+                    wait_age: 00:00:01
+               wait_age_secs: 1
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3014
+         waiting_trx_started: 2026-08-09 21:12:17
+             waiting_trx_age: 00:00:01
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 326
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422003600:7392:10:4:2:130670353566480
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 2961
+                blocking_pid: 328
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422005216:7288:10:4:2:130667400786128
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:13
+            blocking_trx_age: 00:00:05
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 328
+sql_kill_blocking_connection: KILL 328
+*************************** 25. row ***************************
+                wait_started: 2026-08-09 21:12:17
+                    wait_age: 00:00:01
+               wait_age_secs: 1
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3016
+         waiting_trx_started: 2026-08-09 21:12:17
+             waiting_trx_age: 00:00:01
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 340
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422015720:4906:10:4:2:130667400863920
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3014
+                blocking_pid: 326
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422003600:7392:10:4:2:130670353566480
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:17
+            blocking_trx_age: 00:00:01
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 326
+sql_kill_blocking_connection: KILL 326
+*************************** 26. row ***************************
+                wait_started: 2026-08-09 21:12:17
+                    wait_age: 00:00:01
+               wait_age_secs: 1
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3016
+         waiting_trx_started: 2026-08-09 21:12:17
+             waiting_trx_age: 00:00:01
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 340
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422015720:4906:10:4:2:130667400863920
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3012
+                blocking_pid: 346
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422019760:4928:10:4:2:130667400895200
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:16
+            blocking_trx_age: 00:00:02
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 346
+sql_kill_blocking_connection: KILL 346
+*************************** 27. row ***************************
+                wait_started: 2026-08-09 21:12:17
+                    wait_age: 00:00:01
+               wait_age_secs: 1
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3016
+         waiting_trx_started: 2026-08-09 21:12:17
+             waiting_trx_age: 00:00:01
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 340
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422015720:4906:10:4:2:130667400863920
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3010
+                blocking_pid: 358
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422029456:5212:10:4:2:130667400967008
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:16
+            blocking_trx_age: 00:00:02
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 358
+sql_kill_blocking_connection: KILL 358
+*************************** 28. row ***************************
+                wait_started: 2026-08-09 21:12:17
+                    wait_age: 00:00:01
+               wait_age_secs: 1
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3016
+         waiting_trx_started: 2026-08-09 21:12:17
+             waiting_trx_age: 00:00:01
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 340
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422015720:4906:10:4:2:130667400863920
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3008
+                blocking_pid: 351
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422023800:4928:10:4:2:130667400925120
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:15
+            blocking_trx_age: 00:00:03
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 351
+sql_kill_blocking_connection: KILL 351
+*************************** 29. row ***************************
+                wait_started: 2026-08-09 21:12:17
+                    wait_age: 00:00:01
+               wait_age_secs: 1
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3016
+         waiting_trx_started: 2026-08-09 21:12:17
+             waiting_trx_age: 00:00:01
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 340
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422015720:4906:10:4:2:130667400863920
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3006
+                blocking_pid: 354
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422026224:4798:10:4:2:130667400943072
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:15
+            blocking_trx_age: 00:00:03
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 354
+sql_kill_blocking_connection: KILL 354
+*************************** 30. row ***************************
+                wait_started: 2026-08-09 21:12:17
+                    wait_age: 00:00:01
+               wait_age_secs: 1
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3016
+         waiting_trx_started: 2026-08-09 21:12:17
+             waiting_trx_age: 00:00:01
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 340
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422015720:4906:10:4:2:130667400863920
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3004
+                blocking_pid: 324
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422001984:8418:10:4:2:130670353554512
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:14
+            blocking_trx_age: 00:00:04
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 324
+sql_kill_blocking_connection: KILL 324
+*************************** 31. row ***************************
+                wait_started: 2026-08-09 21:12:17
+                    wait_age: 00:00:01
+               wait_age_secs: 1
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3016
+         waiting_trx_started: 2026-08-09 21:12:17
+             waiting_trx_age: 00:00:01
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 340
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422015720:4906:10:4:2:130667400863920
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3002
+                blocking_pid: 318
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670421997136:9724:10:4:2:130670353518256
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:14
+            blocking_trx_age: 00:00:04
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 318
+sql_kill_blocking_connection: KILL 318
+*************************** 32. row ***************************
+                wait_started: 2026-08-09 21:12:17
+                    wait_age: 00:00:01
+               wait_age_secs: 1
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3016
+         waiting_trx_started: 2026-08-09 21:12:17
+             waiting_trx_age: 00:00:01
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 340
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422015720:4906:10:4:2:130667400863920
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 2961
+                blocking_pid: 328
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422005216:7288:10:4:2:130667400786128
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:13
+            blocking_trx_age: 00:00:05
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 328
+sql_kill_blocking_connection: KILL 328
+*************************** 33. row ***************************
+                wait_started: 2026-08-09 21:12:17
+                    wait_age: 00:00:01
+               wait_age_secs: 1
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3014
+         waiting_trx_started: 2026-08-09 21:12:17
+             waiting_trx_age: 00:00:01
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 326
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422003600:7392:10:4:2:130670353566480
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3012
+                blocking_pid: 346
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422019760:4928:10:4:2:130667400895200
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:16
+            blocking_trx_age: 00:00:02
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 346
+sql_kill_blocking_connection: KILL 346
+*************************** 34. row ***************************
+                wait_started: 2026-08-09 21:12:17
+                    wait_age: 00:00:01
+               wait_age_secs: 1
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3014
+         waiting_trx_started: 2026-08-09 21:12:17
+             waiting_trx_age: 00:00:01
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 326
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422003600:7392:10:4:2:130670353566480
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3010
+                blocking_pid: 358
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422029456:5212:10:4:2:130667400967008
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:16
+            blocking_trx_age: 00:00:02
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 358
+sql_kill_blocking_connection: KILL 358
+*************************** 35. row ***************************
+                wait_started: 2026-08-09 21:12:17
+                    wait_age: 00:00:01
+               wait_age_secs: 1
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3014
+         waiting_trx_started: 2026-08-09 21:12:17
+             waiting_trx_age: 00:00:01
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 326
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422003600:7392:10:4:2:130670353566480
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3008
+                blocking_pid: 351
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422023800:4928:10:4:2:130667400925120
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:15
+            blocking_trx_age: 00:00:03
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 351
+sql_kill_blocking_connection: KILL 351
+*************************** 36. row ***************************
+                wait_started: 2026-08-09 21:12:17
+                    wait_age: 00:00:01
+               wait_age_secs: 1
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3014
+         waiting_trx_started: 2026-08-09 21:12:17
+             waiting_trx_age: 00:00:01
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 326
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422003600:7392:10:4:2:130670353566480
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3006
+                blocking_pid: 354
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422026224:4798:10:4:2:130667400943072
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:15
+            blocking_trx_age: 00:00:03
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 354
+sql_kill_blocking_connection: KILL 354
+*************************** 37. row ***************************
+                wait_started: 2026-08-09 21:12:17
+                    wait_age: 00:00:01
+               wait_age_secs: 1
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3014
+         waiting_trx_started: 2026-08-09 21:12:17
+             waiting_trx_age: 00:00:01
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 326
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422003600:7392:10:4:2:130670353566480
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3004
+                blocking_pid: 324
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422001984:8418:10:4:2:130670353554512
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:14
+            blocking_trx_age: 00:00:04
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 324
+sql_kill_blocking_connection: KILL 324
+*************************** 38. row ***************************
+                wait_started: 2026-08-09 21:12:17
+                    wait_age: 00:00:01
+               wait_age_secs: 1
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3014
+         waiting_trx_started: 2026-08-09 21:12:17
+             waiting_trx_age: 00:00:01
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 326
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422003600:7392:10:4:2:130670353566480
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3002
+                blocking_pid: 318
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670421997136:9724:10:4:2:130670353518256
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:14
+            blocking_trx_age: 00:00:04
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 318
+sql_kill_blocking_connection: KILL 318
+*************************** 39. row ***************************
+                wait_started: 2026-08-09 21:12:18
+                    wait_age: 00:00:00
+               wait_age_secs: 0
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3018
+         waiting_trx_started: 2026-08-09 21:12:18
+             waiting_trx_age: 00:00:00
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 336
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422011680:6160:10:4:2:130667400834000
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 2961
+                blocking_pid: 328
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422005216:7288:10:4:2:130667400786128
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:13
+            blocking_trx_age: 00:00:05
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 328
+sql_kill_blocking_connection: KILL 328
+*************************** 40. row ***************************
+                wait_started: 2026-08-09 21:12:18
+                    wait_age: 00:00:00
+               wait_age_secs: 0
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3018
+         waiting_trx_started: 2026-08-09 21:12:18
+             waiting_trx_age: 00:00:00
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 336
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422011680:6160:10:4:2:130667400834000
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3002
+                blocking_pid: 318
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670421997136:9724:10:4:2:130670353518256
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:14
+            blocking_trx_age: 00:00:04
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 318
+sql_kill_blocking_connection: KILL 318
+*************************** 41. row ***************************
+                wait_started: 2026-08-09 21:12:18
+                    wait_age: 00:00:00
+               wait_age_secs: 0
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3018
+         waiting_trx_started: 2026-08-09 21:12:18
+             waiting_trx_age: 00:00:00
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 336
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422011680:6160:10:4:2:130667400834000
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3004
+                blocking_pid: 324
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422001984:8418:10:4:2:130670353554512
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:14
+            blocking_trx_age: 00:00:04
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 324
+sql_kill_blocking_connection: KILL 324
+*************************** 42. row ***************************
+                wait_started: 2026-08-09 21:12:18
+                    wait_age: 00:00:00
+               wait_age_secs: 0
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3018
+         waiting_trx_started: 2026-08-09 21:12:18
+             waiting_trx_age: 00:00:00
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 336
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422011680:6160:10:4:2:130667400834000
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3006
+                blocking_pid: 354
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422026224:4798:10:4:2:130667400943072
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:15
+            blocking_trx_age: 00:00:03
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 354
+sql_kill_blocking_connection: KILL 354
+*************************** 43. row ***************************
+                wait_started: 2026-08-09 21:12:18
+                    wait_age: 00:00:00
+               wait_age_secs: 0
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3018
+         waiting_trx_started: 2026-08-09 21:12:18
+             waiting_trx_age: 00:00:00
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 336
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422011680:6160:10:4:2:130667400834000
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3008
+                blocking_pid: 351
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422023800:4928:10:4:2:130667400925120
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:15
+            blocking_trx_age: 00:00:03
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 351
+sql_kill_blocking_connection: KILL 351
+*************************** 44. row ***************************
+                wait_started: 2026-08-09 21:12:18
+                    wait_age: 00:00:00
+               wait_age_secs: 0
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3018
+         waiting_trx_started: 2026-08-09 21:12:18
+             waiting_trx_age: 00:00:00
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 336
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422011680:6160:10:4:2:130667400834000
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3010
+                blocking_pid: 358
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422029456:5212:10:4:2:130667400967008
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:16
+            blocking_trx_age: 00:00:02
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 358
+sql_kill_blocking_connection: KILL 358
+*************************** 45. row ***************************
+                wait_started: 2026-08-09 21:12:18
+                    wait_age: 00:00:00
+               wait_age_secs: 0
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3018
+         waiting_trx_started: 2026-08-09 21:12:18
+             waiting_trx_age: 00:00:00
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 336
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422011680:6160:10:4:2:130667400834000
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3012
+                blocking_pid: 346
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422019760:4928:10:4:2:130667400895200
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:16
+            blocking_trx_age: 00:00:02
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 346
+sql_kill_blocking_connection: KILL 346
+*************************** 46. row ***************************
+                wait_started: 2026-08-09 21:12:18
+                    wait_age: 00:00:00
+               wait_age_secs: 0
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3018
+         waiting_trx_started: 2026-08-09 21:12:18
+             waiting_trx_age: 00:00:00
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 336
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422011680:6160:10:4:2:130667400834000
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3014
+                blocking_pid: 326
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422003600:7392:10:4:2:130670353566480
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:17
+            blocking_trx_age: 00:00:01
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 326
+sql_kill_blocking_connection: KILL 326
+*************************** 47. row ***************************
+                wait_started: 2026-08-09 21:12:18
+                    wait_age: 00:00:00
+               wait_age_secs: 0
+                locked_table: `capacity_lab`.`hospitals`
+         locked_table_schema: capacity_lab
+           locked_table_name: hospitals
+      locked_table_partition: NULL
+   locked_table_subpartition: NULL
+                locked_index: PRIMARY
+                 locked_type: RECORD
+              waiting_trx_id: 3018
+         waiting_trx_started: 2026-08-09 21:12:18
+             waiting_trx_age: 00:00:00
+     waiting_trx_rows_locked: 1
+   waiting_trx_rows_modified: 0
+                 waiting_pid: 336
+               waiting_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+             waiting_lock_id: 130670422011680:6160:10:4:2:130667400834000
+           waiting_lock_mode: X,REC_NOT_GAP
+             blocking_trx_id: 3016
+                blocking_pid: 340
+              blocking_query: UPDATE hospitals SET available ... vailable_beds - 1 WHERE id = 1
+            blocking_lock_id: 130670422015720:4906:10:4:2:130667400863920
+          blocking_lock_mode: X,REC_NOT_GAP
+        blocking_trx_started: 2026-08-09 21:12:17
+            blocking_trx_age: 00:00:01
+    blocking_trx_rows_locked: 1
+  blocking_trx_rows_modified: 0
+     sql_kill_blocking_query: KILL QUERY 340
+sql_kill_blocking_connection: KILL 340
+
+=== performance_schema.data_locks (mid-load, count + sample) ===
+mysql: [Warning] Using a password on the command line interface can be insecure.
+total_locks
+100
+ENGINE_TRANSACTION_ID	OBJECT_NAME	INDEX_NAME	LOCK_TYPE	LOCK_MODE	LOCK_STATUS	LOCK_DATA
+2961	hospitals	NULL	TABLE	IX	GRANTED	NULL
+3002	hospitals	NULL	TABLE	IX	GRANTED	NULL
+3004	hospitals	NULL	TABLE	IX	GRANTED	NULL
+3006	hospitals	NULL	TABLE	IX	GRANTED	NULL
+3008	hospitals	NULL	TABLE	IX	GRANTED	NULL
+3010	hospitals	NULL	TABLE	IX	GRANTED	NULL
+3012	hospitals	NULL	TABLE	IX	GRANTED	NULL
+3014	hospitals	NULL	TABLE	IX	GRANTED	NULL
+3016	hospitals	NULL	TABLE	IX	GRANTED	NULL
+3018	hospitals	NULL	TABLE	IX	GRANTED	NULL
+
+=== SHOW ENGINE INNODB STATUS (TRANSACTIONS excerpt) ===
+TRANSACTIONS
+------------
+LIST OF TRANSACTIONS FOR EACH SESSION:
+---TRANSACTION 412145398745768, not started
+0 lock struct(s), heap size 1128, 0 row lock(s)
+---TRANSACTION 412145398704560, not started
+0 lock struct(s), heap size 1128, 0 row lock(s)
+---TRANSACTION 412145398703752, not started
+0 lock struct(s), heap size 1128, 0 row lock(s)
+---TRANSACTION 3060, ACTIVE 1 sec starting index read
+mysql tables in use 1, locked 1
+LOCK WAIT 2 lock struct(s), heap size 1128, 1 row lock(s)
+MySQL thread id 348, OS thread handle 130669180020288, query id 319503 172.18.0.4 root updating
+UPDATE hospitals SET available_beds = available_beds - 1 WHERE id = 1
+------- TRX HAS BEEN WAITING 1 SEC FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 10 page no 4 n bits 72 index PRIMARY of table `capacity_lab`.`hospitals` trx id 3060 lock_mode X locks rec but not gap waiting
+Record lock, heap no 2 PHYSICAL RECORD: n_fields 5; compact format; info bits 0
+ 0: len 4; hex 80000001; asc     ;;
+ 1: len 6; hex 000000000b91; asc       ;;
+ 2: len 7; hex 02000002200151; asc       Q;;
+ 3: len 16; hex 47656e6572616c20486f73706974616c; asc General Hospital;;
+ 4: len 4; hex 800f4194; asc   A ;;
+
+------------------

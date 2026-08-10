@@ -1,0 +1,20 @@
+=== SHOW PROCESSLIST (mid-load) ===
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Id	User	Host	db	Command	Time	State	Info
+5	event_scheduler	localhost	NULL	Daemon	212	Waiting on empty queue	NULL
+17	root	172.18.0.4:37728	capacity_lab	Sleep	0		NULL
+18	root	172.18.0.4:37734	capacity_lab	Query	0	executing	SELECT * FROM patients WHERE last_name = 'Smith'
+57	root	localhost	NULL	Query	0	init	SHOW PROCESSLIST
+=== Threads_running / Threads_connected ===
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Variable_name	Value
+Threads_cached	0
+Threads_connected	3
+Threads_created	3
+Threads_running	3
+Variable_name	Value
+Innodb_rows_read	95731908
+=== docker stats snapshot ===
+CONTAINER ID   NAME           CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O        PIDS
+db1d8cf137e9   mysql-db       88.94%    473.8MiB / 14.46GiB   3.20%     2.39MB / 2.8GB    72.4MB / 432MB   40
+ee9dab7751f7   capacity-api   168.00%   86.26MiB / 160MiB     53.91%    2.76GB / 3.59GB   8.43MB / 0B      11

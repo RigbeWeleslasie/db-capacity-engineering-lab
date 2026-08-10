@@ -1,0 +1,11 @@
+=== Testing /api/patients/recent WHILE search burst is running (does it also stall?) ===
+200
+  -> recent call took 14.32 s (http_code below)
+200
+  -> recent call took 10.10 s (http_code below)
+200
+  -> recent call took 10.00 s (http_code below)
+200
+  -> recent call took 0.57 s (http_code below)
+200
+  -> recent call took 0.03 s (http_code below)

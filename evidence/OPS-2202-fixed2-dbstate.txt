@@ -1,0 +1,2 @@
+=== docker stats + processlist snapshot for final fix ===
+(captured mid-run separately; see conversation) DB CPU ~28%, Threads_running=2, Threads_connected=51

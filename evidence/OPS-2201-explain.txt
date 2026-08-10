@@ -1,0 +1,22 @@
+=== SHOW CREATE TABLE ===
+mysql: [Warning] Using a password on the command line interface can be insecure.
+*************************** 1. row ***************************
+       Table: patients
+Create Table: CREATE TABLE `patients` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(64) NOT NULL,
+  `last_name` varchar(64) NOT NULL,
+  `email` varchar(128) NOT NULL,
+  `diagnosis` varchar(255) NOT NULL,
+  `notes` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=131071 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+=== EXPLAIN ANALYZE search ===
+mysql: [Warning] Using a password on the command line interface can be insecure.
+EXPLAIN
+-> Filter: (patients.last_name = 'Smith')  (cost=10276 rows=9819) (actual time=0.0368..66.5 rows=10000 loops=1)\n    -> Table scan on patients  (cost=10276 rows=98191) (actual time=0.0273..58.3 rows=100000 loops=1)\n
+=== row count for Smith ===
+mysql: [Warning] Using a password on the command line interface can be insecure.
+COUNT(*)
+10000

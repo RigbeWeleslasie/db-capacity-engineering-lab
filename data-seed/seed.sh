@@ -47,7 +47,15 @@ CREATE TABLE patients (
   email        VARCHAR(128) NOT NULL,
   diagnosis    VARCHAR(255) NOT NULL,
   notes        TEXT         NOT NULL,
-  created_at   TIMESTAMP    DEFAULT CURRENT_TIMESTAMP
+  created_at   TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
+  -- OPS-2201 fix: GET /api/patients/search filters on last_name. Without an
+  -- index this is a full table scan (100,000 rows examined per request; see
+  -- evidence/OPS-2201-explain.txt). Under shift-change concurrency, competing
+  -- scans saturate DB CPU/buffer-pool latching and back up the app's 2-slot
+  -- connection pool, stalling *every* endpoint sharing it (see
+  -- evidence/OPS-2201-recent-during-search.txt) -- not just search, contrary
+  -- to the ticket's claim that other endpoints are unaffected.
+  KEY idx_patients_last_name (last_name)
 ) ENGINE=InnoDB;
 
 CREATE TABLE hospitals (

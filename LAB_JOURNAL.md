@@ -249,6 +249,16 @@ SHOW PROCESSLIST -> both app connections in "Sleep" state at the sampled instant
 DB CPU flat, both connections idle between uses — the ticket's "DB looks
 idle" claim is **confirmed**, exactly as reported.
 
+**Grafana screenshot**, captured live during a re-run against the *fixed*
+system (`evidence/screenshots/grafana-OPS-2202-live-surge.png`): throughput
+on `/api/patients/recent` spikes to ~800 req/s, p95 latency climbs toward 1s
+and — notably — **stays elevated for a few seconds after the request rate
+has already dropped back to ~0**, which is the queued-request drain effect
+predicted by the Little's Law math below, visible in real time. Memory (RSS)
+settles at a new, slightly higher plateau (~100MB, up from ~75MB) after the
+burst, consistent with the larger `connectionLimit`/`maxIdle` (2->50) keeping
+more idle connections warm.
+
 | Metric                          | Value    | vs. baseline |
 |----------------------------------|----------|--------------|
 | Successful RPS (plateau)         | 1164.7/s | n/a (baseline is VU-throttled) |

@@ -1,4 +1,4 @@
-# Regional Health — Reliability On-Call Lab 🧪
+# Regional Health — Reliability On-Call Lab 
 
 A hands-on "Lab-in-a-Box" for learning **database mechanics, performance tuning,
 and capacity engineering** the way you actually learn them on the job: by picking
@@ -109,4 +109,4 @@ given ticket is part of the exercise.
 docker compose down -v
 ```
 
-Good luck, on-call. 📟
+Good luck, on-call. 

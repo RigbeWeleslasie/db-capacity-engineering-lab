@@ -549,6 +549,15 @@ competing for the same bounded memory/event-loop budget.
   (all completing in **<5ms**). **Zero** crashes, connection resets, or
   timeouts. `dmesg` shows no new node OOM-kill entries after the fix.
 
+**Prometheus screenshot**, captured live during a re-run against the fixed
+system (`evidence/screenshots/prometheus-OPS-2204-heap-bounded.png`):
+`nodejs_heap_size_used_bytes{job="capacity-api"}` over a 5-minute window —
+heap rises from a ~44MB baseline into a sawtooth pattern (45-54MB, GC
+cycling as export batches are built and collected) as the 50-VU export load
+starts, then settles into a **bounded ~53MB plateau** for the remainder of
+the run. It never approaches the 160MB container limit — the visual
+counterpart to the `docker stats` numbers above.
+
 | | Before | After | Improvement |
 |--|--------|-------|-------------|
 | Peak RSS (1 request) | ~155 MB → **OOM-killed** | n/a (never buffers the whole set) | crash eliminated |

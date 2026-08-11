@@ -1,4 +1,4 @@
-# 🧾 On-Call Lab Journal — Regional Health
+#  On-Call Lab Journal — Regional Health
 
 **Engineer:** Rigbe Weleslasie  **Date:** 2026-08-10
 

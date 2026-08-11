@@ -250,14 +250,15 @@ DB CPU flat, both connections idle between uses — the ticket's "DB looks
 idle" claim is **confirmed**, exactly as reported.
 
 **Grafana screenshot**, captured live during a re-run against the *fixed*
-system (`evidence/screenshots/grafana-OPS-2202-live-surge.png`): throughput
-on `/api/patients/recent` spikes to ~800 req/s, p95 latency climbs toward 1s
-and — notably — **stays elevated for a few seconds after the request rate
-has already dropped back to ~0**, which is the queued-request drain effect
-predicted by the Little's Law math below, visible in real time. Memory (RSS)
-settles at a new, slightly higher plateau (~100MB, up from ~75MB) after the
-burst, consistent with the larger `connectionLimit`/`maxIdle` (2->50) keeping
-more idle connections warm.
+system: throughput on `/api/patients/recent` spikes to ~800 req/s, p95
+latency climbs toward 1s and — notably — **stays elevated for a few seconds
+after the request rate has already dropped back to ~0**, which is the
+queued-request drain effect predicted by the Little's Law math below,
+visible in real time. Memory (RSS) settles at a new, slightly higher plateau
+(~100MB, up from ~75MB) after the burst, consistent with the larger
+`connectionLimit`/`maxIdle` (2->50) keeping more idle connections warm.
+
+![Grafana dashboard showing throughput and p95 latency spiking during the OPS-2202 reproduction, then recovering](./evidence/screenshots/grafana-OPS-2202-live-surge.png)
 
 | Metric                          | Value    | vs. baseline |
 |----------------------------------|----------|--------------|
@@ -550,13 +551,14 @@ competing for the same bounded memory/event-loop budget.
   timeouts. `dmesg` shows no new node OOM-kill entries after the fix.
 
 **Prometheus screenshot**, captured live during a re-run against the fixed
-system (`evidence/screenshots/prometheus-OPS-2204-heap-bounded.png`):
-`nodejs_heap_size_used_bytes{job="capacity-api"}` over a 5-minute window —
-heap rises from a ~44MB baseline into a sawtooth pattern (45-54MB, GC
-cycling as export batches are built and collected) as the 50-VU export load
-starts, then settles into a **bounded ~53MB plateau** for the remainder of
-the run. It never approaches the 160MB container limit — the visual
+system: `nodejs_heap_size_used_bytes{job="capacity-api"}` over a 5-minute
+window — heap rises from a ~44MB baseline into a sawtooth pattern (45-54MB,
+GC cycling as export batches are built and collected) as the 50-VU export
+load starts, then settles into a **bounded ~53MB plateau** for the remainder
+of the run. It never approaches the 160MB container limit — the visual
 counterpart to the `docker stats` numbers above.
+
+![Prometheus graph of nodejs_heap_size_used_bytes climbing then holding a bounded plateau during the OPS-2204 reproduction](./evidence/screenshots/prometheus-OPS-2204-heap-bounded.png)
 
 | | Before | After | Improvement |
 |--|--------|-------|-------------|

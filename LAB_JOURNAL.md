@@ -2,9 +2,9 @@
 
 **Engineer:** Rigbe Weleslasie  **Date:** 2026-08-10
 
-This is your investigation notebook. You are on call for the Regional Health
+This is my investigation notebook. I am on call for the Regional Health
 platform and working the [incident queue](./incidents/README.md). For each
-incident you will:
+incident I will:
 
 1. **Hypothesis** — from the ticket symptoms alone, predict the cause *before*
    you run anything.

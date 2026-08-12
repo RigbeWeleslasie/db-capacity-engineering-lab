@@ -7,7 +7,7 @@ platform and working the [incident queue](./incidents/README.md). For each
 incident I will:
 
 1. **Hypothesis** — from the ticket symptoms alone, predict the cause *before*
-   you run anything.
+   I run anything.
 2. **Observation** — record real evidence: k6 output, Grafana/Prometheus
    metrics, `EXPLAIN ANALYZE` plans, lock views, `docker stats`, container logs.
 3. **Root cause & mechanism** — explain *why* it happens. Name the database/OS

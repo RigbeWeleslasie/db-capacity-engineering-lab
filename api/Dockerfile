@@ -24,12 +24,10 @@ COPY . .
 # docker-compose to /usr/local/bin/seed.sh (it is outside this build context,
 # so it cannot be COPYed here).
 
-# trivy DS-0002: run as non-root. node:20-alpine already ships a `node`
-# user/group (uid/gid 1000) for exactly this — just needs ownership of the
-# app dir and an explicit USER. seed.sh only runs mysql client commands over
-# the network, nothing here needs root.
-RUN chown -R node:node /usr/src/app
-USER node
+# DELIBERATE RED-PR CHANGE — do not merge. Drops the USER directive this
+# repo already fixed once (trivy DS-0002, "Image user should not be root"),
+# to prove the trivy config gate actually blocks re-introducing it, not
+# just that it caught it the first time.
 
 EXPOSE 3000
 

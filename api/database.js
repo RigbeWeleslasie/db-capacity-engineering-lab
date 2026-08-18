@@ -8,17 +8,18 @@
 
 const mysql = require('mysql2/promise');
 const { MongoClient } = require('mongodb');
+const { loadDbConfig } = require('./secrets');
 
 // ---------------------------------------------------------------------------
-// Environment configuration (with defaults for local runs)
+// Environment configuration
+//
+// Connection identity (host/user/password/database/ssl) is resolved once at
+// first use, by loadDbConfig() — from Secrets Manager when deployed
+// (DB_SECRET_ARN set), from local env vars when not (see secrets.js). Only
+// the pool *tuning* below is a static default; it isn't service-shaped or
+// secret, so it stays a plain constant.
 // ---------------------------------------------------------------------------
-const MYSQL_CONFIG = {
-  host: process.env.MYSQL_HOST || 'mysql-db',
-  port: Number(process.env.MYSQL_PORT || 3306),
-  user: process.env.MYSQL_USER || 'root',
-  password: process.env.MYSQL_PASSWORD || 'labpassword',
-  database: process.env.MYSQL_DATABASE || 'capacity_lab',
-
+const POOL_TUNING = {
   // OPS-2202: connectionLimit: 2 meant only 2 requests could ever be "in
   // service" at once -- everything else queued *in the app tier* (mysql2's
   // internal waiter queue), not at the DB. Measured: with 2000 concurrent
@@ -62,15 +63,39 @@ const MONGO_URI = process.env.MONGO_URI || 'mongodb://mongo-db:27017';
 const MONGO_DB_NAME = process.env.MONGO_DB || 'capacity_lab';
 
 // ---------------------------------------------------------------------------
-// MySQL pool (singleton)
+// MySQL pool (singleton, lazily created)
+//
+// Async because resolving connection identity may mean a Secrets Manager
+// round trip (loadDbConfig). Concurrent first-callers share one in-flight
+// creation via poolPromise rather than racing to create the pool twice.
 // ---------------------------------------------------------------------------
 let pool;
+let poolPromise;
 
-function getPool() {
-  if (!pool) {
-    pool = mysql.createPool(MYSQL_CONFIG);
+async function getPool() {
+  if (pool) return pool;
+  if (!poolPromise) {
+    poolPromise = (async () => {
+      const config = await loadDbConfig();
+      pool = mysql.createPool({ ...config, ...POOL_TUNING });
+      return pool;
+    })();
   }
-  return pool;
+  return poolPromise;
+}
+
+// ---------------------------------------------------------------------------
+// Readiness check — used by /readyz, not /healthz. A cheap round trip that
+// proves the pool can actually reach MySQL right now, distinct from "the
+// process is up" (liveness). Bounded by its own short timeout so a hung DB
+// doesn't hang readiness checks indefinitely.
+// ---------------------------------------------------------------------------
+async function pingMysql(timeoutMs = 2000) {
+  const dbPool = await getPool();
+  await Promise.race([
+    dbPool.query('SELECT 1'),
+    new Promise((_, reject) => setTimeout(() => reject(new Error('readiness ping timed out')), timeoutMs)),
+  ]);
 }
 
 // ---------------------------------------------------------------------------
@@ -107,10 +132,10 @@ async function closeAll() {
 }
 
 module.exports = {
-  MYSQL_CONFIG,
   MONGO_URI,
   MONGO_DB_NAME,
   getPool,
+  pingMysql,
   getMongo,
   closeAll,
 };

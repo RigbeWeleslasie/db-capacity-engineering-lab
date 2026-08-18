@@ -16,7 +16,7 @@
 
 const express = require('express');
 const client = require('prom-client');
-const { getPool, getMongo } = require('./database');
+const { getPool, pingMysql, getMongo } = require('./database');
 
 const app = express();
 app.use(express.json());
@@ -67,9 +67,32 @@ app.use((req, res, next) => {
 });
 
 // ---------------------------------------------------------------------------
-// Health & metrics
+// Liveness vs. readiness (Assignment 2, C4) — two different questions.
+//
+// Liveness: is the process alive, or hung and in need of a restart? Answering
+// this never touches the DB — a slow/down DB is a readiness problem, not a
+// reason to kill and restart an otherwise-healthy process.
+//
+// Readiness: can this instance serve a request right now? A cold instance is
+// alive (it's listening) well before its DB connection/secret resolution is
+// ready — pingMysql() is what tells the caller (modules/service's nginx
+// auth_request) the difference. /health is kept as a back-compat alias of
+// /healthz for existing local tooling/docs.
 // ---------------------------------------------------------------------------
 app.get('/health', (_req, res) => res.json({ status: 'ok' }));
+app.get('/healthz', (_req, res) => res.json({ status: 'ok' }));
+
+app.get('/readyz', async (_req, res) => {
+  try {
+    await pingMysql();
+    res.json({ status: 'ready' });
+  } catch (err) {
+    // 503, not 500 — this is "not ready yet / not ready right now", not an
+    // application error. modules/service's nginx maps this straight through
+    // so probes see real state, and gates all other traffic behind it.
+    res.status(503).json({ status: 'not_ready', reason: err.message });
+  }
+});
 
 app.get('/metrics', async (_req, res) => {
   res.set('Content-Type', register.contentType);
@@ -81,7 +104,7 @@ app.get('/metrics', async (_req, res) => {
 // ---------------------------------------------------------------------------
 app.get('/api/patients/recent', async (_req, res) => {
   try {
-    const pool = getPool();
+    const pool = await getPool();
     const [rows] = await pool.query(
       'SELECT * FROM patients ORDER BY id DESC LIMIT 50'
     );
@@ -109,7 +132,7 @@ app.get('/api/patients/search', async (req, res) => {
   const lastName = req.query.lastName || '';
   const limit = Math.min(Number(req.query.limit) || MAX_SEARCH_RESULTS, MAX_SEARCH_RESULTS);
   try {
-    const pool = getPool();
+    const pool = await getPool();
     const [rows] = await pool.query(
       'SELECT * FROM patients WHERE last_name = ? ORDER BY id DESC LIMIT ?',
       [lastName, limit]
@@ -160,7 +183,7 @@ app.get('/api/patients/search', async (req, res) => {
 // ---------------------------------------------------------------------------
 app.post('/api/hospitals/:id/admit', async (req, res) => {
   const hospitalId = Number(req.params.id);
-  const pool = getPool();
+  const pool = await getPool();
   try {
     await pool.query(
       'UPDATE hospitals SET available_beds = available_beds - 1 WHERE id = ?',
@@ -234,7 +257,7 @@ app.get('/api/patients/export', async (_req, res) => {
   }
   activeExports += 1;
 
-  const pool = getPool();
+  const pool = await getPool();
   let conn;
   try {
     conn = await pool.getConnection();

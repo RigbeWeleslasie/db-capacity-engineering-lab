@@ -15,13 +15,8 @@ locals {
 }
 
 module "data" {
-  # PINNED TO A BRANCH COMMIT, NOT MAIN — TEMPORARY.
-  # The Aiven rewrite (github.com/nebyathhailu/regional-health-platform,
-  # branch feat/aiven-mysql) hasn't merged to that repo's main yet as of this
-  # commit — it's out for review. This SHA is the actual commit, not a moving
-  # branch name, so it's still a real pin; re-pin to the post-merge commit on
-  # main once that PR lands, then this comment can go.
-  source = "git::https://github.com/nebyathhailu/regional-health-platform.git//terraform/modules/data?ref=bc4f334417feb7e79666f905d57ac7950b3285ca"
+  # Pinned to main (regional-health-platform#5, merged) — Aiven MySQL.
+  source = "git::https://github.com/nebyathhailu/regional-health-platform.git//terraform/modules/data?ref=59ca40551b4727aba27a44aa449503fb0f8a6e8c"
 
   name_prefix    = var.name_prefix
   db_name        = "capacity_lab"
@@ -32,7 +27,10 @@ module "data" {
 }
 
 module "service" {
-  source = "git::https://github.com/nebyathhailu/regional-health-platform.git//terraform/modules/service?ref=d0ff5320a01b0fb3606452c0324610d979411015"
+  # Pinned to main (regional-health-platform#2 + #6, merged) — includes the
+  # trivy config hardening (IMDSv2, encrypted volume, invalid headers) and
+  # the Aiven doc updates.
+  source = "git::https://github.com/nebyathhailu/regional-health-platform.git//terraform/modules/service?ref=59ca40551b4727aba27a44aa449503fb0f8a6e8c"
 
   name_prefix       = var.name_prefix
   app_ami_id        = var.app_ami_id

@@ -1,0 +1,47 @@
+name: CI
+
+# =============================================================================
+# Calls the group platform's reusable golden pipeline (gitleaks -> trivy
+# config -> zizmor -> docker build -> trivy image -> tag AMI -> tflocal
+# apply). See nebyathhailu/regional-health-platform's docs/MODULE-CONTRACTS.md
+# for the frozen gate order.
+#
+# Pinned to main (regional-health-platform#4, merged).
+#
+# Pin history: 70b8811 (initial) -> 2e6e721 (gitleaks GITHUB_TOKEN fix +
+# Aiven passthrough, found testing this workflow against this repo's first
+# real PR) -> 59ca405 (main, post-merge).
+#
+# aiven_host/aiven_port are repo VARIABLES (not secrets — matches
+# modules/data's own sensitivity split, only the password is sensitive).
+# Set them under Settings -> Secrets and variables -> Actions -> Variables.
+# aiven_password is a repo SECRET, same discipline as LOCALSTACK_AUTH_TOKEN.
+# =============================================================================
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    uses: nebyathhailu/regional-health-platform/.github/workflows/golden-ci.yml@59ca40551b4727aba27a44aa449503fb0f8a6e8c
+    with:
+      app_dir: api
+      image_name: capacity-api
+      terraform_dir: terraform
+      run_apply: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+      aiven_host: ${{ vars.AIVEN_HOST }}
+      # aiven_port is type: number in golden-ci.yml. If the AIVEN_PORT repo
+      # variable isn't set, vars.AIVEN_PORT is an empty string, which GitHub
+      # Actions rejects against a number-typed input at parse time — before
+      # any job runs, with no useful error surfaced ("workflow file issue").
+      # Falls back to 0 (harmless placeholder; only the apply job ever reads
+      # this, and that job doesn't run until run_apply is true).
+      aiven_port: ${{ vars.AIVEN_PORT != '' && vars.AIVEN_PORT || 0 }}
+    secrets:
+      localstack_auth_token: ${{ secrets.LOCALSTACK_AUTH_TOKEN }}
+      aiven_password: ${{ secrets.AIVEN_PASSWORD }}

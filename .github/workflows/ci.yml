@@ -6,15 +6,11 @@ name: CI
 # apply). See nebyathhailu/regional-health-platform's docs/MODULE-CONTRACTS.md
 # for the frozen gate order.
 #
-# PINNED TO A BRANCH COMMIT, NOT MAIN — TEMPORARY, same situation as
-# terraform/main.tf's modules/data pin. golden-ci.yml
-# (nebyathhailu/regional-health-platform#4) hasn't merged to that repo's main
-# yet. Re-pin once it does.
+# Pinned to main (regional-health-platform#4, merged).
 #
-# Pin history: 70b8811 (initial) -> 2e6e721 (picks up both fixes found
-# testing this workflow against this repo's first real PR: gitleaks needed
-# GITHUB_TOKEN explicitly, and tflocal-apply now threads aiven_host/
-# aiven_port/aiven_password through to Terraform).
+# Pin history: 70b8811 (initial) -> 2e6e721 (gitleaks GITHUB_TOKEN fix +
+# Aiven passthrough, found testing this workflow against this repo's first
+# real PR) -> 59ca405 (main, post-merge).
 #
 # aiven_host/aiven_port are repo VARIABLES (not secrets — matches
 # modules/data's own sensitivity split, only the password is sensitive).
@@ -32,7 +28,7 @@ permissions:
 
 jobs:
   ci:
-    uses: nebyathhailu/regional-health-platform/.github/workflows/golden-ci.yml@2e6e721db439c35d17c3e24bfac4079255f1c8ae
+    uses: nebyathhailu/regional-health-platform/.github/workflows/golden-ci.yml@59ca40551b4727aba27a44aa449503fb0f8a6e8c
     with:
       app_dir: api
       image_name: capacity-api

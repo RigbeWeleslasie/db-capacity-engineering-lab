@@ -39,7 +39,13 @@ jobs:
       terraform_dir: terraform
       run_apply: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
       aiven_host: ${{ vars.AIVEN_HOST }}
-      aiven_port: ${{ vars.AIVEN_PORT }}
+      # aiven_port is type: number in golden-ci.yml. If the AIVEN_PORT repo
+      # variable isn't set, vars.AIVEN_PORT is an empty string, which GitHub
+      # Actions rejects against a number-typed input at parse time — before
+      # any job runs, with no useful error surfaced ("workflow file issue").
+      # Falls back to 0 (harmless placeholder; only the apply job ever reads
+      # this, and that job doesn't run until run_apply is true).
+      aiven_port: ${{ vars.AIVEN_PORT != '' && vars.AIVEN_PORT || 0 }}
     secrets:
       localstack_auth_token: ${{ secrets.LOCALSTACK_AUTH_TOKEN }}
       aiven_password: ${{ secrets.AIVEN_PASSWORD }}

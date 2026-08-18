@@ -20,3 +20,21 @@ Thumbs.db
 # Logs / test output
 *.log
 load-tests/results/
+
+# Terraform — .terraform.lock.hcl is intentionally NOT ignored here: this is
+# a root config (not a reusable module like the group repo's), so pinning
+# exact provider versions via the committed lock file is the point.
+terraform/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+tfplan
+tfplan.json
+*.tfplan
+crash.log
+crash.*.log
+
+# Never commit variable files that might carry secrets (aiven_*, LOCALSTACK_
+# tokens, etc. all come from TF_VAR_*/CI secrets, never a tfvars file).
+*.tfvars
+*.tfvars.json

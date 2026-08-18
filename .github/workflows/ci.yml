@@ -9,12 +9,17 @@ name: CI
 # PINNED TO A BRANCH COMMIT, NOT MAIN — TEMPORARY, same situation as
 # terraform/main.tf's modules/data pin. golden-ci.yml
 # (nebyathhailu/regional-health-platform#4) hasn't merged to that repo's main
-# yet. Re-pin once it does. That PR also currently has a gap: the
-# tflocal-apply job doesn't pass TF_VAR_aiven_host/aiven_port/aiven_password
-# through, which this root's Terraform requires with no defaults — flagged
-# as a PR review comment, not fixed here (not this repo's file to edit).
-# Harmless today: run_apply only flips true on a push to main, by which
-# point the fix should have landed.
+# yet. Re-pin once it does.
+#
+# Pin history: 70b8811 (initial) -> 2e6e721 (picks up both fixes found
+# testing this workflow against this repo's first real PR: gitleaks needed
+# GITHUB_TOKEN explicitly, and tflocal-apply now threads aiven_host/
+# aiven_port/aiven_password through to Terraform).
+#
+# aiven_host/aiven_port are repo VARIABLES (not secrets — matches
+# modules/data's own sensitivity split, only the password is sensitive).
+# Set them under Settings -> Secrets and variables -> Actions -> Variables.
+# aiven_password is a repo SECRET, same discipline as LOCALSTACK_AUTH_TOKEN.
 # =============================================================================
 
 on:
@@ -27,11 +32,14 @@ permissions:
 
 jobs:
   ci:
-    uses: nebyathhailu/regional-health-platform/.github/workflows/golden-ci.yml@70b88112033f561aba65d4577575e1a19f6028e9
+    uses: nebyathhailu/regional-health-platform/.github/workflows/golden-ci.yml@2e6e721db439c35d17c3e24bfac4079255f1c8ae
     with:
       app_dir: api
       image_name: capacity-api
       terraform_dir: terraform
       run_apply: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+      aiven_host: ${{ vars.AIVEN_HOST }}
+      aiven_port: ${{ vars.AIVEN_PORT }}
     secrets:
       localstack_auth_token: ${{ secrets.LOCALSTACK_AUTH_TOKEN }}
+      aiven_password: ${{ secrets.AIVEN_PASSWORD }}

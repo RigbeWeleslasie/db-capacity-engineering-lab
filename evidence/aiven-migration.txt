@@ -1,0 +1,78 @@
+Assignment 2 — DB migration to Aiven MySQL
+============================================
+Date: 2026-08-18
+Service: mysql-2343e8b8 (Aiven, Free-1-1gb, DigitalOcean blr / Asia)
+Engine: MySQL 8.0.45
+Database: capacity_lab (created manually via Aiven console, alongside the
+default `defaultdb`)
+
+--- 1. Connection test (TLS, before migration) ------------------------------
+$ mysql --host=$TF_VAR_aiven_host --port=$TF_VAR_aiven_port --user=avnadmin \
+        --password=*** --ssl-ca=~/.aiven/ca.pem -e "SHOW DATABASES; SELECT VERSION();"
+
++--------------------+
+| Database           |
++--------------------+
+| capacity_lab       |
+| defaultdb          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
++-----------+
+| VERSION() |
++-----------+
+| 8.0.45    |
++-----------+
+
+--- 2. Local seed (source of truth, docker-compose mysql-db) ----------------
+$ docker compose exec mysql-db mysql -uroot -plabpassword -e "..."
+(schema from data-seed/seed.sh: patients + hospitals tables, 100000-row CTE
+generator for patients, 5 fixed hospital rows)
+
+seeded
+patients rows: 100000
+seeded
+hospitals rows: 5
+
+--- 3. Dump (local -> file) --------------------------------------------------
+$ docker exec mysql-db mysqldump -uroot -plabpassword --databases capacity_lab \
+    --single-transaction --routines --triggers --set-gtid-purged=OFF \
+    > capacity_lab.sql
+
+Result: 28,545,335 bytes (~28.5MB), 29 INSERT statements (mysqldump's default
+extended-insert packs many rows per statement). Consistent with the ~31MB
+on-disk table size noted in api/server.js's OPS-2204 comments.
+
+--- 4. Restore (file -> Aiven, over TLS) -------------------------------------
+$ mysql --host=$TF_VAR_aiven_host --port=$TF_VAR_aiven_port --user=avnadmin \
+        --password=*** --ssl-ca=~/.aiven/ca.pem < capacity_lab.sql
+
+(completed with no errors)
+
+--- 5. Verification: row counts match on both sides --------------------------
+Aiven:
++----------+
+| patients |
++----------+
+|   100000 |
++----------+
++-----------+
+| hospitals |
++-----------+
+|         5 |
++-----------+
+
+Local (from step 2): patients=100000, hospitals=5
+
+MATCH — migration verified, not just claimed.
+
+--- Notes ---------------------------------------------------------------------
+- CA cert (~/.aiven/ca.pem) is Aiven's public root cert for this project, not
+  a secret — not committed to git yet pending the decision (see
+  terraform/README.md) on how the deployed app's AMI actually gets it.
+- Real TF_VAR_aiven_host/port/password used throughout — never committed,
+  never appear in this file (redacted as *** above).
+- capacity_lab database was created manually via the Aiven console (free
+  tier only ships defaultdb) before this migration ran.

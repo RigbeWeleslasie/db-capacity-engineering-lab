@@ -1,0 +1,37 @@
+name: CI
+
+# =============================================================================
+# Calls the group platform's reusable golden pipeline (gitleaks -> trivy
+# config -> zizmor -> docker build -> trivy image -> tag AMI -> tflocal
+# apply). See nebyathhailu/regional-health-platform's docs/MODULE-CONTRACTS.md
+# for the frozen gate order.
+#
+# PINNED TO A BRANCH COMMIT, NOT MAIN — TEMPORARY, same situation as
+# terraform/main.tf's modules/data pin. golden-ci.yml
+# (nebyathhailu/regional-health-platform#4) hasn't merged to that repo's main
+# yet. Re-pin once it does. That PR also currently has a gap: the
+# tflocal-apply job doesn't pass TF_VAR_aiven_host/aiven_port/aiven_password
+# through, which this root's Terraform requires with no defaults — flagged
+# as a PR review comment, not fixed here (not this repo's file to edit).
+# Harmless today: run_apply only flips true on a push to main, by which
+# point the fix should have landed.
+# =============================================================================
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    uses: nebyathhailu/regional-health-platform/.github/workflows/golden-ci.yml@70b88112033f561aba65d4577575e1a19f6028e9
+    with:
+      app_dir: api
+      image_name: capacity-api
+      terraform_dir: terraform
+      run_apply: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    secrets:
+      localstack_auth_token: ${{ secrets.LOCALSTACK_AUTH_TOKEN }}

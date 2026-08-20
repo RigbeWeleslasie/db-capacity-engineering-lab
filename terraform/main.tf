@@ -16,7 +16,7 @@ locals {
 
 module "data" {
   # Pinned to main (regional-health-platform#5, merged) — Aiven MySQL.
-  source = "git::https://github.com/nebyathhailu/regional-health-platform.git//terraform/modules/data?ref=59ca40551b4727aba27a44aa449503fb0f8a6e8c"
+  source = "git::https://github.com/nebyathhailu/regional-health-platform.git//terraform/modules/data?ref=c95c942fc72ef7018399118305f3d90a9ecb524a"
 
   name_prefix    = var.name_prefix
   db_name        = "capacity_lab"
@@ -27,10 +27,12 @@ module "data" {
 }
 
 module "service" {
-  # Pinned to main (regional-health-platform#2 + #6, merged) — includes the
-  # trivy config hardening (IMDSv2, encrypted volume, invalid headers) and
-  # the Aiven doc updates.
-  source = "git::https://github.com/nebyathhailu/regional-health-platform.git//terraform/modules/service?ref=59ca40551b4727aba27a44aa449503fb0f8a6e8c"
+  # Pinned to main (regional-health-platform#2 + #6 + #8, merged) — includes
+  # the trivy config hardening (IMDSv2, encrypted volume, invalid headers),
+  # the Aiven doc updates, and #8's fix for app_ami_id: aws_instance.app.ami
+  # now strips the localstack-ec2/<name>: prefix off the docker-tag-style
+  # value CI produces before passing it to AWS (was InvalidAMIID.Malformed).
+  source = "git::https://github.com/nebyathhailu/regional-health-platform.git//terraform/modules/service?ref=c95c942fc72ef7018399118305f3d90a9ecb524a"
 
   name_prefix       = var.name_prefix
   app_ami_id        = var.app_ami_id

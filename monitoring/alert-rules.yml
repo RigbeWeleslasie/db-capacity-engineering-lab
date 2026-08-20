@@ -1,0 +1,73 @@
+groups:
+  - name: capacity-lab-incidents
+    rules:
+      # OPS-2201 — patient search unusably slow under shift-change load.
+      # p95 latency on the search endpoint specifically (not the whole API —
+      # matches the ticket's own observation that /recent stays fast while
+      # /search dies).
+      - alert: OPS2201_SearchLatencyHigh
+        expr: histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{route="/api/patients/search"}[1m])) by (le)) > 1
+        for: 15s
+        labels:
+          severity: high
+          incident: OPS-2201
+        annotations:
+          summary: "Patient search p95 latency > 1s"
+          description: "matches the reported symptom: search spins/times out under concurrent shift-change load while /recent stays fast"
+
+      # OPS-2202 — whole app freezes during registration surges; DB looks
+      # idle (connection-pool queueing, not DB load). Alert on the "trivial"
+      # /recent endpoint's own latency, since that's the ticket's own proof
+      # the app itself is the bottleneck, not the DB.
+      - alert: OPS2202_RecentEndpointLatencyHigh
+        expr: histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{route="/api/patients/recent"}[1m])) by (le)) > 1
+        for: 15s
+        labels:
+          severity: critical
+          incident: OPS-2202
+        annotations:
+          summary: "Trivial /recent query p95 latency > 1s — app-tier queueing, not DB load"
+          description: "matches the reported symptom: even the tiny recent-patients call stalls under registration-surge concurrency"
+
+      # OPS-2203 — bed admissions to the SAME hospital fail with DB errors
+      # under concurrent load (row-lock serialization / lock wait timeouts).
+      - alert: OPS2203_AdmissionDbErrors
+        expr: increase(db_errors_total{route="/api/hospitals/:id/admit"}[1m]) > 5
+        for: 0s
+        labels:
+          severity: critical
+          incident: OPS-2203
+        annotations:
+          summary: "Admission endpoint DB errors spiking"
+          description: "matches the reported symptom: admissions to the same hospital fail outright with a database error under concurrent load"
+
+      # OPS-2204 — nightly export crashes the service; memory shoots up
+      # right before each restart. Alert before the actual OOM-kill, as a
+      # leading indicator against the 160MB container limit.
+      - alert: OPS2204_MemoryApproachingLimit
+        expr: process_resident_memory_bytes{job="capacity-api"} > 140000000
+        for: 5s
+        labels:
+          severity: high
+          incident: OPS-2204
+        annotations:
+          summary: "capacity-api RSS memory > 140MB, approaching the 160MB container limit"
+          description: "matches the reported symptom: memory graph shoots up right before each restart during the nightly export window"
+
+      # OPS-2204 (crash-loop signal) — the OOM-kill itself happens faster
+      # than a single 5s scrape interval can reliably catch mid-spike, so
+      # the memory-threshold alert above can miss individual crashes even
+      # though the crash-loop is real (confirmed via docker's own
+      # RestartCount, which climbed continuously during replay). Prometheus's
+      # own `up` metric going to 0 on a failed scrape is a more robust signal
+      # for exactly this pattern — the target being repeatedly unreachable
+      # *is* the crash-restart cycle, observed directly, not inferred.
+      - alert: OPS2204_TargetDown
+        expr: up{job="capacity-api"} == 0
+        for: 0s
+        labels:
+          severity: critical
+          incident: OPS-2204
+        annotations:
+          summary: "capacity-api scrape target down — likely mid-restart from OOM-kill"
+          description: "matches the reported symptom: the service restarts over and over during the nightly export window"

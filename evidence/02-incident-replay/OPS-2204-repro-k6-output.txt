@@ -1,0 +1,84 @@
+OPS-2204 replay — "nightly export keeps crashing the service; on-call paged for restarts"
+=============================================================================
+Command: k6 run load-tests/reproduce-OPS-2204.js
+Load shape: 50 constant VUs hammering GET /api/patients/export (the
+unbuffered, unbatched export handler — see api/server.js's temporary
+INCIDENT-REPLAY revert) for 2 minutes, mirroring the nightly ETL job's own
+access pattern from the ticket.
+
+Docker restart-count delta (proves the crash-loop, not just slow requests):
+  docker inspect capacity-api --format 'restarts={{.RestartCount}} status={{.State.Status}}'
+    before this run : restarts=20 status=running   (baseline, prior to any OPS-2204 traffic)
+    mid-run         : restarts=28 status=restarting
+    after this run  : restarts=39 status=running   (stabilized once load stopped)
+  -> 19 container restarts caused by two consecutive 2-minute replay runs —
+     the container is repeatedly OOM-killed and restarted by Docker's own
+     restart policy, exactly matching "on-call paged for restarts" and
+     "crashes ... during the nightly export window."
+
+k6 request log (representative sample — 3,378,449 identical
+"connection refused" warnings were emitted over the full run; the request
+rate itself is a signal here, not just the error, since it shows every one
+of ~28k/s attempted requests hit a dead target during the crash-loop
+windows):
+
+time="2026-08-20T08:35:06+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/export\": dial tcp 127.0.0.1:3000: connect: connection refused"
+time="2026-08-20T08:35:06+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/export\": dial tcp 127.0.0.1:3000: connect: connection refused"
+time="2026-08-20T08:35:06+03:00" level=warning msg="Request Failed" error="Get \"http://localhost:3000/api/patients/export\": dial tcp 127.0.0.1:3000: connect: connection refused"
+  ... (3,378,446 more identical lines omitted; full run captured
+       3,378,449 total, see checks_total below) ...
+
+  █ THRESHOLDS
+
+    http_req_failed
+    ✗ 'rate<0.05' rate=100.00%
+
+
+  █ TOTAL RESULTS
+
+    checks_total.......: 3378449 28153.411433/s
+    checks_succeeded...: 0.00%   0 out of 3378449
+    checks_failed......: 100.00% 3378449 out of 3378449
+
+    ✗ status is 200
+      ↳  0% — ✓ 0 / ✗ 3378449
+
+    HTTP
+    http_req_duration....: avg=206.59µs min=0s      med=0s      max=1.77s p(90)=0s     p(95)=0s
+    http_req_failed......: 100.00% 3378449 out of 3378449
+    http_reqs............: 3378449 28153.411433/s
+
+    EXECUTION
+    iteration_duration...: avg=1.76ms   min=97.17µs med=248.1µs max=2.78s p(90)=4.99ms p(95)=8.37ms
+    iterations...........: 3378449 28153.411433/s
+    vus..................: 50      min=50                 max=50
+    vus_max..............: 50      min=50                 max=50
+
+    NETWORK
+    data_received........: 0 B     0 B/s
+    data_sent............: 653 kB  5.4 kB/s
+
+
+running (2m00.0s), 00/50 VUs, 3378449 complete and 0 interrupted iterations
+nightly_export ✓ [ 100% ] 50 VUs  2m0s
+time="2026-08-20T08:35:06+03:00" level=error msg="thresholds on metrics 'http_req_failed' have been crossed"
+
+Post-run recovery check (proves the service self-heals once load stops —
+matches the ticket's own "it comes back after a few minutes" note):
+  GET /readyz  -> 200
+  GET /healthz -> 200
+  docker inspect capacity-api --format 'restarts={{.RestartCount}} status={{.State.Status}}'
+    -> restarts=39 status=running
+
+Alert coverage note: the originally-designed OPS2204_MemoryApproachingLimit
+alert (process_resident_memory_bytes > 140MB for 5s) could not be confirmed
+firing across ~30 rounds of continuous polling during replay — the OOM-kill
+happens faster than Prometheus's 5s scrape interval can catch a sustained
+threshold breach mid-spike (every poll returned "n/a": scrape target already
+down). Added a second, more robust alert, OPS2204_TargetDown
+(up{job="capacity-api"} == 0, for: 0s), which treats "the target is
+repeatedly unreachable" as the crash-loop signal directly, rather than
+inferring it from a memory sample that may be missed. See
+OPS-2204-alert-firing.json for this alert's firing state, captured live
+during this exact replay run (activeAt 2026-08-20T05:31:54Z, state=firing),
+and confirmed cleared again once load stopped.

@@ -23,7 +23,14 @@ MYSQL_PASSWORD="${MYSQL_PASSWORD:-labpassword}"
 MYSQL_DATABASE="${MYSQL_DATABASE:-capacity_lab}"
 ROW_COUNT="${ROW_COUNT:-100000}"
 
-MYSQL=(mysql -h "${MYSQL_HOST}" -P "${MYSQL_PORT}" -u "${MYSQL_USER}" "-p${MYSQL_PASSWORD}")
+# --ssl-mode=DISABLED: MySQL 8.0 auto-generates a self-signed cert and
+# enables SSL by default; the client's own default (VERIFY_IDENTITY-ish
+# behavior on newer client builds) then fails with "Certificate
+# verification failure: The certificate is NOT trusted." This is
+# local/lab-only traffic on the compose network, not a real production
+# connection (that's Aiven-over-TLS, handled separately) — plaintext is
+# fine here.
+MYSQL=(mysql -h "${MYSQL_HOST}" -P "${MYSQL_PORT}" -u "${MYSQL_USER}" "-p${MYSQL_PASSWORD}" --ssl-mode=DISABLED)
 
 echo ">> Waiting for MySQL at ${MYSQL_HOST}:${MYSQL_PORT} ..."
 until "${MYSQL[@]}" -e "SELECT 1" >/dev/null 2>&1; do

@@ -50,6 +50,10 @@ const POOL_TUNING = {
   // past ~50 here buys nothing further without also scaling app replicas.
   // 50 is well under max_connections=151, leaving room for a second replica
   // and for OPS-2201's costlier search queries on the same server.
+  // Restored to the fixed value for OPS-2203's test specifically — a small
+  // connectionLimit bottlenecks at the pool level before requests even
+  // reach MySQL's row lock, masking OPS-2203's actual mechanism. Already
+  // captured OPS-2202's evidence with connectionLimit: 2 above.
   waitForConnections: true,
   connectionLimit: 50,
   queueLimit: 2000,

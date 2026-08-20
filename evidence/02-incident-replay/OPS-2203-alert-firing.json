@@ -1,0 +1,26 @@
+{
+    "status": "success",
+    "data": {
+        "alerts": [
+            {
+                "labels": {
+                    "alertname": "OPS2203_AdmissionDbErrors",
+                    "app": "capacity-api",
+                    "code": "ER_LOCK_WAIT_TIMEOUT",
+                    "incident": "OPS-2203",
+                    "instance": "capacity-api:3000",
+                    "job": "capacity-api",
+                    "route": "/api/hospitals/:id/admit",
+                    "severity": "critical"
+                },
+                "annotations": {
+                    "description": "matches the reported symptom: admissions to the same hospital fail outright with a database error under concurrent load",
+                    "summary": "Admission endpoint DB errors spiking"
+                },
+                "state": "firing",
+                "activeAt": "2026-08-20T05:21:59.168272735Z",
+                "value": "4.6799999999999994e+02"
+            }
+        ]
+    }
+}

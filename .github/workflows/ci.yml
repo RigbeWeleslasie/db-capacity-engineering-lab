@@ -6,16 +6,29 @@ name: CI
 # apply). See nebyathhailu/regional-health-platform's docs/MODULE-CONTRACTS.md
 # for the frozen gate order.
 #
-# Pinned to main (regional-health-platform#4, merged).
+# Pinned directly to nebyathhailu/regional-health-platform's
+# fix/golden-ci-aiven-secrets branch tip (commit 31e2a92), NOT to that repo's
+# main — the PR for this fix (regional-health-platform#7) is real, pushed,
+# and reviewable, but sat unreviewed long enough that waiting on it wasn't
+# worth blocking this repo's own CI. A commit SHA is immutable and doesn't
+# need its PR merged to be a valid, stable pin (same discipline as pinning
+# Terraform module sources to a SHA rather than a moving branch name) — if
+# #7 merges later, re-pin to that merge commit and this comment can go.
 #
 # Pin history: 70b8811 (initial) -> 2e6e721 (gitleaks GITHUB_TOKEN fix +
-# Aiven passthrough, found testing this workflow against this repo's first
-# real PR) -> 59ca405 (main, post-merge).
+# Aiven passthrough) -> 59ca405 (main, post PR#6 merge) -> 31e2a92
+# (fix/golden-ci-aiven-secrets: aiven_host/aiven_port moved from `inputs`
+# to `secrets` in golden-ci.yml's workflow_call schema, because GitHub
+# Actions' `vars` context is documented-unreliable when passed cross-repo
+# into a reusable workflow hosted in a different repo — confirmed here the
+# hard way: TF_VAR_aiven_host/TF_VAR_aiven_port resolved empty/0 against
+# 59ca405 even with the repo Variables correctly set, causing Terraform's
+# own validation to fail with "aiven_host must be a bare hostname ...
+# var.aiven_host is \"\""; secrets propagate reliably where vars don't).
 #
-# aiven_host/aiven_port are repo VARIABLES (not secrets — matches
-# modules/data's own sensitivity split, only the password is sensitive).
-# Set them under Settings -> Secrets and variables -> Actions -> Variables.
-# aiven_password is a repo SECRET, same discipline as LOCALSTACK_AUTH_TOKEN.
+# aiven_host/aiven_port/aiven_password are now ALL repo SECRETS (not
+# variables) — matches golden-ci.yml's schema as of 31e2a92. Set under
+# Settings -> Secrets and variables -> Actions -> Secrets.
 # =============================================================================
 
 on:
@@ -28,20 +41,14 @@ permissions:
 
 jobs:
   ci:
-    uses: nebyathhailu/regional-health-platform/.github/workflows/golden-ci.yml@59ca40551b4727aba27a44aa449503fb0f8a6e8c
+    uses: nebyathhailu/regional-health-platform/.github/workflows/golden-ci.yml@31e2a9242e58847fddfc7991c16ca7644fac87c2
     with:
       app_dir: api
       image_name: capacity-api
       terraform_dir: terraform
       run_apply: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-      aiven_host: ${{ vars.AIVEN_HOST }}
-      # aiven_port is type: number in golden-ci.yml. If the AIVEN_PORT repo
-      # variable isn't set, vars.AIVEN_PORT is an empty string, which GitHub
-      # Actions rejects against a number-typed input at parse time — before
-      # any job runs, with no useful error surfaced ("workflow file issue").
-      # Falls back to 0 (harmless placeholder; only the apply job ever reads
-      # this, and that job doesn't run until run_apply is true).
-      aiven_port: ${{ vars.AIVEN_PORT != '' && vars.AIVEN_PORT || 0 }}
     secrets:
       localstack_auth_token: ${{ secrets.LOCALSTACK_AUTH_TOKEN }}
+      aiven_host: ${{ secrets.AIVEN_HOST }}
+      aiven_port: ${{ secrets.AIVEN_PORT }}
       aiven_password: ${{ secrets.AIVEN_PASSWORD }}

@@ -1,0 +1,39 @@
+[0m[1mmodule.service.data.aws_vpc.default: Reading...[0m[0m
+[0m[1mmodule.data.aws_secretsmanager_secret.db: Refreshing state... [id=arn:aws:secretsmanager:us-east-1:000000000000:secret:regional-health/db-xbIZvk][0m
+[0m[1mmodule.service.data.aws_vpc.default: Read complete after 0s [id=vpc-7fbc52c2c1a76645a][0m
+[0m[1mmodule.service.aws_security_group.app: Refreshing state... [id=sg-8d4bb32a08e4336e6][0m
+[0m[1mmodule.data.aws_secretsmanager_secret_version.db: Refreshing state... [id=arn:aws:secretsmanager:us-east-1:000000000000:secret:regional-health/db-xbIZvk|terraform-20260820042305450200000002][0m
+
+[0m[1m[32mNo changes.[0m[1m No objects need to be destroyed.[0m
+
+[0mEither you have not created any objects yet or the existing objects were
+already deleted outside of OpenTofu.
+[33m╷[0m[0m
+[33m│[0m [0m[1m[33mWarning: [0m[0m[1mResource targeting is in effect[0m
+[33m│[0m [0m
+[33m│[0m [0m[0mYou are creating a plan with either the -target option or the -exclude
+[33m│[0m [0moption, which means that the result of this plan may not represent all of
+[33m│[0m [0mthe changes requested by the current configuration.
+[33m│[0m [0m
+[33m│[0m [0mThe -target and -exclude options are not for routine use, and are provided
+[33m│[0m [0monly for exceptional situations such as recovering from errors or mistakes,
+[33m│[0m [0mor when OpenTofu specifically suggests to use it as part of an error
+[33m│[0m [0mmessage.
+[33m╵[0m[0m
+[33m╷[0m[0m
+[33m│[0m [0m[1m[33mWarning: [0m[0m[1mApplied changes may be incomplete[0m
+[33m│[0m [0m
+[33m│[0m [0m[0mThe plan was created with the -target or the -exclude option in effect, so
+[33m│[0m [0msome changes requested in the configuration may have been ignored and the
+[33m│[0m [0moutput values may not be fully updated. Run the following command to verify
+[33m│[0m [0mthat no other changes are pending:
+[33m│[0m [0m    tofu plan
+[33m│[0m [0m	
+[33m│[0m [0mNote that the -target and -exclude options are not suitable for routine
+[33m│[0m [0muse, and are provided only for exceptional situations such as recovering
+[33m│[0m [0mfrom errors or mistakes, or when OpenTofu specifically suggests to use it
+[33m│[0m [0mas part of an error message.
+[33m╵[0m[0m
+[0m[1m[32m
+Destroy complete! Resources: 0 destroyed.
+[0m

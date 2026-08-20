@@ -53,12 +53,33 @@ variable "app_env" {
     PORT entry in main.tf. Notably NOT wired by default: MONGO_URI/MONGO_DB
     (the Mongo audit store isn't in Assignment 2's scope — /api/audit/ping
     will fail once deployed unless you choose to stand up a reachable Mongo
-    and set these yourself) and DB_CA_CERT_PATH (Aiven TLS — depends on how
-    the CI-built AMI delivers the CA cert to the instance, not yet decided;
-    see modules/data's README). Both are deliberate gaps, not oversights.
+    and set these yourself). DB_CA_CERT_PATH is no longer a gap here — see
+    db_ca_cert below, which modules/service now wires into user-data itself
+    (regional-health-platform#9); this map doesn't need to carry it.
   EOT
   type        = map(string)
   default     = {}
+}
+
+variable "db_ca_cert" {
+  description = <<-EOT
+    PEM-encoded CA cert for verifying the TLS connection to Aiven MySQL.
+    Public root cert, NOT secret -- same reasoning modules/data's own README
+    uses to keep it out of the Secrets Manager envelope (unlike
+    aiven_password above). Passed straight through to modules/service's own
+    db_ca_cert variable, which writes it to /etc/app/db-ca.pem on the
+    instance and exports DB_CA_CERT_PATH (regional-health-platform#9).
+
+    Default "" matches modules/service's own default -- the whole CA-cert
+    wiring in user-data is skipped when empty, same as before that fix
+    existed. Locally, source the real cert via:
+      export TF_VAR_db_ca_cert="$(cat ~/.aiven/ca.pem)"
+    in .env.local. Not yet wired into ci.yml -- golden-ci.yml doesn't
+    declare a db_ca_cert input/secret yet, so CI applies still run with
+    this at its empty default.
+  EOT
+  type        = string
+  default     = ""
 }
 
 variable "ingress_cidrs" {

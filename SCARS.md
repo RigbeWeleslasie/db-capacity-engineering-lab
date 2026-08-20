@@ -30,6 +30,10 @@ One-screen record per incident. Full evidence and capacity math in
   without testing X *during* the incident, not in isolation. A p95-latency
   alert on `/api/patients/search` plus a `NO_INDEX_USED` slow-query alert
   would have caught this in staging.
+- **Confirmed (Assignment 2):** replayed this exact load against the
+  monitored stack with the fix reverted — `OPS2201_SearchLatencyHigh` fired
+  for real (p95=19.36s), not just predicted. See
+  `evidence/02-incident-replay/OPS-2201-alert-firing.json`.
 - **Evidence:** `LAB_JOURNAL.md` § OPS-2201; `evidence/OPS-2201-explain.txt`,
   `evidence/OPS-2201-repro-output.txt`, `evidence/OPS-2201-fixed-output.txt`,
   `evidence/OPS-2201-fixed2-output.txt`,
@@ -66,6 +70,10 @@ One-screen record per incident. Full evidence and capacity math in
   metric (which this app doesn't currently export) is the single alert that
   would have caught this before "DB CPU looks fine" sent the investigation
   the wrong way.
+- **Confirmed (Assignment 2):** replayed with the pool unbounded again —
+  `OPS2202_RecentEndpointLatencyHigh` fired for real (p95=1.89s, 0.00%
+  errors — pure latency, exactly the ticket's own claim), not just
+  predicted. See `evidence/02-incident-replay/OPS-2202-alert-firing.json`.
 - **Evidence:** `LAB_JOURNAL.md` § OPS-2202; `evidence/OPS-2202-repro-output.txt`,
   `evidence/OPS-2202-mid-evidence.txt`, `evidence/OPS-2202-fixed-output.txt`
   (the worse attempt), `evidence/OPS-2202-fixed2-output.txt`; fix commit
@@ -102,6 +110,10 @@ One-screen record per incident. Full evidence and capacity math in
   needs an architectural change (sharded counters, async coalescing) if ever
   required. An alert on `db_errors_total{code="ER_LOCK_WAIT_TIMEOUT"}` would
   have caught this building up before the mass-casualty drill made it acute.
+- **Confirmed (Assignment 2):** replayed with the notify-before-commit
+  ordering restored — `OPS2203_AdmissionDbErrors` fired for real (78.42%
+  failed, 429/547, `ER_LOCK_WAIT_TIMEOUT`), not just predicted. See
+  `evidence/02-incident-replay/OPS-2203-alert-firing.json`.
 - **Evidence:** `LAB_JOURNAL.md` § OPS-2203; `evidence/OPS-2203-repro-output.txt`,
   `evidence/OPS-2203-locks.txt` / `-locks-full.txt` (InnoDB lock-wait
   evidence), `evidence/OPS-2203-fixed-output.txt`,
@@ -141,6 +153,18 @@ One-screen record per incident. Full evidence and capacity math in
   rejection) is a legitimate fix, not a cop-out. A `nodejs_heap_size_used_bytes`
   threshold alert plus a restart-count alert would have paged on the first
   crash instead of a repeated-restart storm.
+- **Confirmed (Assignment 2) — with a twist:** the proposed
+  `nodejs_heap_size_used_bytes` threshold alert never fired across ~30
+  rounds of continuous polling during replay — the OOM-kill happens faster
+  than a single 5s Prometheus scrape can catch a sustained breach. Added a
+  second alert, `OPS2204_TargetDown` (`up{job="capacity-api"}==0`), which
+  treats the crash-loop's own unreachability as the signal instead of
+  trying to sample the spike — confirmed firing for real (container
+  `RestartCount` 20→39 over the replay). *Lesson: a plausible alert design
+  can still miss the real failure if its `for:` window loses the race with
+  the failure mode's own timescale — only replaying the actual incident
+  against it proves that.* See
+  `evidence/02-incident-replay/OPS-2204-alert-firing.json`.
 - **Evidence:** `LAB_JOURNAL.md` § OPS-2204; `evidence/OPS-2204-dmesg-oom.txt`,
   `evidence/OPS-2204-single-request-memtrace.txt`,
   `evidence/OPS-2204-fixed-output.txt` (streaming-only attempt),

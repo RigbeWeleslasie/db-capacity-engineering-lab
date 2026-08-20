@@ -650,3 +650,51 @@ blast-radius reduction per line changed.
   (`increase(...restarts_total[15m]) > 0`) would have paged on the **first**
   restart — instead of waiting for the repeated-restart storm that actually
   got on-call paged.
+
+---
+
+## Assignment 2 — closing the loop: did the alerts I proposed actually fire?
+
+Assignment 1 above ends with four *proposed* alerts, one per ticket — that's
+a claim ("this would have caught it"), not evidence. For Assignment 2, I
+wired all four into `monitoring/alert-rules.yml`, mounted them into the
+running Prometheus (`docker-compose.yml`, `monitoring/prometheus.yml`), and
+**replayed each ticket's original load pattern against the fixed system with
+the incident's specific code/config change temporarily reverted**, then
+queried Prometheus's own `/api/v1/alerts` endpoint mid-replay to confirm
+`state: "firing"` — not inferred, not "should have," observed. Raw JSON for
+every firing event is in
+[`evidence/02-incident-replay/`](./evidence/02-incident-replay/).
+
+| Ticket | Repro (revert applied) | k6 result | Alert | Fired? | activeAt |
+|---|---|---|---|---|---|
+| OPS-2201 | index dropped, result cap removed | p95=19.36s (`p(95)<300` threshold failed), 0% errors, 674 reqs | `OPS2201_SearchLatencyHigh` | ✅ firing | 2026-08-20T05:14:39Z |
+| OPS-2202 | `connectionLimit`/`queueLimit` unbounded again | p95=1.89s, **0.00%** errors, 33,293 reqs — pure latency, matching the ticket exactly | `OPS2202_RecentEndpointLatencyHigh` | ✅ firing | 2026-08-20T05:18:49Z |
+| OPS-2203 | notify-before-commit restored | 78.42% failed (429/547), p95=51.27s, `ER_LOCK_WAIT_TIMEOUT` | `OPS2203_AdmissionDbErrors` | ✅ firing (value=468, i.e. 468 errors in the trailing 1m window) | 2026-08-20T05:21:59Z |
+| OPS-2204 | export unbuffered again, 50 constant VUs | 100% failed (3,378,449/3,378,449 reqs), container `RestartCount` 20→39 over the replay | `OPS2204_TargetDown` | ✅ firing | 2026-08-20T05:31:54Z |
+
+**OPS-2204 needed a second alert.** The ticket's own design,
+`OPS2204_MemoryApproachingLimit` (`process_resident_memory_bytes > 140MB`,
+`for: 5s`), never fired during replay — polled continuously (~30 rounds)
+while `RestartCount` climbed steadily, and every single poll returned "no
+data": the OOM-kill happens faster than Prometheus's 5-second scrape
+interval can catch a *sustained* breach mid-spike. A threshold alert that
+needs `for: 5s` on a metric that can go from healthy to dead inside one
+scrape window is a real gap, not a tuning problem — shrinking the
+`for:` duration doesn't fix a scrape that arrives after the process is
+already gone. Added `OPS2204_TargetDown` (`up{job="capacity-api"} == 0`,
+`for: 0s`) as a second, independent signal: instead of trying to catch the
+spike, it treats "the target is unreachable" — the crash-loop itself,
+observed directly by Prometheus's own scrape success/failure — as the
+alert condition. Confirmed firing during replay, and confirmed it clears
+again once load stops and the container stabilizes (`readyz`/`healthz`
+both back to 200, restart count flat).
+
+**Scar / lesson:** a plausible alert design on paper (Assignment 1's
+`OPS2204_MemoryApproachingLimit`) can still miss the real failure in
+practice if its `for:` window is longer than the failure mode's own
+timescale — verifying an alert means firing the actual incident at it and
+watching `/api/v1/alerts`, not just reading the PromQL and nodding. The other
+three alerts fired exactly as designed on the first replay attempt; only the
+one racing a sub-5-second crash needed a redesign, and only replaying it
+revealed that.

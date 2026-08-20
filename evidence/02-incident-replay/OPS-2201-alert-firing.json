@@ -1,0 +1,21 @@
+{
+    "status": "success",
+    "data": {
+        "alerts": [
+            {
+                "labels": {
+                    "alertname": "OPS2201_SearchLatencyHigh",
+                    "incident": "OPS-2201",
+                    "severity": "high"
+                },
+                "annotations": {
+                    "description": "matches the reported symptom: search spins/times out under concurrent shift-change load while /recent stays fast",
+                    "summary": "Patient search p95 latency > 1s"
+                },
+                "state": "firing",
+                "activeAt": "2026-08-20T05:14:39.168272735Z",
+                "value": "1e+01"
+            }
+        ]
+    }
+}

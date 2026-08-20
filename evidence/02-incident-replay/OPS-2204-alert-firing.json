@@ -1,0 +1,23 @@
+{
+    "status": "success",
+    "data": {
+        "alerts": [
+            {
+                "labels": {
+                    "alertname": "OPS2204_TargetDown",
+                    "incident": "OPS-2204",
+                    "instance": "capacity-api:3000",
+                    "job": "capacity-api",
+                    "severity": "critical"
+                },
+                "annotations": {
+                    "description": "matches the reported symptom: the service restarts over and over during the nightly export window",
+                    "summary": "capacity-api scrape target down \u2014 likely mid-restart from OOM-kill"
+                },
+                "state": "firing",
+                "activeAt": "2026-08-20T05:31:54.168272735Z",
+                "value": "0e+00"
+            }
+        ]
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "status": "success",
+    "data": {
+        "alerts": [
+            {
+                "labels": {
+                    "alertname": "OPS2202_RecentEndpointLatencyHigh",
+                    "incident": "OPS-2202",
+                    "severity": "critical"
+                },
+                "annotations": {
+                    "description": "matches the reported symptom: even the tiny recent-patients call stalls under registration-surge concurrency",
+                    "summary": "Trivial /recent query p95 latency > 1s \u2014 app-tier queueing, not DB load"
+                },
+                "state": "firing",
+                "activeAt": "2026-08-20T05:18:49.168272735Z",
+                "value": "7.1593003412969285e+00"
+            }
+        ]
+    }
+}

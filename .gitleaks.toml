@@ -1,0 +1,18 @@
+title = "gitleaks config — regional-health capacity-api"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = '''
+Raw tofu/terraform apply+destroy output, captured as C1 evidence.
+Never contains a real secret VALUE — Terraform marks sensitive outputs as
+"(sensitive value)" and never prints them (verified manually before
+committing). Docker AMI tags (localstack-ec2/<name>:ami-<sha12>) and
+similar benign high-entropy strings in this output trip the generic-api-key
+heuristic as false positives. Scoped to just these evidence logs, not a
+blanket exemption — everything else in the repo is still fully scanned.
+'''
+paths = [
+  '''evidence/01-iac/.*\.txt$''',
+]

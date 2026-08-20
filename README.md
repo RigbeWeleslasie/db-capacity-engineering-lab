@@ -109,4 +109,23 @@ given ticket is part of the exercise.
 docker compose down -v
 ```
 
+---
+
+## Assignment 2 — LocalStack rehost & CI security gates
+
+On top of the on-call lab above, this repo is rehosted onto the shared group
+platform modules from
+[nebyathhailu/regional-health-platform](https://github.com/nebyathhailu/regional-health-platform)
+and wired into a 5-gate CI pipeline. Quick links for anyone grading this part:
+
+| Deliverable | Where |
+|---|---|
+| Liveness / readiness endpoints | [`api/server.js`](./api/server.js) — `/healthz`, `/readyz` |
+| DB creds resolved from Secrets Manager at boot (never hardcoded) | [`api/secrets.js`](./api/secrets.js) — `loadDbConfig()` |
+| Terraform rehost onto the group's `modules/data` + `modules/service` | [`terraform/main.tf`](./terraform/main.tf) |
+| CI pipeline (gitleaks → trivy config → zizmor → docker build → trivy image → tflocal apply) | [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) — calls the group's reusable `golden-ci.yml` |
+| C1 evidence (real `tflocal apply` against LocalStack, incl. the two documented LocalStack Hobby-tier limitations) | [`evidence/01-iac/README.md`](./evidence/01-iac/README.md) |
+| **Deliberately-insecure "red PR"** — drops the Dockerfile's non-root `USER` directive; the `trivy config` gate genuinely fails and blocks it | **[PR #5](https://github.com/RigbeWeleslasie/db-capacity-engineering-lab/pull/5)** (left open on purpose, never merged — the failing gate *is* the proof) |
+| All four OPS incidents replayed against the *monitored* stack, with proof the corresponding Prometheus alert actually fires (not just "should have") | [`evidence/02-incident-replay/`](./evidence/02-incident-replay/), summarized in [`LAB_JOURNAL.md`](./LAB_JOURNAL.md#assignment-2--closing-the-loop-did-the-alerts-i-proposed-actually-fire) and each `SCARS.md` entry's "Confirmed (Assignment 2)" line |
+
 Good luck, on-call. 

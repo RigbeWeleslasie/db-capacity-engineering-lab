@@ -51,7 +51,12 @@ compromised maintainer or a zero-day in a scanner's own logic, so:
 - **Blast radius:** the scan jobs in `golden-ci.yml` run with
   `permissions: contents: read` and no secrets exposed to the scanning
   steps themselves — a compromised scanner step has nothing to exfiltrate.
-- **Detection:** not yet added — `step-security/harden-runner` (egress
-  audit) is a real gap here, not implemented in this lab's timeframe. If
-  added, it would surface a compromised step "phoning home" even though
-  it can't prevent an unknown zero-day.
+- **Detection:** already present, not a gap — correcting an earlier draft
+  of this file, which claimed this wasn't implemented. `golden-ci.yml`
+  (the group's shared reusable workflow every one of these gates actually
+  runs through) has `step-security/harden-runner` with `egress-policy:
+  audit` in all six of its jobs (gitleaks, trivy-config, zizmor,
+  docker-build, trivy-image, tflocal-apply) — confirmed directly against
+  the merged file, not assumed. It surfaces a compromised step "phoning
+  home" via unexpected egress, even though it can't prevent an unknown
+  zero-day from running in the first place.

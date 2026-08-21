@@ -6,26 +6,18 @@ name: CI
 # apply). See nebyathhailu/regional-health-platform's docs/MODULE-CONTRACTS.md
 # for the frozen gate order.
 #
-# Pinned to main (regional-health-platform#8, merged).
+# Pinned to main (regional-health-platform#11 + #12, merged).
 #
-# Pin history: 70b8811 (initial) -> 2e6e721 (gitleaks GITHUB_TOKEN fix +
-# Aiven passthrough) -> 59ca405 (main, post PR#6 merge) -> 31e2a92
-# (fix/golden-ci-aiven-secrets branch tip, pinned there directly while
-# PR#7 sat unreviewed: aiven_host/aiven_port moved from `inputs` to
-# `secrets` in golden-ci.yml's workflow_call schema, because GitHub
-# Actions' `vars` context is documented-unreliable when passed cross-repo
-# into a reusable workflow hosted in a different repo — confirmed here the
-# hard way: TF_VAR_aiven_host/TF_VAR_aiven_port resolved empty/0 against
-# 59ca405 even with the repo Variables correctly set, causing Terraform's
-# own validation to fail with "aiven_host must be a bare hostname ...
-# var.aiven_host is \"\""; secrets propagate reliably where vars don't) ->
-# c95c942 (main, post PR#7 AND PR#8 merge — PR#7 landed the same
-# vars->secrets fix on main properly, and PR#8 fixed modules/service's
-# aws_instance.app.ami passing the docker-tag AMI string straight through
-# instead of stripping it to the bare ami-<hex> id, confirmed by this
-# repo's own CI reaching InvalidAMIID.Malformed once the aiven bug above
-# stopped masking it). Now pinned back to main since both fixes are
-# properly merged and reviewed there.
+# Pin history: 70b8811 (initial) -> 2e6e721 -> 59ca405 -> 31e2a92
+# (aiven_host/aiven_port moved from `inputs` to `secrets` -- GitHub Actions'
+# `vars` context is documented-unreliable cross-repo into a reusable
+# workflow) -> c95c942 (post PR#7+#8: vars->secrets landed on main properly,
+# and app_ami_id's docker-tag-string bug fixed) -> da449d0 (post PR#11+#12:
+# PR#11 adds create_alb, defaulting false, so the ALB (blocked by
+# LocalStack's freemium license -- "not included ... available in an
+# upgraded license") is no longer even attempted, only declared+scanned;
+# PR#12 adds the group's bootstrap/ remote-state root, see terraform/README
+# for the one-time setup this repo hasn't run against yet).
 #
 # aiven_host/aiven_port/aiven_password are ALL repo SECRETS (not
 # variables) — matches golden-ci.yml's schema as of c95c942. Set under
@@ -42,7 +34,7 @@ permissions:
 
 jobs:
   ci:
-    uses: nebyathhailu/regional-health-platform/.github/workflows/golden-ci.yml@c95c942fc72ef7018399118305f3d90a9ecb524a
+    uses: nebyathhailu/regional-health-platform/.github/workflows/golden-ci.yml@da449d0ac5ebadf47d74c5720cac1ee760b1d0ff
     with:
       app_dir: api
       image_name: capacity-api

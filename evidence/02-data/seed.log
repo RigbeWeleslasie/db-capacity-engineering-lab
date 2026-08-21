@@ -1,0 +1,9 @@
+>> Waiting for MySQL at mysql-db:3306 ...
+>> MySQL is up.
+>> Creating schema and loading 100000 patient rows (this may take a minute) ...
+mysql: Deprecated program name. It will be removed in a future release, use '/usr/bin/mariadb' instead
+seeded
+patients rows: 100000
+seeded
+hospitals rows: 5
+>> Seed complete.

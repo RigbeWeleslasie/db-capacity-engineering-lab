@@ -1,0 +1,42 @@
+=== C4 readyz-degraded test: break the secret, observe /readyz flip, fix, recover ===
+
+--- Step 1: baseline, correct secret ---
+{"status":"ready"}
+HTTP 200
+
+--- Step 2: secret rotated to a WRONG password (new VersionId 869cee3a...), app restarted to force re-resolution ---
+{"status":"not_ready","reason":"Access denied for user 'root'@'172.18.0.8' (using password: YES)"}
+HTTP 503
+
+--- boot log during the break (confirms new VersionId resolved, ARN never a password) ---
+and security updates please upgrade to node >=22.
+
+More information can be found at: https://a.co/c895JFp
+(Use `node --trace-warnings ...` to show where the warning was created)
+[secrets] resolved DB config from Secrets Manager (arn=arn:aws:secretsmanager:us-east-1:000000000000:secret:capacity-lab/db-creds-TslqZo, versionId=869cee3a-d180-4bf0-91d4-3202bcf503be)
+
+--- Step 3: secret fixed (new VersionId 584cd2e5...), app restarted, recovery ---
+{"status":"ready"}
+HTTP 200
+
+--- boot log confirming recovery ---
+More information can be found at: https://a.co/c895JFp
+(Use `node --trace-warnings ...` to show where the warning was created)
+[secrets] resolved DB config from Secrets Manager (arn=arn:aws:secretsmanager:us-east-1:000000000000:secret:capacity-lab/db-creds-TslqZo, versionId=584cd2e5-54b4-46fd-9353-199bd734e5f4)
+
+--- Honest scope note ---
+This proves the actual mechanism nginx's upstream health check depends on:
+/readyz genuinely flips 200 -> 503 -> 200 as the real Secrets Manager secret
+is broken and fixed, using the SAME loadDbConfig()/getPool() code path the
+deployed instance would use (DB_SECRET_ARN set, AWS_ENDPOINT_URL pointed at
+LocalStack, real GetSecretValue call -- see boot lines above showing the
+VersionId actually changing).
+
+What's NOT demonstrated here: nginx itself pulling this instance out of
+rotation. That requires the EC2 instance from modules/service to actually
+be running, which is blocked by the LocalStack Docker-backed-AMI-discovery
+gap documented in FIDELITY.md -- not something this test or the app code can
+work around. modules/service's own nginx config (templates/nginx.conf.tftpl)
+is written to proxy only to a /readyz-passing upstream; this evidence
+confirms the signal it depends on is real, even though the EC2 layer that
+would consume it can't currently be stood up in this environment.

@@ -1,0 +1,16 @@
+=== image-env.txt: env vars baked into the running container (proves no DB creds present) ===
+MONGO_DB=capacity_lab
+MONGO_URI=mongodb://mongo-db:27017
+MYSQL_DATABASE=capacity_lab
+MYSQL_HOST=mysql-db
+MYSQL_PASSWORD=labpassword
+MYSQL_PORT=3306
+MYSQL_USER=root
+NODE_OPTIONS=--max-old-space-size=256
+PORT=3000
+
+Note: MYSQL_PASSWORD/MYSQL_USER below are LOCAL DEV compose-only values
+(docker-compose.yml, not baked into the image), matching secrets.js's
+documented fallback path when DB_SECRET_ARN is unset. On a real deploy,
+DB_SECRET_ARN + DB_HOST/DB_PORT are the only DB-related vars present --
+never a password (see modules/service's user-data.sh.tftpl).

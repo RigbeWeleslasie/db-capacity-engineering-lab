@@ -1,0 +1,83 @@
+<<EOT
+#!/bin/bash
+# =============================================================================
+# user-data — install nginx, render the readiness-gated proxy, start the app.
+#
+# SECURITY: we pass the secret ARN + DB endpoint, NEVER the secret value. On
+# real EC2 this file is readable via IMDS; on LocalStack it sits world-readable
+# at /var/lib/cloud/instances/<id>/. Same discipline either way: no plaintext
+# credential here. The app calls GetSecretValue at boot using DB_SECRET_ARN.
+# =============================================================================
+set -euxo pipefail
+export DEBIAN_FRONTEND=noninteractive
+
+# --- nginx --------------------------------------------------------------------
+apt-get update
+apt-get install -y --no-install-recommends nginx curl
+
+cat > /etc/nginx/sites-available/app.conf <<'NGINXCONF'
+(nginx.conf.tftpl rendered separately -- no secret content, omitted here for brevity)
+NGINXCONF
+ln -sf /etc/nginx/sites-available/app.conf /etc/nginx/sites-enabled/default
+rm -f /etc/nginx/sites-enabled/default.dpkg-dist 2>/dev/null || true
+nginx -t
+(systemctl restart nginx || service nginx restart || nginx) 2>/dev/null || nginx
+
+# --- app ----------------------------------------------------------------------
+# Creds are resolved by the app from Secrets Manager at boot. We export only the
+# ARN + endpoint + non-secret service config.
+cd "/usr/src/app"
+
+export AWS_REGION="us-east-1"
+export AWS_DEFAULT_REGION="us-east-1"
+# LocalStack target only: point the SDK at the emulator and use its dummy creds
+# (account 000000000000 — not real secrets). Gated so the SAME image runs against
+# real AWS by passing aws_endpoint_url = "": no endpoint override and no static
+# creds, so the SDK falls through to the instance-profile role. This gate lives in
+# infra glue, not application code — the app itself has no isLocalStack branch.
+export AWS_ENDPOINT_URL="http://localhost.localstack.cloud:4566"
+export AWS_ACCESS_KEY_ID="test"
+export AWS_SECRET_ACCESS_KEY="test"
+export DB_SECRET_ARN="arn:aws:secretsmanager:us-east-1:000000000000:secret:regional-health/db-xbIZvk"
+export DB_HOST="mysql-2343e8b8-rigbewweleslasie-2c2e.i.aivencloud.com"
+export DB_PORT="16437"
+# Aiven (and most managed MySQL) requires TLS. This is the CA's public root
+# cert -- not secret, unlike the credential envelope above -- so it's safe to
+# write to disk here rather than route through Secrets Manager. The app reads
+# DB_CA_CERT_PATH to verify the server's cert (see api/secrets.js in a
+# rehosted service repo); unset (this block skipped) means the app connects
+# without TLS verification configured, same as before this variable existed.
+mkdir -p /etc/app
+cat > /etc/app/db-ca.pem <<'DBCACERT'
+-----BEGIN CERTIFICATE-----
+MIIERDCCAqygAwIBAgIUIac7mbfDuDGW8rw/1XQQy4m6k6EwDQYJKoZIhvcNAQEM
+BQAwOjE4MDYGA1UEAwwvNzUzZGYzMGQtNzY0MC00NGQ3LTgzY2QtNDFjYTNlNTE5
+NGVlIFByb2plY3QgQ0EwHhcNMjYwMjI2MDgyNTE2WhcNMzYwMjI0MDgyNTE2WjA6
+MTgwNgYDVQQDDC83NTNkZjMwZC03NjQwLTQ0ZDctODNjZC00MWNhM2U1MTk0ZWUg
+UHJvamVjdCBDQTCCAaIwDQYJKoZIhvcNAQEBBQADggGPADCCAYoCggGBALZlHpQp
+bRZy7Ss45BYrIz4lOnbL53qzXDOgzR5o1QM3hyW++Hc6LoWq2wifYE3wH8Gbbhw9
+T+pGN8OuOPLKLWyKUZ0iU+tQu1qmsqYghBigtcj0F9FAc8Sz7xYVqKoEVoDQ4REN
+Z1nVbwkdtkMX0u1lk77D+MNCa42tChud7k+HNkV4oZz0bkYfRnU89LETjru/u0KW
+4D8YNaamjItKBEd3+npyyl9F/m2VD849B1rRmwEgcApHyIjlwmIWOONAMLJ82piv
++t2KxhVJ64S7up3Ek0p6w4czWTo7xNd8TeJSndHr/d/bk4rrm07Y25KqRwl5Ox8U
+XNfAMo2g5m/PI2a6+gH552SRG4tc7tmusYjvy+AMlfeitbLBETDER0ze54phgyk3
+5AqLCCCvxNY0HG1cli2nc+fE1ccYB/46Jhw3xOY04rlD+gbLxTMxK9Ar+Inuf98L
+VtO4JP3zCmQyiBMhb/5pACMG95uXvt/efMrxHXMYXo+9vHIHzmZc+AbAHQIDAQAB
+o0IwQDAdBgNVHQ4EFgQUc7YQwQcyTz/rU7TddtbQsexoskMwEgYDVR0TAQH/BAgw
+BgEB/wIBADALBgNVHQ8EBAMCAQYwDQYJKoZIhvcNAQEMBQADggGBAFPQuHsVwuaq
+st8yq6SdiFV51SRqDCYUpsmwI5LryLSFeNDrkrRnxMfnkWSS51IVx4PdLglE6Gan
+LomkiWf9A3M8AQ57kU8Nual2dEitF79xWKQ3ubDet3436ShK3+zQOna+HvtA5IHA
+k9qYpA+88hIhZIF24e4syE8wckCBn0DCtBU2s7AgHoEIwLPCWv9P2u45z75rF+MT
+h8eU9A2r88dgZ7GHwfZ0g6h1kgLc4jSGC4qiVCP7yjHX9HTEsEhbZMewXSXNF0Iw
+S62guPZWQ1aXzUaJfop0FbnWfuENok89M6NvOyWvOPu+SnDwBP0emwIg+5Uo5Y7C
+uVf60STwUL0+kkpZ5Zqhir5KS+n8amVhLEoW3HXxz8iid2FGDoS3UNTcLh2aINw5
+3awALvfj8LEfTSrySu6S2o8Ish5261uRJDoed/X2iVIcy62CwIaoGPGeXfJjAsgv
+8HRvt/mW4lyZJW+Kr+VN6qdQEaS7wT6pREa39wFHv1Yg1/D2RpQW+g==
+-----END CERTIFICATE-----
+DBCACERT
+chmod 644 /etc/app/db-ca.pem
+export DB_CA_CERT_PATH=/etc/app/db-ca.pem
+
+nohup node server.js > /var/log/app.log 2>&1 &
+
+EOT

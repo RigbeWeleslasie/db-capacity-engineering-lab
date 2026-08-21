@@ -17,6 +17,7 @@
 const express = require('express');
 const client = require('prom-client');
 const { getPool, pingMysql, getMongo } = require('./database');
+const { getSecretSource } = require('./secrets');
 
 const app = express();
 app.use(express.json());
@@ -97,6 +98,18 @@ app.get('/readyz', async (_req, res) => {
 app.get('/metrics', async (_req, res) => {
   res.set('Content-Type', register.contentType);
   res.end(await register.metrics());
+});
+
+// ---------------------------------------------------------------------------
+// C8 (`make verify`) checks this to prove creds actually came from Secrets
+// Manager rather than a local fallback. ARN + VersionId ONLY -- getPool()
+// must have run at least once (readyz already forces that) so this reflects
+// what actually happened at boot, not a guess. Never exposes host/user/
+// password -- see api/secrets.js's getSecretSource().
+// ---------------------------------------------------------------------------
+app.get('/debug/secret-source', async (_req, res) => {
+  await getPool(); // ensure loadDbConfig() has run at least once
+  res.json(getSecretSource());
 });
 
 // ---------------------------------------------------------------------------

@@ -23,11 +23,26 @@
 
 const { SecretsManagerClient, GetSecretValueCommand } = require('@aws-sdk/client-secrets-manager');
 
+// ---------------------------------------------------------------------------
+// Source tracking for /debug/secret-source and boot-log evidence (C3/C8).
+// Holds ONLY the ARN + VersionId -- never the secret value, never even the
+// resolved host/user. Set once, at the point loadDbConfig() actually
+// resolves creds, so it reflects reality rather than being guessed at boot.
+// ---------------------------------------------------------------------------
+let secretSource = { arn: null, versionId: null };
+
+function getSecretSource() {
+  return { ...secretSource };
+}
+
 async function loadDbConfig() {
   const secretArn = process.env.DB_SECRET_ARN;
 
   if (!secretArn) {
     // Local docker-compose path — unchanged behavior.
+    secretSource = { arn: 'env', versionId: 'n/a' };
+    // eslint-disable-next-line no-console
+    console.log(`[secrets] resolved DB config from env vars (arn=${secretSource.arn}, versionId=${secretSource.versionId}) -- no Secrets Manager call made`);
     return {
       host: process.env.MYSQL_HOST || 'mysql-db',
       port: Number(process.env.MYSQL_PORT || 3306),
@@ -49,6 +64,11 @@ async function loadDbConfig() {
   const response = await client.send(new GetSecretValueCommand({ SecretId: secretArn }));
   const envelope = JSON.parse(response.SecretString);
 
+  // ARN + VersionId only -- never engine/username/password/host/port/dbname.
+  secretSource = { arn: response.ARN || secretArn, versionId: response.VersionId || 'unknown' };
+  // eslint-disable-next-line no-console
+  console.log(`[secrets] resolved DB config from Secrets Manager (arn=${secretSource.arn}, versionId=${secretSource.versionId})`);
+
   // envelope: { engine, username, password, host, port, dbname }
   const caCertPath = process.env.DB_CA_CERT_PATH;
   return {
@@ -65,4 +85,4 @@ async function loadDbConfig() {
   };
 }
 
-module.exports = { loadDbConfig };
+module.exports = { loadDbConfig, getSecretSource };

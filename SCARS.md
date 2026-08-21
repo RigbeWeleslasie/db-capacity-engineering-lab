@@ -33,7 +33,7 @@ One-screen record per incident. Full evidence and capacity math in
 - **Confirmed (Assignment 2):** replayed this exact load against the
   monitored stack with the fix reverted — `OPS2201_SearchLatencyHigh` fired
   for real (p95=19.36s), not just predicted. See
-  `evidence/02-incident-replay/OPS-2201-alert-firing.json`.
+  `evidence/07-incidents/2201/alert-firing.json`.
 - **Evidence:** `LAB_JOURNAL.md` § OPS-2201; `evidence/OPS-2201-explain.txt`,
   `evidence/OPS-2201-repro-output.txt`, `evidence/OPS-2201-fixed-output.txt`,
   `evidence/OPS-2201-fixed2-output.txt`,
@@ -73,7 +73,7 @@ One-screen record per incident. Full evidence and capacity math in
 - **Confirmed (Assignment 2):** replayed with the pool unbounded again —
   `OPS2202_RecentEndpointLatencyHigh` fired for real (p95=1.89s, 0.00%
   errors — pure latency, exactly the ticket's own claim), not just
-  predicted. See `evidence/02-incident-replay/OPS-2202-alert-firing.json`.
+  predicted. See `evidence/07-incidents/2202/alert-firing.json`.
 - **Evidence:** `LAB_JOURNAL.md` § OPS-2202; `evidence/OPS-2202-repro-output.txt`,
   `evidence/OPS-2202-mid-evidence.txt`, `evidence/OPS-2202-fixed-output.txt`
   (the worse attempt), `evidence/OPS-2202-fixed2-output.txt`; fix commit
@@ -113,7 +113,7 @@ One-screen record per incident. Full evidence and capacity math in
 - **Confirmed (Assignment 2):** replayed with the notify-before-commit
   ordering restored — `OPS2203_AdmissionDbErrors` fired for real (78.42%
   failed, 429/547, `ER_LOCK_WAIT_TIMEOUT`), not just predicted. See
-  `evidence/02-incident-replay/OPS-2203-alert-firing.json`.
+  `evidence/07-incidents/2203/alert-firing.json`.
 - **Evidence:** `LAB_JOURNAL.md` § OPS-2203; `evidence/OPS-2203-repro-output.txt`,
   `evidence/OPS-2203-locks.txt` / `-locks-full.txt` (InnoDB lock-wait
   evidence), `evidence/OPS-2203-fixed-output.txt`,
@@ -164,7 +164,7 @@ One-screen record per incident. Full evidence and capacity math in
   can still miss the real failure if its `for:` window loses the race with
   the failure mode's own timescale — only replaying the actual incident
   against it proves that.* See
-  `evidence/02-incident-replay/OPS-2204-alert-firing.json`.
+  `evidence/07-incidents/2204/alert-firing.json`.
 - **Evidence:** `LAB_JOURNAL.md` § OPS-2204; `evidence/OPS-2204-dmesg-oom.txt`,
   `evidence/OPS-2204-single-request-memtrace.txt`,
   `evidence/OPS-2204-fixed-output.txt` (streaming-only attempt),

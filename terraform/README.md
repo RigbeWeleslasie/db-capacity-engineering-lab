@@ -61,15 +61,38 @@ new optional ones with defaults, like PR #9's `db_ca_cert`, don't).
   it reaches this root (a `TF_VAR_db_ca_cert` env var, same discipline as
   `TF_VAR_aiven_password`, is the natural fit — never a tfvars file).
 
-## Remote state
+## Remote state — done
 
-The group repo's `bootstrap/` root (added in PR #12) creates the shared
-S3 + DynamoDB state store this root's commented-out `backend "s3" {}` block
-(see `versions.tf`) is waiting on. It's run **once by hand** against
-LocalStack, shared across the whole group — check with the group before
-running it yourself in case someone already has. See its README in the group
-repo for the exact `tflocal init -backend-config=...` invocation once it's
-up.
+The group repo's `bootstrap/` root (regional-health-platform#12, Meron)
+creates the S3 + DynamoDB state store `versions.tf`'s `backend "s3" {}`
+block now actually uses. Correction to an earlier note here: this is
+**not** something to coordinate across the group before running — every
+person's LocalStack is their own local emulator instance, so running the
+bootstrap only ever touches your own machine, never anyone else's.
+
+```bash
+tflocal init \
+  -backend-config="bucket=devops-g1-ls-tfstate" \
+  -backend-config="key=db-capacity-engineering-lab/terraform.tfstate" \
+  -backend-config="region=us-east-1" \
+  -backend-config="dynamodb_table=devops-g1-ls-tflock" \
+  -backend-config="access_key=test" \
+  -backend-config="secret_key=test" \
+  -backend-config="skip_credentials_validation=true" \
+  -backend-config="skip_metadata_api_check=true" \
+  -backend-config="skip_requesting_account_id=true" \
+  -backend-config='endpoints={s3="http://localhost:4566",dynamodb="http://localhost:4566",sts="http://localhost:4566",iam="http://localhost:4566"}' \
+  -backend-config="use_path_style=true"
+```
+
+The extra `access_key`/`skip_*`/`endpoints`/`use_path_style` flags beyond
+what the bootstrap's own README documents are needed because `tflocal`
+patches *provider* config automatically but not the S3 *backend* block —
+without them, `init` fails with `STS: GetCallerIdentity ...
+InvalidClientTokenId` before it ever gets to the modules. Verified
+end-to-end (not just configured): a real apply/destroy cycle against this
+backend, with the state file genuinely appearing in (and shrinking back
+down in) the S3 bucket — see `evidence/01-iac/README.md`.
 
 ## Testing
 

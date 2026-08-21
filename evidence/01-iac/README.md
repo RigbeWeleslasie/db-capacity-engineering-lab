@@ -78,3 +78,37 @@ instance again, every time) — see that file's own header note.
    variable, written to `/etc/app/db-ca.pem` in user-data).
 4. **The ALB blocked the whole apply on LocalStack's Hobby-tier license**
    — fixed in regional-health-platform#11 (`create_alb`, defaults `false`).
+
+## Remote state (S3 + DynamoDB lock) — now actually running against it
+
+C1 also asks for "Remote state on S3 + DynamoDB lock (the bootstrap script
+is provided — you don't write it)." The group's `bootstrap/` root
+(regional-health-platform#12, Meron) creates this once; ran it against a
+local LocalStack (`bootstrap-apply.log`) — real, clean apply:
+
+```
+Apply complete! Resources: 5 added, 0 changed, 0 destroyed.
+Outputs:
+lock_table = "devops-g1-ls-tflock"
+state_bucket = "devops-g1-ls-tfstate"
+```
+
+`terraform/versions.tf` here now has a live `backend "s3" {}` block
+(previously commented out, waiting on the bootstrap to exist). Confirmed
+genuinely working end-to-end, not just configured:
+
+- `tflocal init` with the documented `-backend-config` flags (bucket, key,
+  region, dynamodb_table) — needed a few *additional* LocalStack-specific
+  backend flags (`access_key`/`secret_key=test`, `skip_credentials_validation`,
+  `skip_metadata_api_check`, `skip_requesting_account_id`, `endpoints={...}`,
+  `use_path_style=true`) that `tflocal` does NOT auto-inject for the S3
+  *backend* block the way it does for providers — a real, documented
+  LocalStack+Terraform nuance, not a guess (first attempt without them
+  failed on `STS: GetCallerIdentity ... InvalidClientTokenId`).
+- `tflocal apply` (`apply-remote-state.log`) — real resources created,
+  and the state file genuinely appeared in the bucket afterward:
+  `aws s3 ls s3://devops-g1-ls-tfstate/ --recursive` showed
+  `db-capacity-engineering-lab/terraform.tfstate` (6942 bytes).
+- `tflocal destroy` (`destroy-remote-state.log`) — real destroy, and the
+  same state file shrank to 963 bytes (empty resource list) afterward,
+  confirming the write-back on destroy too, not just on apply.

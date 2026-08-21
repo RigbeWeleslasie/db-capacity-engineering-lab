@@ -2,9 +2,18 @@
 
 Two caveats below, each one genuinely hit and root-caused during this project
 (not copied from the starter list) — see `evidence/01-iac/README.md` and
-`evidence/01-iac/apply-output.txt` for the raw apply output behind both.
+`evidence/01-iac/apply.log` / `apply-output-earlier.txt` for the raw apply
+output behind both.
 
 ## ELBv2 is not included in the free Hobby tier at all — not just "unfaithful," entirely absent
+
+> **Resolved, not just documented:** `modules/service` added a
+> `create_alb` variable (default `false`, regional-health-platform#11)
+> specifically for this — the ALB resources stay declared and scanned as
+> real IaC, but are no longer even attempted against LocalStack. The
+> caveat below is preserved as-is because it's still a genuine fidelity
+> gap worth knowing about (real AWS *would* create these resources fine),
+> it's just no longer a blocker to the rest of the apply.
 
 - **What LocalStack did:** `tofu apply` failed outright trying to *create*
   `aws_lb`, `aws_lb_target_group`, and `aws_lb_listener` — not "created but

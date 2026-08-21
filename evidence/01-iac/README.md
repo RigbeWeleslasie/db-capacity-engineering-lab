@@ -1,37 +1,40 @@
 # C1 — Terraform apply evidence
 
-Real `tflocal apply` run against a locally-started LocalStack instance
-(freemium/Hobby license), on 2026-08-20. Raw output: `apply-output.txt`.
+Two real `tflocal apply` runs against a locally-started LocalStack
+instance (freemium/Hobby license): an earlier one on 2026-08-20
+(`apply-output-earlier.txt`), and the current one on 2026-08-21
+(`apply.log`, `plan-after-apply.txt`, `destroy.log`) — re-run after the
+group's `modules/service` added a `create_alb` toggle
+(regional-health-platform#11), which resolved the ALB blocker below
+entirely rather than just documenting it.
 
 ## What actually stood up (real, verified)
 
 | Resource | Result |
 |---|---|
-| `module.data.aws_secretsmanager_secret.db` | **Created** — `arn:aws:secretsmanager:us-east-1:000000000000:secret:regional-health/db-xbIZvk` |
+| `module.data.aws_secretsmanager_secret.db` | **Created** — real Secrets Manager secret |
 | `module.data.aws_secretsmanager_secret_version.db` | **Created** — credential envelope written, real `GetSecretValue`-readable secret |
-| `module.service.aws_security_group.app` | **Created** — `sg-8d4bb32a08e4336e6` |
+| `module.service.aws_security_group.app` | **Created** — real security group, ingress/egress rules as declared |
 
 This is the core C3 (secrets) proof: the Aiven connection details actually
 made it into a real Secrets Manager secret on a real LocalStack apply, not
-just a `tofu plan`.
+just a `tofu plan`. `destroy.log` confirms all three were genuinely
+tracked in state and cleanly destroyed ("Destroy complete! Resources: 3
+destroyed.") — not a fluke or drift.
 
-## What's blocked, and why (genuine environment limitations, not code bugs)
+## Resolved since the earlier run: the ALB blocker
 
-### ALB (`aws_lb`, `aws_lb_target_group`, `aws_lb_listener`) — LocalStack license
+The 2026-08-20 run hit `aws_lb`/`aws_lb_target_group`/`aws_lb_listener`
+failing outright (`the elbv2 service is not included within your
+LocalStack license`). `modules/service`'s owner added a `create_alb`
+variable (default `false`) specifically for this — the ALB resources stay
+declared and scanned by `trivy`/`zizmor` as real IaC, but are no longer
+even *attempted* against LocalStack. Re-pinning to that fix and re-running
+the apply confirms it: `plan` now shows exactly 4 resources for a fresh
+apply (secret, secret version, security group, instance) — zero ALB
+resources — and the ALB-specific error is gone entirely from `apply.log`.
 
-```
-Error: reading ELBv2 Load Balancer (devops-g1-ls-rigbe-alb): ... api error
-InternalFailure: Sorry, the elbv2 service is not included within your
-LocalStack license, but is available in an upgraded license.
-```
-
-ELBv2 is not included in LocalStack's free Hobby ("freemium") tier at all —
-confirmed via the container's own logs, not just the apply error. This
-matches `modules/service`'s own documented design ("ALB topology as IaC;
-nginx carries the real traffic") — the module already anticipated ALB might
-not be gate-able on LocalStack, though the actual failure mode (can't even
-be *created*, not just can't health-check) is stronger than what its README
-describes.
+## Still blocked, and why (a genuine environment limitation, not a code bug)
 
 ### EC2 instance — Docker-backed AMI discovery doesn't register the image
 
@@ -51,28 +54,27 @@ discoverable AMI:
 - Tried: a fresh LocalStack restart after the image already existed (rules out timing)
 - Tried: explicit `EC2_VM_MANAGER=docker` (rules out a wrong default)
 
-None of these changed the result. This looks like a genuine gap in this
-LocalStack version (`2026.7.1`)/environment between the documented behavior
-and actual behavior — worth reporting to LocalStack and/or the trainer, not
-something fixable by changing this repo's Terraform or app code.
+None of these changed the result, on either the 2026-08-20 or the
+2026-08-21 run (different LocalStack container instances, same result
+both times). This looks like a genuine gap in this LocalStack version
+between the documented behavior and actual behavior — see `FIDELITY.md`
+for the full writeup — not something fixable by changing this repo's
+Terraform or app code. Because the instance never enters state,
+`plan-after-apply.txt` is honestly **not empty** (it proposes creating the
+instance again, every time) — see that file's own header note.
 
-## Separately, two real bugs found and fixed along the way
+## Separately, real bugs found and fixed along the way (all merged upstream)
 
-1. **`modules/service`'s `app_ami_id` validation accepts the full docker-tag
-   string (`localstack-ec2/<name>:ami-<sha12>`), but `aws_instance.ami`
-   passes it through unmodified** — LocalStack expects the bare `ami-<sha12>`
-   id. The validation regex's own `:ami-[0-9a-f]{12}$` branch implies the
-   full-tag form should work; it doesn't, without an extraction step the
-   module doesn't have. Flagged to Nebyat (module owner).
-2. **`golden-ci.yml`'s `aiven_host`/`aiven_port` inputs never resolved**
-   when passed as `vars` context into the reusable workflow from a different
-   repo — fixed by moving them to `secrets:` instead (see
-   `fix/golden-ci-aiven-secrets`, merged).
-
-## Teardown
-
-`destroy-output.txt` shows `0 destroyed` — not a bug. Between the apply above and
-the destroy attempt, LocalStack was restarted twice (chasing the AMI issue),
-which wipes all state server-side by design ("every run starts LocalStack
-fresh"). `tofu destroy`'s refresh step correctly detected the drift and
-found nothing real left to tear down.
+1. **`modules/service`'s `app_ami_id` validation accepted the full
+   docker-tag string, but `aws_instance.ami` passed it through
+   unmodified** — fixed in regional-health-platform#8 (strips to the bare
+   `ami-<sha12>` id).
+2. **`golden-ci.yml`'s `aiven_host`/`aiven_port` never resolved** when
+   passed as `vars` context cross-repo — fixed in
+   regional-health-platform#7 (moved to `secrets:`).
+3. **`modules/service` never delivered the Aiven CA cert to the
+   instance**, despite `api/secrets.js` already expecting
+   `DB_CA_CERT_PATH` — fixed in regional-health-platform#9 (`db_ca_cert`
+   variable, written to `/etc/app/db-ca.pem` in user-data).
+4. **The ALB blocked the whole apply on LocalStack's Hobby-tier license**
+   — fixed in regional-health-platform#11 (`create_alb`, defaults `false`).

@@ -1,3 +1,13 @@
+# HONEST NOTE, read before the raw output below: this plan is NOT empty
+# (exit code 2 -- changes present), and that is a real, documented result,
+# not an oversight. "Plan: 1 to add" is the EC2 instance, which the apply
+# never actually created -- LocalStack Docker-backed AMI discovery gap
+# (see FIDELITY.md) means aws_instance.app fails every attempt, so it
+# never enters state, so every subsequent plan proposes creating it again.
+# The Secrets Manager secret + security group (both genuinely created,
+# see apply.log) correctly show 0 changes -- that is the part of C1 that
+# actually works end-to-end in this environment.
+
 [0m[1mmodule.service.data.aws_vpc.default: Reading...[0m[0m
 [0m[1mmodule.data.aws_secretsmanager_secret.db: Refreshing state... [id=arn:aws:secretsmanager:us-east-1:000000000000:secret:regional-health/db-USOQOE][0m
 [0m[1mmodule.data.aws_secretsmanager_secret_version.db: Refreshing state... [id=arn:aws:secretsmanager:us-east-1:000000000000:secret:regional-health/db-USOQOE|terraform-20260821112437471600000002][0m
@@ -110,12 +120,8 @@ OpenTofu will perform the following actions:
 Changes to Outputs:
   [32m+[0m[0m instance_id         = (known after apply)
   [32m+[0m[0m instance_private_ip = (known after apply)
-[0m[1mmodule.service.aws_instance.app: Creating...[0m[0m
-[31m╷[0m[0m
-[31m│[0m [0m[1m[31mError: [0m[0m[1mcollecting instance settings: couldn't find resource[0m
-[31m│[0m [0m
-[31m│[0m [0m[0m  with module.service.aws_instance.app,
-[31m│[0m [0m  on .terraform/modules/service/terraform/modules/service/main.tf line 121, in resource "aws_instance" "app":
-[31m│[0m [0m 121: resource "aws_instance" "app" [4m{[0m[0m
-[31m│[0m [0m
-[31m╵[0m[0m
+[90m
+─────────────────────────────────────────────────────────────────────────────[0m
+
+Note: You didn't use the -out option to save this plan, so OpenTofu can't
+guarantee to take exactly these actions if you run "tofu apply" now.

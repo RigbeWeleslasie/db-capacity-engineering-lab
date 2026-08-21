@@ -16,7 +16,7 @@ locals {
 
 module "data" {
   # Pinned to main (regional-health-platform#5, merged) — Aiven MySQL.
-  source = "git::https://github.com/nebyathhailu/regional-health-platform.git//terraform/modules/data?ref=c95c942fc72ef7018399118305f3d90a9ecb524a"
+  source = "git::https://github.com/nebyathhailu/regional-health-platform.git//terraform/modules/data?ref=c930bc6aeb6dfc456a57de9dfb34053f08c0278d"
 
   name_prefix    = var.name_prefix
   db_name        = "capacity_lab"
@@ -27,12 +27,14 @@ module "data" {
 }
 
 module "service" {
-  # Pinned to main (regional-health-platform#2 + #6 + #8 + #9, merged) —
-  # includes the trivy config hardening (IMDSv2, encrypted volume, invalid
-  # headers), the Aiven doc updates, #8's fix for app_ami_id
-  # (InvalidAMIID.Malformed), and #9's db_ca_cert: user-data now wires the
-  # Aiven TLS CA cert to DB_CA_CERT_PATH when db_ca_cert is set below.
-  source = "git::https://github.com/nebyathhailu/regional-health-platform.git//terraform/modules/service?ref=4ebcd9bdf856b4b97796041223db025b5e6f78af"
+  # Pinned to main (regional-health-platform#2 + #6 + #8 + #9 + #10, merged)
+  # — the trivy config hardening (IMDSv2, encrypted volume, invalid headers),
+  # #8's fix for app_ami_id (aws_instance.app.ami strips the
+  # localstack-ec2/<name>: prefix off the docker-tag-style value CI produces,
+  # was InvalidAMIID.Malformed), #9's db_ca_cert (user-data now wires the
+  # Aiven TLS CA cert to DB_CA_CERT_PATH when db_ca_cert is set below), and
+  # #10's trivy ignore-unfixed tweak.
+  source = "git::https://github.com/nebyathhailu/regional-health-platform.git//terraform/modules/service?ref=c930bc6aeb6dfc456a57de9dfb34053f08c0278d"
 
   name_prefix       = var.name_prefix
   app_ami_id        = var.app_ami_id

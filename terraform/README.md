@@ -22,11 +22,13 @@ VPC/subnet lookup (hasn't adopted `modules/network` yet).
 
 Both `source = "git::...?ref=<sha>"` lines in `main.tf` are pinned to a full
 commit SHA, never a moving branch name — per the group repo's own
-convention. **`modules/data`'s pin is temporary**: it points at the Aiven
-rewrite's branch commit, not `main`, because that PR hasn't merged in the
-group repo yet as of this writing. Re-pin to the post-merge commit on `main`
-once it lands (the SHA doesn't change when a PR merges without a rebase/
-squash, so check whichever the group repo actually did).
+convention. Both currently point at the group repo's `main` HEAD as of
+2026-08-21 (`c930bc6`, through PR #10). Re-pin periodically as the group repo
+moves — `git log <old-sha>..origin/main --oneline` against a clone of
+`nebyathhailu/regional-health-platform` shows what you'd be picking up, and
+`git diff` on each module's `variables.tf` between the two SHAs shows whether
+anything requires a change on this root's side (new required variables would;
+new optional ones with defaults, like PR #9's `db_ca_cert`, don't).
 
 ## Before you can `plan`/`apply`
 
@@ -50,11 +52,24 @@ squash, so check whichever the group repo actually did).
 - **Mongo audit store** isn't part of Assignment 2's scope — `/api/audit/ping`
   will fail once deployed unless you separately stand up a reachable Mongo
   and set `MONGO_URI`/`MONGO_DB` via `app_env`.
-- **Aiven's TLS CA cert** delivery to the instance isn't solved yet — the CA
-  cert isn't secret, so it doesn't belong in Secrets Manager, but *how* it
-  gets onto the instance (baked into the CI-built AMI, fetched from Aiven's
-  public URL at boot, etc.) is still an open decision. `DB_CA_CERT_PATH` in
-  `app_env` is ready to be set once that's decided.
+- **Aiven's TLS CA cert** delivery to the instance isn't wired up from this
+  root yet. `modules/service` (as of PR #9) now takes an optional
+  `db_ca_cert` variable — pass the PEM content and it writes it to
+  `/etc/app/db-ca.pem` on the instance and exports `DB_CA_CERT_PATH` in
+  user-data itself, no CI-baked-AMI or fetch-at-boot logic needed on this
+  side. Still open: get the actual PEM from Aiven's console and decide how
+  it reaches this root (a `TF_VAR_db_ca_cert` env var, same discipline as
+  `TF_VAR_aiven_password`, is the natural fit — never a tfvars file).
+
+## Remote state
+
+The group repo's `bootstrap/` root (added in PR #12) creates the shared
+S3 + DynamoDB state store this root's commented-out `backend "s3" {}` block
+(see `versions.tf`) is waiting on. It's run **once by hand** against
+LocalStack, shared across the whole group — check with the group before
+running it yourself in case someone already has. See its README in the group
+repo for the exact `tflocal init -backend-config=...` invocation once it's
+up.
 
 ## Testing
 

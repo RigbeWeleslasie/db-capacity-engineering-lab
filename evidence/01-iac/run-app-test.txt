@@ -1,0 +1,45 @@
+=== scripts/run-app.sh — real end-to-end verification ===
+Per the trainer's clarification: LocalStack's Hobby tier gives Docker-backed
+EC2 as a mock only (no backing container); the app image run as a plain
+container, wired to real Secrets Manager + real Aiven, IS the graded runtime
+-- this is that test.
+
+Setup: real LocalStack (secretsmanager,ec2,iam,sts), a real secret created
+matching the frozen envelope (engine/username/password/host/port/dbname),
+the actual app image built from api/Dockerfile.
+
+$ ./scripts/run-app.sh capacity-api-runapp-test:latest \
+    "arn:aws:secretsmanager:us-east-1:000000000000:secret:regional-health/db-runapp-test-cTmZLM" \
+    ~/.aiven/ca.pem
+
+>> Stopping any previous run of capacity-api-runtime...
+>> Starting capacity-api-runtime from capacity-api-runapp-test:latest ...
+0bcee97fe95f5e5bbdd3ae14ea8dc5bb0ec9f0dd171a7b2d67039efe9e5b9d32
+>> Waiting for readiness...
+>> Ready. /healthz and /readyz both reachable on :3000.
+{"arn":"arn:aws:secretsmanager:us-east-1:000000000000:secret:regional-health/db-runapp-test-cTmZLM","versionId":"3bcfe5eb-4273-4554-908d-47c7d7537cdb"}
+
+Container boot log confirms the real Secrets-Manager path (not the local
+fallback):
+[secrets] resolved DB config from Secrets Manager (arn=arn:aws:secretsmanager:us-east-1:000000000000:secret:regional-health/db-runapp-test-cTmZLM, versionId=3bcfe5eb-4273-4554-908d-47c7d7537cdb)
+
+Real API call against the real Aiven database (not a local docker-compose
+fallback -- confirmed directly by querying Aiven itself, which genuinely
+has this data from the earlier Aiven migration work, evidence/aiven-
+migration.txt):
+
+$ curl http://localhost:3000/api/patients/recent
+{"count":50,"data":[{"id":100000,"first_name":"Alice","last_name":"Smith", ...
+
+One real bug found and fixed while building this: the first attempt tried
+to join whatever docker network LocalStack happened to be on (a bridge-
+network container-name lookup) -- from that network, "localhost:4566"
+inside the app container means the container's OWN loopback, not the host
+running LocalStack, so the app silently fell back to its local-env-vars
+path instead of erroring (matched a stale, still-running docker-compose
+container on the same host port, masking the failure at first). Fixed by
+using --network host instead: this assignment is Linux-only anyway
+(LocalStack's own EC2 model requires it), so there's no Docker Desktop
+bridge-network caveat to work around here, and host networking means
+AWS_ENDPOINT_URL=http://localhost:4566 genuinely reaches LocalStack's
+published port.

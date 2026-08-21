@@ -1,17 +1,22 @@
 # =============================================================================
 # Makefile — C8's "one command to stand it up" / "one command to verify."
 #
-# HONEST SCOPE: `make up` stands up the locally-demonstrable stack (the app +
-# its real dependencies, via docker-compose) and seeds it -- this is the path
-# that actually works end-to-end in this environment. It does NOT run
-# `tflocal apply` against LocalStack: that path is blocked by two genuine
-# LocalStack limitations documented in FIDELITY.md (ELBv2 license, Docker-
-# backed EC2 AMI discovery), not by anything `make up` could paper over.
-# `make plan` / `make apply` are provided separately for the Terraform layer,
-# and fail exactly the way FIDELITY.md documents -- on purpose, not silently.
+# Per the trainer's clarification: LocalStack Hobby gives Docker-backed EC2
+# as a MOCK only (RunInstances "succeeds," no backing container) -- real
+# Docker-backed EC2 is a paid Base-tier-and-up feature. So `aws_instance.app`
+# (via `make apply`) is graded as IaC only: it applies against the mock and
+# shows correctly in state/plan, but never actually runs the service. Same
+# story for the ALB -- see terraform/lb-design/, IaC-only, never applied.
+#
+# `make up` stands up the locally-demonstrable stack (docker-compose) and
+# seeds it -- for pure local dev without any LocalStack dependency.
+# `make run-app` is the REAL runtime target: the app image run as a plain
+# container wired to real Secrets Manager + real Aiven (scripts/run-app.sh)
+# -- this is what `/healthz`, `/readyz`, `make verify`, and the incident
+# replay actually target, per the trainer's own framing.
 # =============================================================================
 
-.PHONY: up down seed verify plan apply destroy fmt
+.PHONY: up down seed verify plan apply destroy fmt run-app
 
 up:
 	docker compose up -d --build
@@ -73,3 +78,11 @@ apply:
 
 destroy:
 	cd terraform && tflocal destroy -auto-approve | tee ../evidence/01-iac/destroy.log
+
+# --- The real runtime (see scripts/run-app.sh's own header for the full
+# reasoning). Requires: LocalStack running, `make apply` already run so
+# module.data's secret genuinely exists, and IMAGE_TAG/SECRET_ARN set.
+#   make run-app IMAGE_TAG=db-capacity-engineering-lab-capacity-api:latest \
+#     SECRET_ARN=arn:aws:secretsmanager:us-east-1:000000000000:secret:regional-health/db-XXXXXX
+run-app:
+	./scripts/run-app.sh "$(IMAGE_TAG)" "$(SECRET_ARN)" "$(CA_CERT_PATH)"

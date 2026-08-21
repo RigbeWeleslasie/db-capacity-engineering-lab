@@ -13,7 +13,11 @@ output behind both.
 > real IaC, but are no longer even attempted against LocalStack. The
 > caveat below is preserved as-is because it's still a genuine fidelity
 > gap worth knowing about (real AWS *would* create these resources fine),
-> it's just no longer a blocker to the rest of the apply.
+> it's just no longer a blocker to the rest of the apply. Confirmed by the
+> trainer directly: ELBv2 is a Base-tier-and-up feature, same story as
+> Docker-backed EC2 below — this repo's own standalone equivalent,
+> `terraform/lb-design/`, exists for the identical reason (real, hardened,
+> validated + scanned IaC that's never applied).
 
 - **What LocalStack did:** `tofu apply` failed outright trying to *create*
   `aws_lb`, `aws_lb_target_group`, and `aws_lb_listener` — not "created but
@@ -71,11 +75,25 @@ output behind both.
   - Restarted LocalStack fresh *after* the image already existed (rules out
     a startup-ordering/timing race)
   - Set `EC2_VM_MANAGER=docker` explicitly (rules out a wrong default)
-  None of these changed the result. This looks like a genuine gap between
+  None of these changed the result. This looked like a genuine gap between
   LocalStack's documented behavior and its actual behavior in this specific
-  version (`2026.7.1`)/environment.
+  version (`2026.7.1`)/environment — the trainer's own follow-up confirmed
+  it's stronger than that: real Docker-backed EC2 (the mode that actually
+  boots user-data into a curl-able container) is a paid Base-tier-and-up
+  feature. Hobby gives a *mock* EC2 only — `RunInstances` returns "running,"
+  but there's no backing container, no `ec2_vm_manager:docker` tag, and
+  `describe-images --owners self` is empty, matching every symptom above
+  exactly. Not a bug to report, and not something any Terraform/app-code
+  change here could have fixed — `aws_instance.app` is correctly an IaC-only
+  deliverable in this lab: write it, `tofu apply` it (the mock accepts it),
+  but the real runtime is the app image run as a plain container instead
+  (`scripts/run-app.sh`), wired to the same real Secrets Manager + Aiven the
+  instance's user-data would have used — see that script's own header and
+  `evidence/01-iac/run-app-test.txt` for the real, working end-to-end proof.
 - **What I'd verify on real AWS:** that a real AMI (built via Packer or a
   registered EC2 Image Builder pipeline, not a Docker-backed emulation
-  shortcut) launches an instance the normal way — this whole caveat is
-  specific to LocalStack's Docker-backed EC2 substitution for a real AMI
-  and has no equivalent failure mode on real AWS at all.
+  shortcut) launches an instance the normal way, and that a real EC2
+  instance running the same user-data actually reaches the same
+  `/healthz`/`/readyz` state `scripts/run-app.sh` proves for the container
+  form — this whole caveat is specific to LocalStack's Hobby-tier EC2
+  substitution and has no equivalent failure mode on real AWS at all.

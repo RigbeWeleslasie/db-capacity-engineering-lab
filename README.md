@@ -130,6 +130,8 @@ and wired into a 5-gate CI pipeline. Quick links for anyone grading this part:
 | All four OPS incidents replayed against the *monitored* stack, with proof the corresponding Prometheus alert actually fires (not just "should have") | [`evidence/07-incidents/`](./evidence/07-incidents/), summarized in [`LAB_JOURNAL.md`](./LAB_JOURNAL.md#assignment-2--closing-the-loop-did-the-alerts-i-proposed-actually-fire) and each `SCARS.md` entry's "Confirmed (Assignment 2)" line |
 | `FIDELITY.md` — where LocalStack didn't reproduce real AWS faithfully | [`FIDELITY.md`](./FIDELITY.md) |
 | `make up` / `make verify` — one-command stand-up and verification | [`Makefile`](./Makefile) |
+| **The real runtime** — EC2 is IaC-only here (LocalStack Hobby mocks `RunInstances`, no backing container — confirmed by the trainer, not a bug); the app image run as a plain container wired to real Secrets Manager + real Aiven is what `/healthz`/`/readyz`/`make verify`/incident replay actually target | [`scripts/run-app.sh`](./scripts/run-app.sh), real end-to-end proof in [`evidence/01-iac/run-app-test.txt`](./evidence/01-iac/run-app-test.txt) |
+| The ALB, as IaC only — same Hobby-tier gate as EC2 (ELBv2 is Base+), validated + scanned, never applied | [`terraform/lb-design/`](./terraform/lb-design/) |
 | E2 — OIDC design (writing-only Extended deliverable) | [`docs/E2-oidc-design.md`](./docs/E2-oidc-design.md) |
 
 Good luck, on-call. 

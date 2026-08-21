@@ -1,0 +1,20 @@
+=== zizmor against the FIXED (pinned) ci.yml on main ===
+ INFO zizmor: 🌈 zizmor v1.29.0
+ WARN audit: zizmor: zizmor is running in offline mode by default; some audits and auto-fixes will not be available. see https://docs.zizmor.sh/usage/#operating-modes for details
+ INFO audit: zizmor: 🌈 completed .github/workflows/ci.yml
+No findings to report. Good job!
+
+=== zizmor against the RED PR's deliberately-unpinned ci.yml (red-pr/zizmor-unpinned-workflow-ref) ===
+ INFO zizmor: 🌈 zizmor v1.29.0
+ WARN audit: zizmor: zizmor is running in offline mode by default; some audits and auto-fixes will not be available. see https://docs.zizmor.sh/usage/#operating-modes for details
+ INFO audit: zizmor: 🌈 completed /tmp/ci-unpinned.yml
+error[unpinned-uses]: unpinned action reference
+  --> /tmp/ci-unpinned.yml:45:11
+   |
+45 |     uses: nebyathhailu/regional-health-platform/.github/workflows/golden-ci.yml@main
+   |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ action is not pinned to a hash (required by blanket policy)
+   |
+   = note: audit confidence → High
+   = help: audit documentation → https://docs.zizmor.sh/audits/#unpinned-uses
+
+1 finding: 0 informational, 0 low, 0 medium, 1 high

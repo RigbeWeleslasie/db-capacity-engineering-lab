@@ -42,7 +42,7 @@ permissions:
 
 jobs:
   ci:
-    uses: nebyathhailu/regional-health-platform/.github/workflows/golden-ci.yml@c95c942fc72ef7018399118305f3d90a9ecb524a
+    uses: nebyathhailu/regional-health-platform/.github/workflows/golden-ci.yml@main
     with:
       app_dir: api
       image_name: capacity-api

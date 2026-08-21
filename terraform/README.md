@@ -61,14 +61,28 @@ new optional ones with defaults, like PR #9's `db_ca_cert`, don't).
   it reaches this root (a `TF_VAR_db_ca_cert` env var, same discipline as
   `TF_VAR_aiven_password`, is the natural fit — never a tfvars file).
 
-## Remote state — done
+## Remote state — verified working, deliberately NOT the committed default
 
 The group repo's `bootstrap/` root (regional-health-platform#12, Meron)
-creates the S3 + DynamoDB state store `versions.tf`'s `backend "s3" {}`
-block now actually uses. Correction to an earlier note here: this is
-**not** something to coordinate across the group before running — every
-person's LocalStack is their own local emulator instance, so running the
-bootstrap only ever touches your own machine, never anyone else's.
+creates the S3 + DynamoDB state store a `backend "s3" {}` block can use.
+Correction to an earlier note here: running the bootstrap is **not**
+something to coordinate across the group — every person's LocalStack is
+their own local emulator instance, so it only ever touches your own
+machine.
+
+**Why it's not active in the committed `versions.tf`:** CI (`golden-ci.yml`)
+starts a fresh LocalStack every single run and tears it down at the end —
+remote state has nothing to persist *across* in that model, and activating
+the backend broke CI outright the one time it was tried (`tofu init`
+failed with `Invalid bucket value` / `Missing region value`, since CI
+passes no `-backend-config` at all — and even past that, CI's bucket
+wouldn't exist, since CI never runs `bootstrap/` first). Local state is
+the *correct* choice for CI, not a shortcut.
+
+**For your own longer-lived local LocalStack**, where remote state
+actually helps: run the bootstrap once, then add this to `versions.tf`
+(uncomment the equivalent block already there) or pass it via
+`-backend-config` at init time:
 
 ```bash
 tflocal init \
@@ -89,10 +103,11 @@ The extra `access_key`/`skip_*`/`endpoints`/`use_path_style` flags beyond
 what the bootstrap's own README documents are needed because `tflocal`
 patches *provider* config automatically but not the S3 *backend* block —
 without them, `init` fails with `STS: GetCallerIdentity ...
-InvalidClientTokenId` before it ever gets to the modules. Verified
-end-to-end (not just configured): a real apply/destroy cycle against this
-backend, with the state file genuinely appearing in (and shrinking back
-down in) the S3 bucket — see `evidence/01-iac/README.md`.
+InvalidClientTokenId` before it ever gets to the modules.
+
+Verified end-to-end (not just configured): a real apply/destroy cycle
+against this backend, with the state file genuinely appearing in (and
+shrinking back down in) the S3 bucket — see `evidence/01-iac/README.md`.
 
 ## Testing
 

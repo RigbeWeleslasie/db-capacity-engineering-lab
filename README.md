@@ -1,3 +1,4 @@
+
 # Regional Health — Reliability On-Call Lab 
 
 A hands-on "Lab-in-a-Box" for learning **database mechanics, performance tuning,
@@ -128,6 +129,7 @@ and wired into a 5-gate CI pipeline. Quick links for anyone grading this part:
 | **Three deliberately-insecure "red PRs," one per gate** — Dockerfile non-root `USER` dropped ([#5](https://github.com/RigbeWeleslasie/db-capacity-engineering-lab/pull/5), `trivy config`), a fake credential committed ([#16](https://github.com/RigbeWeleslasie/db-capacity-engineering-lab/pull/16), `gitleaks`), a workflow ref unpinned to `@main` ([#17](https://github.com/RigbeWeleslasie/db-capacity-engineering-lab/pull/17), `zizmor`) | [`evidence/05-gates/README.md`](./evidence/05-gates/README.md) — all three left open, unmerged, each genuinely failing its gate |
 | Grafana dashboard + a panel per incident, real screenshots captured live during each replay | [`evidence/06-observability/`](./evidence/06-observability/) |
 | All four OPS incidents replayed against the *monitored* stack, with proof the corresponding Prometheus alert actually fires (not just "should have") | [`evidence/07-incidents/`](./evidence/07-incidents/), summarized in [`LAB_JOURNAL.md`](./LAB_JOURNAL.md#assignment-2--closing-the-loop-did-the-alerts-i-proposed-actually-fire) and each `SCARS.md` entry's "Confirmed (Assignment 2)" line |
+| **Loom — one incident (OPS-2204) caught end-to-end: alert fires → dashboard → mechanism named** | **[Watch it](https://www.loom.com/share/506b07fa0089452b8e044250d38a2362)** |
 | `FIDELITY.md` — where LocalStack didn't reproduce real AWS faithfully | [`FIDELITY.md`](./FIDELITY.md) |
 | `make up` / `make verify` — one-command stand-up and verification | [`Makefile`](./Makefile) |
 | **The real runtime** — EC2 is IaC-only here (LocalStack Hobby mocks `RunInstances`, no backing container — confirmed by the trainer, not a bug); the app image run as a plain container wired to real Secrets Manager + real Aiven is what `/healthz`/`/readyz`/`make verify`/incident replay actually target | [`scripts/run-app.sh`](./scripts/run-app.sh), real end-to-end proof in [`evidence/01-iac/run-app-test.txt`](./evidence/01-iac/run-app-test.txt) |

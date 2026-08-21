@@ -16,6 +16,8 @@ re-run) are in `../06-observability/panels/`.
 
 ## The "full treatment" — OPS-2204
 
+**[Loom recording — this incident caught live, end-to-end](https://www.loom.com/share/506b07fa0089452b8e044250d38a2362)**
+
 Chosen because it has the clearest end-to-end story: induce → alert fires
 → dashboard shows it → the mechanism is nameable in one sentence, and
 because getting here required *discovering* that the originally-designed

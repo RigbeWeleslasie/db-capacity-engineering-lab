@@ -1,0 +1,9 @@
+# This is the local docker-compose boot path (DB_SECRET_ARN unset), which is
+# what's actually reachable in this environment -- the deployed path (real
+# Secrets Manager ARN + VersionId logged here instead) can't be exercised
+# end-to-end because the EC2 apply itself is blocked by the two LocalStack
+# limitations documented in FIDELITY.md, not by anything in this app code.
+# The Secrets-Manager branch of this exact log line is exercised directly
+# (bypassing the blocked EC2 layer) in evidence/03-secrets/README.md.
+capacity-api listening on :3000 (metrics at /metrics)
+[secrets] resolved DB config from env vars (arn=env, versionId=n/a) -- no Secrets Manager call made

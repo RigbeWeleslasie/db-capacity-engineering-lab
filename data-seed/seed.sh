@@ -23,14 +23,25 @@ MYSQL_PASSWORD="${MYSQL_PASSWORD:-labpassword}"
 MYSQL_DATABASE="${MYSQL_DATABASE:-capacity_lab}"
 ROW_COUNT="${ROW_COUNT:-100000}"
 
-# --ssl-mode=DISABLED: MySQL 8.0 auto-generates a self-signed cert and
-# enables SSL by default; the client's own default (VERIFY_IDENTITY-ish
-# behavior on newer client builds) then fails with "Certificate
-# verification failure: The certificate is NOT trusted." This is
-# local/lab-only traffic on the compose network, not a real production
-# connection (that's Aiven-over-TLS, handled separately) — plaintext is
-# fine here.
-MYSQL=(mysql -h "${MYSQL_HOST}" -P "${MYSQL_PORT}" -u "${MYSQL_USER}" "-p${MYSQL_PASSWORD}" --ssl-mode=DISABLED)
+# Disable SSL for this local/lab-only traffic on the compose network (not a
+# real production connection -- that's Aiven-over-TLS, handled separately by
+# secrets.js's DB_CA_CERT_PATH). MySQL 8.0 auto-generates a self-signed cert
+# and enables SSL by default; without disabling it the client's own default
+# verification then fails with "Certificate verification failure: The
+# certificate is NOT trusted."
+#
+# The FLAG for "disable SSL" isn't the same across client builds, and this
+# broke silently once before: the Oracle MySQL client (5.7+) uses
+# `--ssl-mode=DISABLED`; a MariaDB-flavored client (which `apk upgrade` can
+# pull in on Alpine, exactly what happened here) rejects that as "unknown
+# variable" and instead wants `--skip-ssl`. Detect which one this client
+# actually supports rather than hardcoding either.
+if mysql --help --verbose 2>/dev/null | grep -q -- '--ssl-mode='; then
+  SSL_DISABLE_FLAG="--ssl-mode=DISABLED"
+else
+  SSL_DISABLE_FLAG="--skip-ssl"
+fi
+MYSQL=(mysql -h "${MYSQL_HOST}" -P "${MYSQL_PORT}" -u "${MYSQL_USER}" "-p${MYSQL_PASSWORD}" "${SSL_DISABLE_FLAG}")
 
 echo ">> Waiting for MySQL at ${MYSQL_HOST}:${MYSQL_PORT} ..."
 until "${MYSQL[@]}" -e "SELECT 1" >/dev/null 2>&1; do

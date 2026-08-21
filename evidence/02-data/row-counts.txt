@@ -1,0 +1,4 @@
+mysql: [Warning] Using a password on the command line interface can be insecure.
+table_name	row_count
+patients	100000
+hospitals	5

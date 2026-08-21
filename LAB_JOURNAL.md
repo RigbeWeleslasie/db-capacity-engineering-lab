@@ -664,7 +664,7 @@ the incident's specific code/config change temporarily reverted**, then
 queried Prometheus's own `/api/v1/alerts` endpoint mid-replay to confirm
 `state: "firing"` — not inferred, not "should have," observed. Raw JSON for
 every firing event is in
-[`evidence/02-incident-replay/`](./evidence/02-incident-replay/).
+[`evidence/07-incidents/`](./evidence/07-incidents/).
 
 | Ticket | Repro (revert applied) | k6 result | Alert | Fired? | activeAt |
 |---|---|---|---|---|---|

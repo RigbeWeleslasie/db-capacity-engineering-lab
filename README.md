@@ -125,7 +125,11 @@ and wired into a 5-gate CI pipeline. Quick links for anyone grading this part:
 | Terraform rehost onto the group's `modules/data` + `modules/service` | [`terraform/main.tf`](./terraform/main.tf) |
 | CI pipeline (gitleaks → trivy config → zizmor → docker build → trivy image → tflocal apply) | [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) — calls the group's reusable `golden-ci.yml` |
 | C1 evidence (real `tflocal apply` against LocalStack, incl. the two documented LocalStack Hobby-tier limitations) | [`evidence/01-iac/README.md`](./evidence/01-iac/README.md) |
-| **Deliberately-insecure "red PR"** — drops the Dockerfile's non-root `USER` directive; the `trivy config` gate genuinely fails and blocks it | **[PR #5](https://github.com/RigbeWeleslasie/db-capacity-engineering-lab/pull/5)** (left open on purpose, never merged — the failing gate *is* the proof) |
-| All four OPS incidents replayed against the *monitored* stack, with proof the corresponding Prometheus alert actually fires (not just "should have") | [`evidence/02-incident-replay/`](./evidence/02-incident-replay/), summarized in [`LAB_JOURNAL.md`](./LAB_JOURNAL.md#assignment-2--closing-the-loop-did-the-alerts-i-proposed-actually-fire) and each `SCARS.md` entry's "Confirmed (Assignment 2)" line |
+| **Three deliberately-insecure "red PRs," one per gate** — Dockerfile non-root `USER` dropped ([#5](https://github.com/RigbeWeleslasie/db-capacity-engineering-lab/pull/5), `trivy config`), a fake credential committed ([#16](https://github.com/RigbeWeleslasie/db-capacity-engineering-lab/pull/16), `gitleaks`), a workflow ref unpinned to `@main` ([#17](https://github.com/RigbeWeleslasie/db-capacity-engineering-lab/pull/17), `zizmor`) | [`evidence/05-gates/README.md`](./evidence/05-gates/README.md) — all three left open, unmerged, each genuinely failing its gate |
+| Grafana dashboard + a panel per incident, real screenshots captured live during each replay | [`evidence/06-observability/`](./evidence/06-observability/) |
+| All four OPS incidents replayed against the *monitored* stack, with proof the corresponding Prometheus alert actually fires (not just "should have") | [`evidence/07-incidents/`](./evidence/07-incidents/), summarized in [`LAB_JOURNAL.md`](./LAB_JOURNAL.md#assignment-2--closing-the-loop-did-the-alerts-i-proposed-actually-fire) and each `SCARS.md` entry's "Confirmed (Assignment 2)" line |
+| `FIDELITY.md` — where LocalStack didn't reproduce real AWS faithfully | [`FIDELITY.md`](./FIDELITY.md) |
+| `make up` / `make verify` — one-command stand-up and verification | [`Makefile`](./Makefile) |
+| E2 — OIDC design (writing-only Extended deliverable) | [`docs/E2-oidc-design.md`](./docs/E2-oidc-design.md) |
 
 Good luck, on-call. 
